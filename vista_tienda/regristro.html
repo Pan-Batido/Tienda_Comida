@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>registros</title>
+</head>
+<body>
+    <!-- formulario -->
+    <div class="mb-3">
+        <label for="regionSelect" class="form-label">Región</label>
+        <select class="form-label" id="regionSelect">
+            <option value="">Seleccione una Región</option>
+        </select>
+    </div>
+
+    <!-- Enlace al JS -->
+     <script src="../assets/js/regiones-comunas.js"></script>
+
+    <script>
+        // Inicialización de los selectores dinámicos
+        document.addEventListener("DOMContentLoaded", () =>{
+            // 1. Cargar las regiones disponibles
+            cargarRegiones("regionSelect");
+            // 2. Escuchar el cambio en el select de región
+            document.getElementById("regionSelect").addEventListener("change", () =>{
+                actualizarComunas("regionSelect", "comunaSelect");
+            });
+        });
+    </script>
+</body>
+</html>
