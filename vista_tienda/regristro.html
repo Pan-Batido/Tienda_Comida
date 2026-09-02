@@ -3,30 +3,255 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>registros</title>
+    <title>Registro de usuario</title>
+    <!-- Bootstrap 5 CSS via CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Iconos de Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- CSS Personalizado -->
+    <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 <body>
-    <!-- formulario -->
-    <div class="mb-3">
-        <label for="regionSelect" class="form-label">Región</label>
-        <select class="form-label" id="regionSelect">
-            <option value="">Seleccione una Región</option>
-        </select>
+    <body class="bg-light d-flex flex-column min-vh-100">
+
+  <!-- BARRA DE NAVEGACIÓN (SAKURA MARKET) -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold text-warning" href="index.html">
+        <i class="bi bi-shop me-2"></i>Sakura Market 🌸
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="productos.html">Productos</a></li>
+          <li class="nav-item"><a class="nav-link" href="nosotros.html">Nosotros</a></li>
+          <li class="nav-item"><a class="nav-link" href="blogs.html">Blogs</a></li>
+          <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+        </ul>
+
+        <div class="d-flex align-items-center gap-2">
+          <a href="login.html" class="btn btn-outline-light btn-sm">Iniciar Sesión</a>
+          <a href="registro.html" class="btn btn-warning btn-sm active">Registrarse</a>
+          <a href="carrito.html" class="btn btn-outline-warning btn-sm position-relative ms-2">
+            <i class="bi bi-cart-fill"></i>
+            <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+          </a>
+        </div>
+      </div>
     </div>
+  </nav>
 
-    <!-- Enlace al JS -->
-     <script src="../assets/js/regiones-comunas.js"></script>
+  <!-- FORMULARIO DE REGISTRO DE USUARIO -->
+  <main class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6">
+        <div class="card shadow-sm border-0">
+          <div class="card-header bg-dark text-white text-center py-3">
+            <h4 class="mb-0 fw-bold text-warning">REGISTRO DE USUARIO</h4>
+            <small class="text-muted">¡Únete a la comunidad de Sakura Market!</small>
+          </div>
+          <div class="card-body p-4">
+            
+            <form id="formRegistro" novalidate>
 
-    <script>
-        // Inicialización de los selectores dinámicos
-        document.addEventListener("DOMContentLoaded", () =>{
-            // 1. Cargar las regiones disponibles
-            cargarRegiones("regionSelect");
-            // 2. Escuchar el cambio en el select de región
-            document.getElementById("regionSelect").addEventListener("change", () =>{
-                actualizarComunas("regionSelect", "comunaSelect");
-            });
+              <!-- RUN -->
+              <div class="mb-3">
+                <label for="txtRun" class="form-label fw-semibold">RUN <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="txtRun" placeholder="Ej: 19011022K" maxlength="9">
+                <div class="form-text">Sin puntos ni guion. Mínimo 7, máximo 9 caracteres.</div>
+                <div id="errorRun" class="invalid-feedback"></div>
+              </div>
+
+              <!-- NOMBRE -->
+              <div class="mb-3">
+                <label for="txtNombre" class="form-label fw-semibold">Nombre <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="txtNombre" placeholder="Tu nombre" maxlength="50">
+                <div id="errorNombre" class="invalid-feedback"></div>
+              </div>
+
+              <!-- APELLIDOS -->
+              <div class="mb-3">
+                <label for="txtApellidos" class="form-label fw-semibold">Apellidos <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="txtApellidos" placeholder="Tus apellidos" maxlength="100">
+                <div id="errorApellidos" class="invalid-feedback"></div>
+              </div>
+
+              <!-- CORREO ELECTRÓNICO -->
+              <div class="mb-3">
+                <label for="txtCorreo" class="form-label fw-semibold">Correo Electrónico <span class="text-danger">*</span></label>
+                <input type="email" class="form-control" id="txtCorreo" placeholder="ejemplo@duoc.cl" maxlength="100">
+                <div class="form-text">Solo dominios @duoc.cl, @profesor.duoc.cl y @gmail.com.</div>
+                <div id="errorCorreo" class="invalid-feedback"></div>
+              </div>
+
+              <!-- CONTRASEÑA -->
+              <div class="mb-3">
+                <label for="txtPassword" class="form-label fw-semibold">Contraseña <span class="text-danger">*</span></label>
+                <input type="password" class="form-control" id="txtPassword" placeholder="Entre 4 y 10 caracteres" maxlength="10">
+                <div id="errorPassword" class="invalid-feedback"></div>
+              </div>
+
+              <!-- CONFIRMAR CONTRASEÑA -->
+              <div class="mb-3">
+                <label for="txtConfirmPassword" class="form-label fw-semibold">Confirmar Contraseña <span class="text-danger">*</span></label>
+                <input type="password" class="form-control" id="txtConfirmPassword" placeholder="Repite tu contraseña" maxlength="10">
+                <div id="errorConfirmPassword" class="invalid-feedback"></div>
+              </div>
+
+              <!-- TELÉFONO (OPCIONAL) -->
+              <div class="mb-3">
+                <label for="txtTelefono" class="form-label fw-semibold">Teléfono <span class="text-muted fs-7">(Opcional)</span></label>
+                <input type="tel" class="form-control" id="txtTelefono" placeholder="+56912345678" maxlength="15">
+              </div>
+
+              <!-- FECHA DE NACIMIENTO (OPCIONAL) -->
+              <div class="mb-3">
+                <label for="txtFechaNacimiento" class="form-label fw-semibold">Fecha de Nacimiento <span class="text-muted fs-7">(Opcional)</span></label>
+                <input type="date" class="form-control" id="txtFechaNacimiento">
+              </div>
+
+              <!-- REGIÓN -->
+              <div class="mb-3">
+                <label for="selectRegion" class="form-label fw-semibold">Región</label>
+                <select class="form-select" id="selectRegion">
+                  <!-- Se llena dinámicamente desde regiones-comunas.js -->
+                </select>
+              </div>
+
+              <!-- COMUNA -->
+              <div class="mb-3">
+                <label for="selectComuna" class="form-label fw-semibold">Comuna</label>
+                <select class="form-select" id="selectComuna">
+                  <option value="">-- Seleccione una Comuna --</option>
+                </select>
+              </div>
+
+              <!-- DIRECCIÓN -->
+              <div class="mb-4">
+                <label for="txtDireccion" class="form-label fw-semibold">Dirección <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="txtDireccion" placeholder="Av. Tokyo 123" maxlength="300">
+                <div id="errorDireccion" class="invalid-feedback"></div>
+              </div>
+
+              <!-- BOTÓN REGISTRAR -->
+              <div class="d-grid">
+                <button type="submit" class="btn btn-warning btn-lg fw-bold">REGISTRARSE</button>
+              </div>
+
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- PIE DE PÁGINA -->
+  <footer class="bg-dark text-light py-3 mt-auto text-center">
+    <div class="container">
+      <p class="small mb-0">&copy; 2026 Sakura Market 🌸 - Comida Asiática. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- BOOTSTRAP JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- ARCHIVOS JS BASE -->
+  <script src="../assets/js/regiones-comunas.js"></script>
+  <script src="../assets/js/validaciones.js"></script>
+
+  <!-- LÓGICA DE EVENTOS Y VALIDACIÓN DE REGISTRO -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+      // 1. Cargar las Regiones y configurar evento para actualizar Comunas
+      cargarRegiones("selectRegion");
+      document.getElementById("selectRegion").addEventListener("change", () => {
+        actualizarComunas("selectRegion", "selectComuna");
+      });
+
+      // 2. Validaciones en tiempo real (Evento 'input')
+
+      // RUN
+      document.getElementById("txtRun").addEventListener("input", (e) => {
+        const val = e.target.value;
+        const esValido = validarRun(val);
+        mostrarError("txtRun", "errorRun", "RUN inválido. Formato esperado: 19011022K (sin puntos ni guion).", esValido);
+      });
+
+      // Nombre
+      document.getElementById("txtNombre").addEventListener("input", (e) => {
+        const val = e.target.value.trim();
+        const esValido = val.length > 0 && val.length <= 50;
+        mostrarError("txtNombre", "errorNombre", "El nombre es obligatorio (máximo 50 caracteres).", esValido);
+      });
+
+      // Apellidos
+      document.getElementById("txtApellidos").addEventListener("input", (e) => {
+        const val = e.target.value.trim();
+        const esValido = val.length > 0 && val.length <= 100;
+        mostrarError("txtApellidos", "errorApellidos", "Los apellidos son obligatorios (máximo 100 caracteres).", esValido);
+      });
+
+      // Correo
+      document.getElementById("txtCorreo").addEventListener("input", (e) => {
+        const val = e.target.value.trim();
+        const esValido = validarEmail(val) && val.length <= 100;
+        mostrarError("txtCorreo", "errorCorreo", "Solo correos válidos terminados en @duoc.cl, @profesor.duoc.cl o @gmail.com.", esValido);
+      });
+
+      // Contraseña
+      document.getElementById("txtPassword").addEventListener("input", (e) => {
+        const val = e.target.value;
+        const esValido = val.length >= 4 && val.length <= 10;
+        mostrarError("txtPassword", "errorPassword", "La contraseña debe tener entre 4 y 10 caracteres.", esValido);
+
+        const confirmVal = document.getElementById("txtConfirmPassword").value;
+        if (confirmVal.length > 0) {
+          mostrarError("txtConfirmPassword", "errorConfirmPassword", "Las contraseñas no coinciden.", confirmVal === val);
+        }
+      });
+
+      // Confirmar Contraseña
+      document.getElementById("txtConfirmPassword").addEventListener("input", (e) => {
+        const val = e.target.value;
+        const passVal = document.getElementById("txtPassword").value;
+        const esValido = val === passVal && val.length >= 4 && val.length <= 10;
+        mostrarError("txtConfirmPassword", "errorConfirmPassword", "Las contraseñas no coinciden.", esValido);
+      });
+
+      // Dirección
+      document.getElementById("txtDireccion").addEventListener("input", (e) => {
+        const val = e.target.value.trim();
+        const esValido = val.length > 0 && val.length <= 300;
+        mostrarError("txtDireccion", "errorDireccion", "La dirección es obligatoria (máximo 300 caracteres).", esValido);
+      });
+
+      // 3. Envío del Formulario
+      document.getElementById("formRegistro").addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        // Evaluar todos los campos obligatorios antes de enviar
+        const inputs = ["txtRun", "txtNombre", "txtApellidos", "txtCorreo", "txtPassword", "txtConfirmPassword", "txtDireccion"];
+        inputs.forEach(id => {
+          document.getElementById(id).dispatchEvent(new Event('input'));
         });
-    </script>
+
+        const hayErrores = document.querySelectorAll('.is-invalid').length > 0;
+
+        if (!hayErrores) {
+          alert("¡Bienvenido a Sakura Market! Registro exitoso. Redirigiendo a inicio de sesión...");
+          window.location.href = "login.html";
+        } else {
+          alert("Por favor, corrija los campos marcados en rojo antes de continuar.");
+        }
+      });
+
+    });
+  </script>
 </body>
 </html>
