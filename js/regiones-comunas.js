@@ -25,19 +25,31 @@ function cargarRegiones(selectRegionId){
         option.textContent = item.region;
         selectRegion.appendChild(option);
     });
+
+    
 }
 
 // Función para actualizar las Comunas cuando cambia la Región
 function actualizarComunas(selectRegionId, selectComunaId){
     const selectRegion = document.getElementById(selectRegionId);
     const selectComuna = document.getElementById(selectComunaId);
-    if(!selectRegion||!selectComuna) return;
 
-    if (regionIndex !== ""){
-        const comuna = datosUbicacion[regionIndex].comunas;
+    // 1. Validar que ambos elementos existan en el DOM
+    if (!selectRegion || !selectComuna) return;
+
+    // 2. Obtener el índice de la región seleccionada
+    const regionIndex = selectRegion.value;
+
+    // 3. Limpiar las comunas anteriores
+    selectComuna.innerHTML = '<option value="">-- Seleccione una Comuna --</option>';
+
+    // 4. Cargar las nuevas comunas si se eligió una región válida
+    if (regionIndex !== "" && datosUbicacion[regionIndex]) {
+        const comunas = datosUbicacion[regionIndex].comunas; // Nombre en plural
+        
         comunas.forEach(comuna => {
             const option = document.createElement('option');
-            option.value= comuna;
+            option.value = comuna;
             option.textContent = comuna;
             selectComuna.appendChild(option);
         });
