@@ -64,11 +64,71 @@
   </div>
 </nav>
 
+<!-- HERO CAROUSEL ESTILIZADO -->
+<header id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+  </div>
+  
+  <div class="carousel-inner">
+    
+    <!-- Slide 1: Comida -->
+    <div class="carousel-item active position-relative text-white p-5 text-center align-content-center" 
+         style="min-height: 400px; background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('../img/ramen-banner.jpg') center/cover no-repeat;">
+      <div class="container py-4 position-relative">
+        <h1 class="display-4 fw-bold text-shadow">Ramen Instántaneo</h1>
+        <p class="lead fw-normal text-light fs-5">Deliciosos fideos instantáneos.</p>
+        <a href="productos.html?cat=Comida" 
+           class="btn btn-lg mt-3 px-4 rounded-pill shadow-sm fw-bold text-white" 
+           style="background-color: #f282a5; border-color: #f282a5;">
+          <i class="bi bi-shop me-1"></i> Explorar Ramen
+        </a>
+      </div>
+    </div>
+
+    <!-- Slide 2: Snacks -->
+    <div class="carousel-item position-relative text-white p-5 text-center align-content-center" 
+         style="min-height: 400px; background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('../img/snacks-banner.png') center/cover no-repeat;">
+      <div class="container py-4 position-relative">
+        <h1 class="display-4 fw-bold text-shadow">Snacks & Dulces Japoneses</h1>
+        <p class="lead fw-normal text-light fs-5">Pockys, mochis, dorayakis y los mejores bocadillos crujientes de Asia.</p>
+        
+        <a href="productos.html?cat=Snacks" 
+           class="btn btn-lg mt-3 px-4 rounded-pill shadow-sm fw-bold text-white" 
+           style="background-color: #f282a5; border-color: #f282a5;">
+          <i class="bi bi-egg-fried me-1"></i> Explorar Snacks
+        </a>
+      </div>
+    </div>
+
+    <!-- Slide 3: Bebidas -->
+    <div class="carousel-item position-relative text-white p-5 text-center align-content-center" 
+         style="min-height: 400px; background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('../img/bebidas-banner.jpg') center/cover no-repeat;">
+      <div class="container py-4 position-relative">
+        <h1 class="display-4 fw-bold text-shadow">Bebidas & Bubble Teas</h1>
+        <p class="lead fw-normal text-light fs-5">Refréscate con los Ramunes tradicionales, Boba teas y jugos Mogu Mogu.</p>
+        <a href="productos.html?cat=Bebidas" 
+           class="btn btn-lg mt-3 px-4 rounded-pill shadow-sm fw-bold text-white" 
+           style="background-color: #f282a5; border-color: #f282a5;">
+          <i class="bi bi-cup-straw me-1"></i> Explorar Bebidas
+        </a>
+      </div>
+    </div>
+  </div>
+  
+  <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+</header>
+
   <!-- CONTENIDO -->
   <main class="container my-5">
     <div class="text-center mb-5">
-      <h1 class="fw-bold text-danger">Sakura Market</h1>
-      <p class="text-muted">Descubre la mejor selección de comida y bebidas asiáticas tradicionales</p>
     </div>
 
     <div class="row g-4" id="lista-productos"></div>
@@ -85,5 +145,45 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../js/productos.js"></script>
   <script src="../js/main.js"></script>
+
+  <!-- SCRIPT SINCRO INSTANTÁNEA DE CARRUSEL SEGÚN URL -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const categoria = urlParams.get("cat");
+
+      if (categoria) {
+        const indices = {
+          Comida: 0,
+          Snacks: 1,
+          Bebidas: 2
+        };
+
+        const targetIndex = indices[categoria];
+
+        if (targetIndex !== undefined) {
+          const carouselEl = document.getElementById("heroCarousel");
+          if (carouselEl) {
+            // Remueve temporalmente la clase de animación para cambio directo
+            carouselEl.classList.remove("slide");
+
+            const items = carouselEl.querySelectorAll(".carousel-item");
+            const indicators = carouselEl.querySelectorAll(".carousel-indicators button");
+
+            items.forEach(item => item.classList.remove("active"));
+            indicators.forEach(ind => ind.classList.remove("active"));
+
+            items[targetIndex].classList.add("active");
+            indicators[targetIndex].classList.add("active");
+
+            // Vuelve a habilitar el deslizamiento tras renderizar
+            setTimeout(() => {
+              carouselEl.classList.add("slide");
+            }, 100);
+          }
+        }
+      }
+    });
+  </script>
 </body>
 </html>
