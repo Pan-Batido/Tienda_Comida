@@ -1,25 +1,46 @@
-<div class="container my-5">
-  <h2>Tu Carrito de Compras Asiático</h2>
-  
-  <div class="table-responsive mt-4">
-    <table class="table align-middle">
-      <thead>
-        <tr>
-          <th>Producto</th>
-          <th>Precio</th>
-          <th>Cantidad</th>
-          <th>Subtotal</th>
-          <th>Acción</th>
-        </tr>
-      </thead>
-      <tbody id="tabla-carrito">
-        <!-- Filas dinámicas -->
-      </tbody>
-    </table>
-  </div>
+  <!-- NAVBAR NAVEGABLE -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-danger shadow-sm">
+  <div class="container">
+    <!-- Logo y Nombre -->
+    <a class="navbar-brand fw-bold d-flex align-items-center" href="index.html">
+      <img src="../img/logo-sakura.png" alt="Sakura" height="38" class="me-2">
+      <span>Sakura Market</span>
+    </a>
 
-  <div class="d-flex justify-content-between align-items-center mt-4">
-    <h4>Total: <span id="total-precio" class="text-success">$0</span></h4>
-    <button class="btn btn-success btn-lg" onclick="comprar()">Finalizar Compra</button>
+    <!-- Botón responsive para móviles -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Menú de enlaces -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="productos.html">Productos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="nosotros.html">Nosotros</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="contacto.html">Contacto</a>
+        </li>
+      </ul>
+
+      <!-- Botones de sesión y carrito al extremo derecho -->
+      <div class="d-flex align-items-center gap-2">
+        <a href="login.html" class="btn btn-outline-light btn-sm">Ingresar</a>
+        <a href="regristro.html" class="btn btn-warning btn-sm fw-bold">Registrarse</a>
+        
+        <a href="carrito.html" class="btn btn-outline-light position-relative ms-2">
+          <i class="bi bi-cart-fill"></i> Carrito
+          <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark">
+            0
+          </span>
+        </a>
+      </div>
+    </div>
   </div>
-</div>
+</nav>

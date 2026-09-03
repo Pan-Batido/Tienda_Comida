@@ -1,36 +1,67 @@
-document.addEventListener("DOMContentLoaded", () => {
+// --- RENDERIZAR Y FILTRAR PRODUCTOS ---
+
+// Función para pintar la lista de productos en el HTML
+function cargarProductos(lista = productosAsia) {
   const contenedor = document.getElementById("lista-productos");
+  if (!contenedor) return;
 
-  if (contenedor) {
-    productosAsia.forEach((prod) => {
-      const col = document.createElement("div");
-      col.className = "col-12 col-md-6 col-lg-3";
+  contenedor.innerHTML = "";
 
-      col.innerHTML = `
-        <div class="card h-100 shadow-sm">
-          <img src="${prod.imagen}" class="card-img-top" alt="${prod.nombre}" style="height: 180px; object-fit: cover;">
-          <div class="card-body d-flex flex-column">
-            <span class="badge bg-danger mb-2 w-auto align-self-start">${prod.categoria}</span>
-            <h5 class="card-title">${prod.nombre}</h5>
-            <p class="card-text text-muted small">${prod.descripcion}</p>
-            <p class="fw-bold fs-5 text-success">$${prod.precio.toLocaleString("es-CL")}</p>
-            <button class="btn btn-outline-danger mt-auto" onclick="agregarAlCarrito(${prod.id})">
-              <i class="bi bi-cart-plus"></i> Añadir al Carrito
+  if (typeof lista === "undefined" || lista.length === 0) {
+    contenedor.innerHTML = `<p class="text-center text-muted">No hay productos disponibles por el momento.</p>`;
+    return;
+  }
+
+  lista.forEach((prod) => {
+    const col = document.createElement("div");
+    col.className = "col-12 col-md-6 col-lg-3";
+
+    col.innerHTML = `
+      <div class="card h-100 shadow-sm border-0">
+        <img src="${prod.imagen}" class="card-img-top" alt="${prod.nombre}" style="height: 200px; object-fit: cover;">
+        <div class="card-body d-flex flex-column">
+          <span class="badge bg-danger mb-2 w-auto align-self-start">${prod.categoria}</span>
+          <h5 class="card-title fw-bold">${prod.nombre}</h5>
+          <p class="card-text text-muted small flex-grow-1">${prod.descripcion}</p>
+          <div class="mt-3">
+            <p class="fw-bold fs-5 text-success mb-2">$${prod.precio.toLocaleString("es-CL")}</p>
+            <button class="btn btn-outline-danger w-100" onclick="agregarAlCarrito(${prod.id})">
+              <i class="bi bi-cart-plus-fill"></i> Añadir al Carrito
             </button>
           </div>
         </div>
-      `;
-      contenedor.appendChild(col);
-    });
-  }
-});
+      </div>
+    `;
+    contenedor.appendChild(col);
+  });
+}
 
-// Obtener el carrito actual o iniciar uno vacío
+// Función para filtrar por la categoría seleccionada desde los botones
+function filtrarProductos(categoria) {
+  // Cambiar la clase activa visual en los botones
+  const botones = document.querySelectorAll('.btn-group .btn');
+  botones.forEach(btn => {
+    btn.classList.remove('active');
+    if (btn.textContent.includes(categoria) || (categoria === 'Todos' && btn.textContent.includes('Todos'))) {
+      btn.classList.add('active');
+    }
+  });
+
+  // Filtrar el arreglo global según la categoría
+  if (categoria === 'Todos') {
+    cargarProductos(productosAsia);
+  } else {
+    const filtrados = productosAsia.filter(p => p.categoria.toLowerCase() === categoria.toLowerCase());
+    cargarProductos(filtrados);
+  }
+}
+
+// --- LÓGICA DEL CARRITO DE COMPRAS ---
+
 function obtenerCarrito() {
   return JSON.parse(localStorage.getItem("carrito")) || [];
 }
 
-// Agregar producto
 function agregarAlCarrito(idProducto) {
   let carrito = obtenerCarrito();
   const producto = productosAsia.find((p) => p.id === idProducto);
@@ -45,13 +76,11 @@ function agregarAlCarrito(idProducto) {
     carrito.push({ ...producto, cantidad: 1 });
   }
 
-  // Guardar en localStorage
   localStorage.setItem("carrito", JSON.stringify(carrito));
-  alert(`${producto.nombre} fue añadido al carrito`);
+  alert(`¡${producto.nombre} añadido al carrito!`);
   actualizarContadorCarrito();
 }
 
-// Actualizar indicador visual del carrito en el Navbar
 function actualizarContadorCarrito() {
   const contador = document.getElementById("cart-count");
   if (contador) {
@@ -61,56 +90,19 @@ function actualizarContadorCarrito() {
   }
 }
 
-// Ejecutar al cargar la página
-document.addEventListener("DOMContentLoaded", actualizarContadorCarrito);
+// --- EVENTO INICIAL (DETECTA EL CARRUSEL Y LA URL) ---
 
-function renderizarCarrito() {
-  const tabla = document.getElementById("tabla-carrito");
-  const totalSpan = document.getElementById("total-precio");
-  if (!tabla) return;
-
-  const carrito = obtenerCarrito();
-  tabla.innerHTML = "";
-  let total = 0;
-
-  carrito.forEach((prod, index) => {
-    const subtotal = prod.precio * prod.cantidad;
-    total += subtotal;
-
-    tabla.innerHTML += `
-      <tr>
-        <td><strong>${prod.nombre}</strong></td>
-        <td>$${prod.precio.toLocaleString("es-CL")}</td>
-        <td>
-          <input type="number" min="1" value="${prod.cantidad}" 
-            class="form-control w-25" onchange="cambiarCantidad(${index}, this.value)">
-        </td>
-        <td>$${subtotal.toLocaleString("es-CL")}</td>
-        <td>
-          <button class="btn btn-sm btn-danger" onclick="eliminarDelCarrito(${index})">Eliminar</button>
-        </td>
-      </tr>
-    `;
-  });
-
-  if (totalSpan) totalSpan.textContent = `$${total.toLocaleString("es-CL")}`;
-}
-
-function cambiarCantidad(index, nuevaCantidad) {
-  let carrito = obtenerCarrito();
-  carrito[index].cantidad = parseInt(nuevaCantidad);
-  localStorage.setItem("carrito", JSON.stringify(carrito));
-  renderizarCarrito();
+document.addEventListener("DOMContentLoaded", () => {
   actualizarContadorCarrito();
-}
 
-function eliminarDelCarrito(index) {
-  let carrito = obtenerCarrito();
-  carrito.splice(index, 1);
-  localStorage.setItem("carrito", JSON.stringify(carrito));
-  renderizarCarrito();
-  actualizarContadorCarrito();
-}
+  // Revisar si la URL trae el parámetro de categoría (Ej: productos.html?cat=Comida)
+  const urlParams = new URLSearchParams(window.location.search);
+  const categoriaURL = urlParams.get('cat');
 
-// Cargar la tabla si estamos en carrito.html
-document.addEventListener("DOMContentLoaded", renderizarCarrito);
+  if (categoriaURL && typeof productosAsia !== "undefined") {
+    filtrarProductos(categoriaURL);
+  } else {
+    cargarProductos();
+  }
+});
+
