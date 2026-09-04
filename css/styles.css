@@ -56,3 +56,23 @@ body {
   transform: translateY(-4px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1) !important;
 }
+
+/* Clase para texto en Verde Musgo */
+.text-verde-musgo {
+  color: var(--verde-musgo) !important;
+}
+
+.sakura-card {
+  background-color: var(--rosa-pastel) !important;
+  border-radius: 16px;
+  border: 1px solid rgba(244, 143, 177, 0.4) !important; /* Para que el encabezado no se salga de las esquinas */
+}
+
+/* Clase para el encabezado verde matcha */
+.bg-matcha {
+  background-color: var(--verde-musgo, #556b2f) !important;
+}
+
+.footer-matcha {
+  background-color: var(--verde-musgo, #556b2f) !important;
+}
