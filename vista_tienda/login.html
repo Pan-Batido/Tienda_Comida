@@ -5,54 +5,69 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Iniciar Sesión - Sakura Market</title>
 
-  <!-- Bootstrap 5 CSS via CDN -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Iconos de Bootstrap -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <!-- CSS Personalizado -->
+  
+  <link rel="icon" type="image/png" href="../img/logo-sakura.png">
   <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body class="bg-light d-flex flex-column min-vh-100">
 
-  <!-- BARRA DE NAVEGACIÓN UNIFICADA -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
-    <div class="container">
-      <a class="navbar-brand fw-bold text-warning" href="index.html">
-        <i class="bi bi-shop me-2"></i>Sakura Market 🌸
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-danger shadow-sm">
+  <div class="container">
+    <!-- Logo y Nombre -->
+    <a class="navbar-brand fw-bold d-flex align-items-center" href="index.html">
+      <img src="../img/logo-sakura.png" alt="Sakura" height="38" class="me-2">
+      <span>Sakura Market</span>
+    </a>
 
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="productos.html">Productos</a></li>
-          <li class="nav-item"><a class="nav-link" href="nosotros.html">Nosotros</a></li>
-          <li class="nav-item"><a class="nav-link" href="blogs.html">Blogs</a></li>
-          <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
-        </ul>
+    <!-- Botón responsive para móviles -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <div class="d-flex align-items-center gap-2">
-          <a href="login.html" class="btn btn-outline-light btn-sm active">Iniciar Sesión</a>
-          <a href="registro.html" class="btn btn-warning btn-sm">Registrarse</a>
-          <a href="carrito.html" class="btn btn-outline-warning btn-sm position-relative ms-2">
-            <i class="bi bi-cart-fill"></i>
-            <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
-          </a>
-        </div>
+    <!-- Menú de enlaces -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="productos.html">Productos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="nosotros.html">Nosotros</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="contacto.html">Contacto</a>
+        </li>
+      </ul>
+
+      <!-- Botones de sesión y carrito al extremo derecho -->
+      <div class="d-flex align-items-center gap-2">
+        <a href="login.html" class="btn btn-outline-light btn-sm">Ingresar</a>
+        <a href="registro.html" class="btn btn-warning btn-sm fw-bold">Registrarse</a>
+        
+        <a href="carrito.html" class="btn btn-outline-light position-relative ms-2">
+          <i class="bi bi-cart-fill"></i> Carrito
+          <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark">
+            0
+          </span>
+        </a>
       </div>
     </div>
-  </nav>
+  </div>
+</nav>
 
   <!-- CONTENIDO PRINCIPAL: INICIO DE SESIÓN -->
   <main class="container my-5">
     <div class="row justify-content-center">
       <div class="col-md-6 col-lg-5">
         <div class="card border-0 shadow-sm">
-          <div class="card-header bg-dark text-white text-center py-3">
-            <h4 class="mb-0 fw-bold text-warning"><i class="bi bi-person-circle me-2"></i>INICIAR SESIÓN</h4>
-            <small class="text-white-50">Ingresa tus credenciales para acceder a tu cuenta</small>
+          <div class="card-header text-white text-center py-3" style="background-color: var(--verde-musgo, #556b2f);">
+            <h4 class="mb-0 fw-bold "><i class="bi bi-person-circle me-2"></i>INICIAR SESIÓN</h4>
+            
           </div>
           <div class="card-body p-4">
 
@@ -80,7 +95,7 @@
 
               <!-- BOTÓN INRESAR -->
               <div class="d-grid mt-4">
-                <button type="submit" class="btn btn-warning btn-lg fw-bold">INGRESAR</button>
+                <button type="submit" class="btn btn-outline-danger btn-lg fw-bold">INGRESAR</button>
               </div>
 
             </form>
@@ -99,18 +114,10 @@
     </div>
   </main>
 
-  <!-- PIE DE PÁGINA UNIFICADO -->
-  <footer class="bg-dark text-light py-4 mt-auto">
-    <div class="container text-center text-md-start">
-      <div class="row align-items-center">
-        <div class="col-md-6 mb-2 mb-md-0">
-          <h5 class="text-warning mb-1">Sakura Market 🌸</h5>
-          <p class="small text-muted mb-0">Sabores auténticos de Asia directo a tu puerta.</p>
-        </div>
-        <div class="col-md-6 text-md-end">
-          <p class="small text-muted mb-0">&copy; 2026 Sakura Market. Evaluación Parcial 1.</p>
-        </div>
-      </div>
+  <!-- PIE DE PÁGINA -->
+  <footer class="footer-matcha text-white text-center py-4 mt-auto">
+    <div class="container">
+      <p class="mb-0">&copy; 2026 Sakura Market </p>
     </div>
   </footer>
 
