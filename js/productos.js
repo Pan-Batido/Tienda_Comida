@@ -84,164 +84,156 @@ const productosAsia = [
   // --- SNACKS Y DULCES ---
   {
     id: 11,
-    nombre: "Pocky Chocolate Original",
+    nombre: "Pocky Crunch Pistacho Glico 37 g",
     categoria: "Snacks",
-    precio: 1800,
-    imagen: "https://images.unsplash.com/photo-1582293041079-7814c2f12063?w=500&auto=format&fit=crop",
-    descripcion: "Crujientes palitos de galleta bañados en rico chocolate con leche."
+    precio: 2990,
+    imagen: "../img/Pocky1.webp",
+    descripcion: "Crujientes palitos de galleta bañados en un rico pistacho"
   },
   {
     id: 12,
-    nombre: "Pocky Match Green Tea",
+    nombre: "Pocky Chocolate Glico 55 g",
     categoria: "Snacks",
-    precio: 1950,
-    imagen: "https://images.unsplash.com/photo-1536256263959-770b48d82b0a?w=500&auto=format&fit=crop",
-    descripcion: "Palitos de galleta cubiertos con crema de té verde matcha."
+    precio: 1990,
+    imagen: "../img/pocky2.webp",
+    descripcion: "Crujientes palitos de galleta bañados en un rico chocolate"
   },
   {
     id: 13,
-    nombre: "Mochi surtido de Frutas (6 pzs)",
+    nombre: "Pocky Frutilla Glico 55 g",
     categoria: "Snacks",
-    precio: 4500,
-    imagen: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=500&auto=format&fit=crop",
-    descripcion: "Pasteles de arroz pegajoso rellenos de pasta de fresa y mango."
+    precio: 1900,
+    imagen: "../img/pocky3.webp",
+    descripcion: "Crujientes palitos de galleta bañados en un rico chocolate sabor frutilla"
   },
   {
     id: 14,
-    nombre: "Pepero Crunch de Almendras",
+    nombre: "Pocky Sabor Avellana Glico 48 g",
     categoria: "Snacks",
-    precio: 1850,
-    imagen: "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?w=500&auto=format&fit=crop",
-    descripcion: "Galletas alargadas con cobertura de chocolate y trozos de almendra."
+    precio: 2990,
+    imagen: "../img/pocky4.webp",
+    descripcion: "Crujientes palitos de galleta sabor avellana"
   },
   {
     id: 15,
-    nombre: "Dorayaki Relleno de Anko",
+    nombre: "Pocky Crunch Chocolate y Almendras Glico 48 g",
     categoria: "Snacks",
-    precio: 2200,
-    imagen: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=500&auto=format&fit=crop",
-    descripcion: "Bizcocho esponjoso japonés relleno de pasta dulce de poroto rojo."
+    precio: 2990,
+    imagen: "../img/pocky5.webp",
+    descripcion: "Crujientes palitos de galleta sabor chocolate con almendras"
   },
   {
     id: 16,
-    nombre: "KitKat de Té Verde Matcha",
+    nombre: "Pocky Sabor Helado de Vainilla Matcha Glico 48 g",
     categoria: "Snacks",
-    precio: 3900,
-    imagen: "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?w=500&auto=format&fit=crop",
-    descripcion: "Edición especial japonesa con cobertura sabor a matcha genuino."
+    precio: 2990,
+    imagen: "../img/pocky6.webp",
+    descripcion: "Crujientes palitos de galleta sabor helado de vainilla matcha"
   },
   {
     id: 17,
-    nombre: "Galletas Hello Panda Fresa",
+    nombre: "Pocky Leche Glico 55 g",
     categoria: "Snacks",
-    precio: 1500,
-    imagen: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=500&auto=format&fit=crop",
-    descripcion: "Mini galletas crujientes rellenas de crema dulce de frutilla."
+    precio: 1900,
+    imagen: "../img/pocky7.webp",
+    descripcion: "Crujientes palitos de galleta sabor leche"
   },
   {
     id: 18,
-    nombre: "Galletas Hello Panda Fresa",
+    nombre: "Bolsa Mochi Cheese Cake Frutilla 180g",
     categoria: "Snacks",
-    precio: 1500,
-    imagen: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=500&auto=format&fit=crop",
-    descripcion: "Mini galletas crujientes rellenas de crema dulce de frutilla."
+    precio: 3800,
+    imagen: "../img/mochi1.png",
+    descripcion: "pastelitos tradicionales japoneses hechos a base de un arroz sabor cheese cake de frutilla"
   },
   {
     id: 19,
-    nombre: "Galletas Hello Panda Fresa",
+    nombre: "Bolsa Mochi Choco Menta 180g",
     categoria: "Snacks",
-    precio: 1500,
-    imagen: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=500&auto=format&fit=crop",
-    descripcion: "Mini galletas crujientes rellenas de crema dulce de frutilla."
+    precio: 3800,
+    imagen: "../img/mochi2.png",
+    descripcion: "pastelitos tradicionales japoneses hechos a base de un arroz sabor chocolate menta"
   },
   {
     id: 20,
-    nombre: "Galletas Hello Panda Fresa",
+    nombre: "Bolsa Mochi Chocolate 180g",
     categoria: "Snacks",
-    precio: 1500,
-    imagen: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=500&auto=format&fit=crop",
-    descripcion: "Mini galletas crujientes rellenas de crema dulce de frutilla."
+    precio: 3800,
+    imagen: "../img/mochi3.png",
+    descripcion: "pastelitos tradicionales japoneses hechos a base de un arroz sabor chocolate"
   },
 
   // --- BEBIDAS ---
   {
     id: 21,
-    nombre: "Ramune Sabor Original 200ml",
+    nombre: "Gaseosa de Melon 350ml",
     categoria: "Bebidas",
-    precio: 2400,
-    imagen: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=500&auto=format&fit=crop",
-    descripcion: "Bebida gaseosa japonesa tradicional en botella de vidrio con canica."
+    precio: 1300,
+    imagen: "../img/bebida1.jpg",
+    descripcion: "Bebida gaseosa japonesa sabor melon"
   },
   {
     id: 22,
-    nombre: "Ramune Sabor Frutilla 200ml",
+    nombre: "Gaseosa Mango 350ml",
     categoria: "Bebidas",
-    precio: 2400,
-    imagen: "https://images.unsplash.com/photo-1527661591475-527312dd65f5?w=500&auto=format&fit=crop",
-    descripcion: "Refresco con gas dulce y afrutado sabor a fresas de temporada."
+    precio: 1300,
+    imagen: "../img/bebida3.png",
+    descripcion: "Bebida gaseosa japonesa sabor mango"
   },
   {
     id: 23,
-    nombre: "Boba Tea en Lata - Matcha",
+    nombre: "Gaseosa Manzana Menta Zero 350ml",
     categoria: "Bebidas",
-    precio: 2900,
-    imagen: "https://images.unsplash.com/photo-1558857563-b371033873b8?w=500&auto=format&fit=crop",
-    descripcion: "Té de burbujas listo para tomar con perlas de tapioca reales."
+    precio: 1300,
+    imagen: "../img/bebida4.png",
+    descripcion: "Bebida gaseosa japonesa sabor manzana menta zero"
   },
   {
     id: 24,
-    nombre: "Boba Tea en Lata - Taro",
+    nombre: "Gaseosa Yogurt Durazno 350ml",
     categoria: "Bebidas",
-    precio: 2900,
-    imagen: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=500&auto=format&fit=crop",
-    descripcion: "Té de burbujas cremoso con sabor a raíz de taro y tapioca."
+    precio: 1300,
+    imagen: "../img/bebida5.png",
+    descripcion: "Bebida gaseosa japonesa sabor yogurt durazno"
   },
   {
     id: 25,
-    nombre: "Jugo Mogu Mogu Lychee",
+    nombre: "Gaseosa Yogurt Arandano 350ml",
     categoria: "Bebidas",
-    precio: 1700,
-    imagen: "https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=500&auto=format&fit=crop",
-    descripcion: "Jugo sabor a lichi con cubos masticables de coco (Nata de Coco)."
+    precio: 1300,
+    imagen: "../img/bebida6.png",
+    descripcion: "Bebida gaseosa japonesa sabor yogurt arandano"
   },
   {
     id: 26,
-    nombre: "Jugo Mogu Mogu Mango",
+    nombre: "Leche con Te Jazmin 390ml",
     categoria: "Bebidas",
-    precio: 1700,
-    imagen: "https://images.unsplash.com/photo-1546173159-315724a31696?w=500&auto=format&fit=crop",
-    descripcion: "Refrescante bebida tropical de mango con trozos de jalea de coco."
+    precio: 2300,
+    imagen: "../img/leche1.png",
+    descripcion: "Sabroso té con leche jazmin"
   },
   {
     id: 27,
-    nombre: "Pokka Té Verde Jasmine 500ml",
+    nombre: "Leche con Te Matcha 390ml",
     categoria: "Bebidas",
-    precio: 2100,
-    imagen: "https://images.unsplash.com/photo-1627435601361-ec25f5b1d0e5?w=500&auto=format&fit=crop",
-    descripcion: "Té verde aromático infusionado con flores de jazmín sin azúcar."
+    precio: 2300,
+    imagen: "../img/leche2.png",
+    descripcion: "Sabroso té con leche matcha"
   },
   {
     id: 28,
-    nombre: "Calpis Refresco de Yogurt",
+    nombre: "Leche con Te Original 390ml",
     categoria: "Bebidas",
-    precio: 2600,
-    imagen: "https://images.unsplash.com/photo-1523371054106-bbf80586c38c?w=500&auto=format&fit=crop",
-    descripcion: "Bebida láctea japonesa no carbonatada de sabor suave y ácido."
+    precio: 2300,
+    imagen: "../img/leche3.png",
+    descripcion: "Sabroso té con leche"
   },
   {
     id: 29,
-    nombre: "Calpis Refresco de Yogurt",
+    nombre: "Leche con Te y Taro 390ml",
     categoria: "Bebidas",
-    precio: 2600,
-    imagen: "https://images.unsplash.com/photo-1523371054106-bbf80586c38c?w=500&auto=format&fit=crop",
-    descripcion: "Bebida láctea japonesa no carbonatada de sabor suave y ácido."
-  },
-  { 
-    id: 30,
-    nombre: "Calpis Refresco de Yogurt",
-    categoria: "Bebidas",
-    precio: 2600,
-    imagen: "https://images.unsplash.com/photo-1523371054106-bbf80586c38c?w=500&auto=format&fit=crop",
-    descripcion: "Bebida láctea japonesa no carbonatada de sabor suave y ácido."
+    precio: 2300,
+    imagen: "../img/leche4.png",
+    descripcion: "Sabroso té con leche y taro"
   }
 ];
