@@ -261,6 +261,34 @@
         const hayErrores = document.querySelectorAll('.is-invalid').length > 0;
 
         if (!hayErrores) {
+
+          // 1. Obtener los valores del formulario
+          const runVal = document.getElementById("txtRun").value.trim();
+          const nombreVal = document.getElementById("txtNombre").value.trim();
+          const apellidosVal = document.getElementById("txtApellidos").value.trim();
+          const correoVal = document.getElementById("txtCorreo").value.trim();
+
+          // 2. Cargar usuarios existentes de localStorage (o usuariosBase de usuarios.js)
+          let usuarios = JSON.parse(localStorage.getItem("usuarios_db")) || (typeof usuariosBase !== 'undefined' ? usuariosBase : []);
+
+          // 3. Validar si el RUT o Correo ya existen
+          const existe = usuarios.some(u => u.rut === runVal || u.correo === correoVal);
+          if (existe) {
+            alert("El RUN o correo ya se encuentra registrado.");
+            return;
+          }
+
+          // 4. Crear el objeto con la misma estructura que usa el admin
+          const nuevoUsuario = {
+            rut: runVal,
+            nombre: `${nombreVal} ${apellidosVal}`, // Une Nombre y Apellidos
+            correo: correoVal,
+            rol: "Cliente" // Rol asignado por defecto a los registros web
+          };
+
+          // 5. Guardar en el arreglo y actualizar localStorage
+          usuarios.push(nuevoUsuario);
+          localStorage.setItem("usuarios_db", JSON.stringify(usuarios));
           alert("¡Bienvenido a Sakura Market! Registro exitoso. Redirigiendo a inicio de sesión...");
           window.location.href = "login.html";
         } else {
