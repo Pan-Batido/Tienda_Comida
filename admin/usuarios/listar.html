@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gestión de Usuarios - Sakura Market 🌸</title>
+  <title>Gestión de Usuarios</title>
 
   <!-- Bootstrap 5 CSS via CDN -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Iconos de Bootstrap -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <!-- CSS Personalizado -->
-  <link rel="stylesheet" href="../../assets/css/styles.css">
+  <link rel="stylesheet" href="../../css/styles.css">
 </head>
 <body class="bg-light">
 
@@ -48,9 +48,9 @@
           <strong>Admin Integrante 2</strong>
         </a>
         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-          <li><a class="dropdown-item" href="../../public/index.html"><i class="bi bi-shop me-2"></i>Ir a la Tienda</a></li>
+          <li><a class="dropdown-item" href="../../vista_tienda/index.html"><i class="bi bi-shop me-2"></i>Ir a la Tienda</a></li>
           <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item text-danger" href="../../public/login.html"><i class="bi bi-box-arrow-right me-2"></i>Cerrar Sesión</a></li>
+          <li><a class="dropdown-item text-danger" href="../../vista_tienda/login.html"><i class="bi bi-box-arrow-right me-2"></i>Cerrar Sesión</a></li>
         </ul>
       </div>
     </aside>
@@ -58,7 +58,7 @@
     <!-- CONTENIDO PRINCIPAL -->
     <main class="col-md-9 col-lg-10 p-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-        <h1 class="h2 fw-bold text-dark"><i class="bi bi-people-fill me-2 text-warning"></i>Mantenedor de Usuarios</h1>
+        <h1 class="h2 fw-bold text-dark"><i class="bi bi-people-fill me-2 text-warning"></i>Gestor de Usuarios</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <a href="formulario.html" class="btn btn-warning fw-bold">
             <i class="bi bi-person-plus-fill me-1"></i> Nuevo Usuario
@@ -66,25 +66,22 @@
         </div>
       </div>
 
-      <!-- BUSCADOR Y FILTROS -->
+      <!-- BUSCADOR -->
       <div class="card border-0 shadow-sm mb-4">
         <div class="card-body">
           <div class="row g-3">
-            <div class="col-md-6">
+            <div class="col-md-8">
               <div class="input-group">
                 <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
-                <input type="text" class="form-control" placeholder="Buscar por Nombre, RUN o Correo...">
+                <input type="text" id="txtBuscarUsuario" class="form-control" placeholder="Buscar por nombre, correo o RUT..." onkeyup="filtrarUsuarios()">
               </div>
             </div>
             <div class="col-md-4">
-              <select class="form-select">
+              <select id="selectRolFiltro" class="form-select" onchange="filtrarUsuarios()">
                 <option value="">Todos los Roles</option>
-                <option value="admin">Administrador</option>
-                <option value="cliente">Cliente</option>
+                <option value="Administrador">Administrador</option>
+                <option value="Cliente">Cliente</option>
               </select>
-            </div>
-            <div class="col-md-2">
-              <button class="btn btn-dark w-100"><i class="bi bi-funnel me-1"></i>Filtrar</button>
             </div>
           </div>
         </div>
@@ -97,69 +94,18 @@
             <table class="table table-hover align-middle mb-0">
               <thead class="table-dark">
                 <tr>
-                  <th scope="col" class="ps-3">RUN</th>
-                  <th scope="col">Nombre Completo</th>
-                  <th scope="col">Correo Electrónico</th>
-                  <th scope="col">Región</th>
+                  <th scope="col" class="ps-3">RUT</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Correo</th>
                   <th scope="col">Rol</th>
                   <th scope="col" class="text-end pe-3">Acciones</th>
                 </tr>
               </thead>
-              <tbody>
-                
-                <!-- Usuario 1 -->
-                <tr>
-                  <td class="ps-3 fw-semibold">19.876.543-2</td>
-                  <td>Javier Pérez</td>
-                  <td>javier.perez@duoc.cl</td>
-                  <td>Metropolitana de Santiago</td>
-                  <td><span class="badge bg-danger">Administrador</span></td>
-                  <td class="text-end pe-3">
-                    <a href="formulario.html?run=198765432" class="btn btn-sm btn-outline-dark me-1" title="Editar"><i class="bi bi-pencil-fill"></i></a>
-                    <button class="btn btn-sm btn-outline-danger" title="Eliminar" onclick="confirmarEliminacionUser('19.876.543-2')"><i class="bi bi-trash-fill"></i></button>
-                  </td>
-                </tr>
-
-                <!-- Usuario 2 -->
-                <tr>
-                  <td class="ps-3 fw-semibold">12.345.678-5</td>
-                  <td>Ana Gómez</td>
-                  <td>ana.gomez@gmail.com</td>
-                  <td>Valparaíso</td>
-                  <td><span class="badge bg-primary">Cliente</span></td>
-                  <td class="text-end pe-3">
-                    <a href="formulario.html?run=123456785" class="btn btn-sm btn-outline-dark me-1" title="Editar"><i class="bi bi-pencil-fill"></i></a>
-                    <button class="btn btn-sm btn-outline-danger" title="Eliminar" onclick="confirmarEliminacionUser('12.345.678-5')"><i class="bi bi-trash-fill"></i></button>
-                  </td>
-                </tr>
-
-                <!-- Usuario 3 -->
-                <tr>
-                  <td class="ps-3 fw-semibold">15.432.109-K</td>
-                  <td>Carlos Silva</td>
-                  <td>carlos.silva@profesor.duoc.cl</td>
-                  <td>Biobío</td>
-                  <td><span class="badge bg-primary">Cliente</span></td>
-                  <td class="text-end pe-3">
-                    <a href="formulario.html?run=15432109K" class="btn btn-sm btn-outline-dark me-1" title="Editar"><i class="bi bi-pencil-fill"></i></a>
-                    <button class="btn btn-sm btn-outline-danger" title="Eliminar" onclick="confirmarEliminacionUser('15.432.109-K')"><i class="bi bi-trash-fill"></i></button>
-                  </td>
-                </tr>
-
+              <tbody id="tablaUsuariosBody">
+                <!-- Se llena dinámicamente -->
               </tbody>
             </table>
           </div>
-        </div>
-        <!-- PAGINACIÓN -->
-        <div class="card-footer bg-white py-3">
-          <nav aria-label="Navegación de usuarios">
-            <ul class="pagination pagination-sm justify-content-end mb-0">
-              <li class="page-item disabled"><a class="page-link" href="#">Anterior</a></li>
-              <li class="page-item active"><a class="page-link bg-dark border-dark" href="#">1</a></li>
-              <li class="page-item"><a class="page-link text-dark" href="#">2</a></li>
-              <li class="page-item"><a class="page-link text-dark" href="#">Siguiente</a></li>
-            </ul>
-          </nav>
         </div>
       </div>
 
@@ -170,12 +116,75 @@
   <!-- BOOTSTRAP JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
+  <!-- Carga usuarios -->
+  <script src="../../js/usuarios.js"></script>
+  <!-- LÓGICA DE USUARIOS -->
   <script>
-    function confirmarEliminacionUser(run) {
-      if (confirm(`¿Está seguro de que desea eliminar al usuario con RUN ${run}?`)) {
-        alert(`Usuario con RUN ${run} eliminado correctamente.`);
+
+    function obtenerUsuarios() {
+      let usuariosGuardados = localStorage.getItem("usuarios_db");
+      
+      if (!usuariosGuardados) {
+        // Si no hay datos guardados, usamos los del archivo usuarios.js
+        localStorage.setItem("usuarios_db", JSON.stringify(usuariosBase));
+        return usuariosBase;
+      }
+      
+      return JSON.parse(usuariosGuardados);
+    }
+
+    function renderizarTabla(lista) {
+      const tbody = document.getElementById("tablaUsuariosBody");
+      tbody.innerHTML = "";
+
+      if (lista.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5" class="text-center py-4 text-muted">No hay usuarios registrados.</td></tr>`;
+        return;
+      }
+
+      lista.forEach(user => {
+        const badgeRol = user.rol === "Administrador" ? "bg-danger" : "bg-primary";
+        tbody.innerHTML += `
+          <tr>
+            <td class="ps-3 fw-bold">${user.rut}</td>
+            <td class="fw-semibold">${user.nombre}</td>
+            <td>${user.correo}</td>
+            <td><span class="badge ${badgeRol}">${user.rol}</span></td>
+            <td class="text-end pe-3">
+              <a href="formulario.html?rut=${user.rut}" class="btn btn-sm btn-outline-dark me-1" title="Editar"><i class="bi bi-pencil-fill"></i></a>
+              <button class="btn btn-sm btn-outline-danger" title="Eliminar" onclick="eliminarUsuario('${user.rut}')"><i class="bi bi-trash-fill"></i></button>
+            </td>
+          </tr>
+        `;
+      });
+    }
+
+    function eliminarUsuario(rut) {
+      if (confirm(`¿Está seguro de eliminar al usuario con RUT ${rut}?`)) {
+        let usuarios = obtenerUsuarios();
+        usuarios = usuarios.filter(u => u.rut !== rut);
+        localStorage.setItem("usuarios_db", JSON.stringify(usuarios));
+        filtrarUsuarios();
       }
     }
+
+    function filtrarUsuarios() {
+      const usuarios = obtenerUsuarios();
+      const texto = document.getElementById("txtBuscarUsuario").value.toLowerCase();
+      const rol = document.getElementById("selectRolFiltro").value;
+
+      const resultados = usuarios.filter(u => {
+        const coincideTexto = u.nombre.toLowerCase().includes(texto) || u.correo.toLowerCase().includes(texto) || u.rut.toLowerCase().includes(texto);
+        const coincideRol = rol === "" || u.rol === rol;
+        return coincideTexto && coincideRol;
+      });
+
+      renderizarTabla(resultados);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      renderizarTabla(obtenerUsuarios());
+    });
   </script>
 
 </body>
