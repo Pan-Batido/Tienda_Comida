@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalle del Producto - Sakura Market</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="icon" type="image/png" href="../img/logo-sakura.png">
+</head>
+<body class="d-flex flex-column min-vh-100 bg-light">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-danger shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold d-flex align-items-center" href="index.html">
+        <img src="../img/logo-sakura.png" alt="Sakura" height="38" class="me-2">
+        <span>Sakura Market</span>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="productos.html">Productos</a></li>
+          <li class="nav-item"><a class="nav-link" href="blogs.html">Blogs</a></li>
+          <li class="nav-item"><a class="nav-link active" href="nosotros.html">Nosotros</a></li>
+          <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+        </ul>
+
+        <!-- Botones de sesión y carrito -->
+        <div class="d-flex align-items-center gap-2">
+          <a href="login.html" class="btn btn-outline-light btn-sm fw-bold">
+            <i class="bi bi-box-arrow-in-right me-1"></i> Ingresar
+          </a>
+          <a href="registro.html" class="btn btn-outline-light btn-sm fw-bold">
+            <i class="bi bi-person-plus-fill me-1"></i> Registrarse
+          </a>
+          
+          <a href="carrito.html" class="btn btn-sm text-white position-relative ms-1 fw-bold" style="background-color: #3f5135; border-color: #3f5135;">
+            <i class="bi bi-cart-fill me-1"></i> Carrito
+            <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+              0
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="container my-5 flex-grow-1">
+    <!-- Botón para regresar -->
+    <a href="productos.html" class="btn btn-outline-danger btn-sm mb-4">
+      <i class="bi bi-arrow-left me-1"></i> Volver al Catálogo
+    </a>
+
+    <!-- Alerta cuando no se encuentra el producto -->
+    <div id="alerta-error" class="alert alert-danger d-none text-center" role="alert">
+      <h4 class="alert-heading fw-bold"><i class="bi bi-exclamation-triangle-fill me-2"></i>Producto no encontrado</h4>
+      <p class="mb-0">El producto solicitado no existe o fue eliminado.</p>
+      <hr>
+      <a href="productos.html" class="btn btn-danger btn-sm">Regresar a Productos</a>
+    </div>
+
+    <!-- Ficha del Producto -->
+    <div id="contenedor-producto" class="row g-4 align-items-center bg-white p-4 p-md-5 rounded shadow-sm d-none">
+      <!-- Imagen -->
+      <div class="col-md-6 text-center">
+        <img id="producto-imagen" src="" alt="Producto" class="img-fluid rounded shadow-sm object-fit-cover" style="max-height: 400px; width: 100%;">
+      </div>
+
+      <!-- Información del Producto -->
+      <div class="col-md-6">
+        <span id="producto-categoria" class="badge bg-danger mb-2 fs-6">Categoría</span>
+        <h2 id="producto-nombre" class="fw-bold text-dark mb-3">Nombre del Producto</h2>
+        <h3 id="producto-precio" class="fw-bold text-success mb-4">$0</h3>
+        
+        <p class="text-muted mb-4 fs-6" id="producto-descripcion">
+          Descripción del producto...
+        </p>
+
+        <hr class="my-4">
+
+        <!-- Selector de Cantidad y Botón de Agregar -->
+        <div class="d-flex flex-wrap align-items-center gap-3">
+          <label for="cantidad" class="fw-bold text-secondary mb-0">Cantidad:</label>
+          <div class="btn-group border rounded" role="group">
+            <button type="button" class="btn btn-light border-end" id="btn-decrementar"><i class="bi bi-dash-lg"></i></button>
+            <input type="text" id="cantidad-input" class="form-control border-0 text-center fw-bold bg-white" value="1" readonly style="width: 50px;">
+            <button type="button" class="btn btn-light border-start" id="btn-incrementar"><i class="bi bi-plus-lg"></i></button>
+          </div>
+
+          <button id="btn-agregar-carrito" class="btn btn-warning fw-bold px-4 py-2 flex-grow-1">
+            <i class="bi bi-cart-plus-fill me-2"></i>Agregar al Carrito
+          </button>
+        </div>
+
+        <!-- Mensaje de confirmación al agregar -->
+        <div id="mensaje-exito" class="alert alert-success mt-3 d-none mb-0 py-2" role="alert">
+          <i class="bi bi-check-circle-fill me-2"></i>¡Producto agregado al carrito con éxito!
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer-matcha text-white pt-5 pb-4 mt-auto">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-4">
+          <h5 class="fw-bold text-white mb-3"><i class="bi bi-shop me-1"></i> Sakura Market</h5>
+          <p class="small text-white-50">Tu tienda especializada en importación de comidas, snacks y bebidas orientales directas a tu mesa.</p>
+        </div>
+        <div class="col-md-4">
+          <h5 class="fw-bold mb-3">Enlaces Rápidos</h5>
+          <ul class="list-unstyled small">
+            <li class="mb-1"><a href="index.html" class="text-white-50 text-decoration-none link-light">Inicio</a></li>
+            <li class="mb-1"><a href="productos.html" class="text-white-50 text-decoration-none link-light">Ver Productos</a></li>
+            <li class="mb-1"><a href="blogs.html" class="text-white-50 text-decoration-none link-light">Blog</a></li>
+            <li class="mb-1"><a href="nosotros.html" class="text-white-50 text-decoration-none link-light">Sobre Nosotros</a></li>
+            <li class="mb-1"><a href="contacto.html" class="text-white-50 text-decoration-none link-light">Contacto</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5 class="fw-bold mb-3">Contacto</h5>
+          <p class="small text-white-50 mb-1"><i class="bi bi-geo-alt me-2 text-white"></i>Av. Asia 1234, Santiago, Chile</p>
+          <p class="small text-white-50 mb-1"><i class="bi bi-envelope me-2 text-white"></i>contacto@sakuramarket.cl</p>
+          <p class="small text-white-50"><i class="bi bi-clock me-2 text-white"></i>Lun - Sáb: 10:00 - 20:00 hrs</p>
+        </div>
+      </div>
+      <hr class="border-light opacity-25 my-4">
+      <div class="text-center small text-white-50">
+        &copy; 2026 Sakura Market - Evaluación Proyecto Web.
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../js/productos.js"></script>
+  <script src="../js/main.js"></script>
+
+  <script>
+    let productoActual = null;
+    let cantidadSeleccionada = 1;
+
+    // Obtener los productos desde localStorage o cargar los de productos.js
+    function obtenerListaProductos() {
+      let productosGuardados = localStorage.getItem("productos_db");
+      if (!productosGuardados) {
+        const listaInicial = (typeof productosAsia !== "undefined") ? productosAsia : [];
+        localStorage.setItem("productos_db", JSON.stringify(listaInicial));
+        return listaInicial;
+      }
+      return JSON.parse(productosGuardados);
+    }
+
+    // Cargar producto leyendo el ID de la URL
+    document.addEventListener("DOMContentLoaded", () => {
+      const params = new URLSearchParams(window.location.search);
+      const idParam = parseInt(params.get("id"));
+
+      const productos = obtenerListaProductos();
+      productoActual = productos.find(p => p.id === idParam);
+
+      const contenedorProducto = document.getElementById("contenedor-producto");
+      const alertaError = document.getElementById("alerta-error");
+
+      if (!productoActual) {
+        alertaError.classList.remove("d-none");
+        return;
+      }
+
+      // Rellenar datos en la vista
+      document.getElementById("producto-imagen").src = productoActual.imagen;
+      document.getElementById("producto-imagen").alt = productoActual.nombre;
+      document.getElementById("producto-nombre").textContent = productoActual.nombre;
+      document.getElementById("producto-categoria").textContent = productoActual.categoria;
+      document.getElementById("producto-precio").textContent = `$${productoActual.precio.toLocaleString("es-CL")}`;
+      document.getElementById("producto-descripcion").textContent = productoActual.descripcion || "Sin descripción disponible.";
+
+      contenedorProducto.classList.remove("d-none");
+    });
+
+    // Control de Cantidad (+ / -)
+    const cantidadInput = document.getElementById("cantidad-input");
+
+    document.getElementById("btn-incrementar").addEventListener("click", () => {
+      cantidadSeleccionada++;
+      cantidadInput.value = cantidadSeleccionada;
+    });
+
+    document.getElementById("btn-decrementar").addEventListener("click", () => {
+      if (cantidadSeleccionada > 1) {
+        cantidadSeleccionada--;
+        cantidadInput.value = cantidadSeleccionada;
+      }
+    });
+
+    // Función para agregar al carrito en localStorage
+    document.getElementById("btn-agregar-carrito").addEventListener("click", () => {
+      if (!productoActual) return;
+
+      let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+      const index = carrito.findIndex(item => item.id === productoActual.id);
+
+      if (index !== -1) {
+        // Si ya está en el carrito, sumar la cantidad seleccionada
+        carrito[index].cantidad += cantidadSeleccionada;
+      } else {
+        // Agregar nuevo ítem
+        carrito.push({
+          id: productoActual.id,
+          nombre: productoActual.nombre,
+          precio: productoActual.precio,
+          categoria: productoActual.categoria,
+          imagen: productoActual.imagen,
+          cantidad: cantidadSeleccionada
+        });
+      }
+
+      localStorage.setItem("carrito", JSON.stringify(carrito));
+
+      // Mostrar alerta de éxito
+      const mensajeExito = document.getElementById("mensaje-exito");
+      mensajeExito.classList.remove("d-none");
+      setTimeout(() => {
+        mensajeExito.classList.add("d-none");
+      }, 3000);
+    });
+  </script>
+</body>
+</html>

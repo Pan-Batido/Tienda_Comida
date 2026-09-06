@@ -8,7 +8,7 @@ function cargarProductos(lista = productosAsia) {
   contenedor.innerHTML = "";
 
   if (typeof lista === "undefined" || lista.length === 0) {
-    contenedor.innerHTML = `<p class="text-center text-muted">No hay productos disponibles por el momento.</p>`;
+    contenedor.innerHTML = `<p class="text-center text-muted col-12">No hay productos disponibles por el momento.</p>`;
     return;
   }
 
@@ -17,19 +17,32 @@ function cargarProductos(lista = productosAsia) {
     col.className = "col-12 col-md-6 col-lg-3";
 
     col.innerHTML = `
-      <div class="card h-100 shadow-sm border-0">
-        <img src="${prod.imagen}" class="card-img-top p-2" alt="${prod.nombre}" style="height: 200px; object-fit: contain; background-color: #fff;">
+      <div class="card h-100 shadow-sm border-0 overflow-hidden">
+        
+        <!-- enlace en la imagen -->
+        <a href="detalle_producto.html?id=${prod.id}">
+          <img src="${prod.imagen}" class="card-img-top p-2" alt="${prod.nombre}" style="height: 200px; object-fit: contain; background-color: #fff;">
+        </a>
+
         <div class="card-body d-flex flex-column">
           <span class="badge bg-danger mb-2 w-auto align-self-start">${prod.categoria}</span>
-          <h5 class="card-title fw-bold">${prod.nombre}</h5>
-          <p class="card-text text-muted small flex-grow-1">${prod.descripcion}</p>
-          <div class="mt-3">
-            <p class="fw-bold fs-5 text-success mb-2">$${prod.precio.toLocaleString("es-CL")}</p>
-            <button class="btn btn-outline-danger w-100" onclick="agregarAlCarrito(${prod.id})">
-              <i class="bi bi-cart-plus-fill"></i> Añadir al Carrito
-            </button>
-          </div>
+          
+          <!-- enlace en el titulo -->
+          <h5 class="card-title fw-bold fs-6">
+            <a href="detalle_producto.html?id=${prod.id}" class="text-decoration-none text-dark">
+              ${prod.nombre}
+            </a>
+          </h5>
+          
+          <p class="card-text text-muted small flex-grow-1">${prod.descripcion || ''}</p>
+        
+        <div class="mt-3">
+          <p class="fw-bold fs-5 text-success mb-2">$${prod.precio.toLocaleString("es-CL")}</p>
+          <button class="btn btn-outline-danger w-100" onclick="agregarAlCarrito(${prod.id})">
+            <i class="bi bi-cart-plus-fill"></i> Añadir al Carrito
+          </button>
         </div>
+
       </div>
     `;
     contenedor.appendChild(col);
