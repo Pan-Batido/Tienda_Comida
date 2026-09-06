@@ -33,17 +33,27 @@
         <ul class="navbar-nav me-auto">
           <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
           <li class="nav-item"><a class="nav-link" href="productos.html">Productos</a></li>
+          <li class="nav-item"><a class="nav-link" href="blogs.html">Blogs</a></li>
           <li class="nav-item"><a class="nav-link" href="nosotros.html">Nosotros</a></li>
           <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
         </ul>
 
+        <!-- Botones de sesión y carrito al extremo derecho -->
         <div class="d-flex align-items-center gap-2">
-          <a href="login.html" class="btn btn-outline-light btn-sm">Ingresar</a>
-          <a href="registro.html" class="btn btn-outline-danger btn-sm fw-bold">Registrarse</a>
-          
-          <a href="carrito.html" class="btn btn-outline-light position-relative ms-2 active">
-            <i class="bi bi-cart-fill"></i> Carrito
-            <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark">
+          <!-- Botón Ingresar con icono -->
+          <a href="login.html" class="btn btn-outline-light btn-sm fw-bold">
+            <i class="bi bi-box-arrow-in-right me-1"></i> Ingresar
+          </a>
+
+          <!-- Botón Registrarse con mismo estilo e icono -->
+          <a href="registro.html" class="btn btn-outline-light btn-sm fw-bold">
+            <i class="bi bi-person-plus-fill me-1"></i> Registrarse
+          </a>
+
+          <!-- Botón Carrito en verde Moss con texto blanco -->
+          <a href="carrito.html" class="btn btn-sm text-white position-relative ms-1 fw-bold active" style="background-color: #3f5135; border-color: #3f5135;">
+            <i class="bi bi-cart-fill me-1"></i> Carrito
+            <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
               0
             </span>
           </a>
@@ -131,12 +141,13 @@
   </main>
 
   <!-- FOOTER -->
-  <footer class="footer-matcha text-white pt-5 pb-4">
+  <footer class="footer-matcha text-white pt-5 pb-4 mt-auto">
     <div class="container">
       <div class="row g-4">
         <div class="col-md-4">
           <h5 class="fw-bold text-white mb-3">
-            <i class="bi bi-shop"></i> Sakura Market</h5>
+            <i class="bi bi-shop me-1"></i> Sakura Market
+          </h5>
           <p class="small text-white-50">Tu tienda especializada en importación de comidas, snacks y bebidas orientales directas a tu mesa.</p>
         </div>
         <div class="col-md-4">
@@ -144,9 +155,7 @@
           <ul class="list-unstyled small">
             <li class="mb-1"><a href="index.html" class="text-white-50 text-decoration-none link-light">Inicio</a></li>
             <li class="mb-1"><a href="productos.html" class="text-white-50 text-decoration-none link-light">Ver Productos</a></li>
-            <li class="nav-item">
-            <a class="nav-link" href="blogs.html">Blogs</a>
-            </li>
+            <li class="mb-1"><a href="blogs.html" class="text-white-50 text-decoration-none link-light">Blogs</a></li>
             <li class="mb-1"><a href="nosotros.html" class="text-white-50 text-decoration-none link-light">Sobre Nosotros</a></li>
             <li class="mb-1"><a href="contacto.html" class="text-white-50 text-decoration-none link-light">Contacto</a></li>
           </ul>
@@ -157,7 +166,6 @@
           <p class="small text-white-50 mb-1"><i class="bi bi-envelope me-2 text-white"></i>contacto@sakuramarket.cl</p>
           <p class="small text-white-50"><i class="bi bi-clock me-2 text-white"></i>Lun - Sáb: 10:00 - 20:00 hrs</p>
         </div>
-
       </div>
 
       <hr class="border-light opacity-25 my-4">

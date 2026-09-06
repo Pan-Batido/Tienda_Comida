@@ -5,16 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Inicio - Sakura Market</title>
   
+  <!-- Favicon -->
   <link rel="icon" type="image/png" href="../img/logo-sakura.png">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+  <!-- Bootstrap CSS & Iconos -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   
-  <!-- Estilos personalizados cargados al final -->
+  <!-- CSS Personalizado -->
   <link rel="stylesheet" href="../css/styles.css">
 </head>
-<body class="bg-light">
+<body class="bg-light d-flex flex-column min-vh-100">
 
-  <!-- NAVBAR CORREGIDO -->
+  <!-- NAVBAR -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-danger shadow-sm">
     <div class="container">
       <!-- Logo y Nombre -->
@@ -48,15 +51,22 @@
           </li>
         </ul>
 
-        <!-- Botones de sesión y carrito -->
+        <!-- Botones de sesión y carrito al extremo derecho -->
         <div class="d-flex align-items-center gap-2">
-          <a href="login.html" class="btn btn-outline-light btn-sm">
-            <i class="bi bi-person-circle"></i> Ingresar
+          <!-- Botón Ingresar con icono -->
+          <a href="login.html" class="btn btn-outline-light btn-sm fw-bold">
+            <i class="bi bi-box-arrow-in-right me-1"></i> Ingresar
           </a>
-          <a href="registro.html" class="btn btn-outline-danger btn-sm fw-bold">Registrarse</a>
-          <a href="carrito.html" class="btn btn-outline-light btn-sm position-relative ms-2">
-            <i class="bi bi-cart4 fs-6"></i> Carrito
-            <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark">
+
+          <!-- Botón Registrarse con icono -->
+          <a href="registro.html" class="btn btn-outline-light btn-sm fw-bold">
+            <i class="bi bi-person-plus-fill me-1"></i> Registrarse
+          </a>
+
+          <!-- Botón Carrito en verde Moss con texto blanco -->
+          <a href="carrito.html" class="btn btn-sm text-white position-relative ms-1 fw-bold" style="background-color: #3f5135; border-color: #3f5135;">
+            <i class="bi bi-cart-fill me-1"></i> Carrito
+            <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
               0
             </span>
           </a>
@@ -65,70 +75,69 @@
     </div>
   </nav>
 
-<!-- HERO CAROUSEL ESTILIZADO -->
-<header id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
-    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
-    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
-  </div>
-  
-  <div class="carousel-inner">
+  <!-- HERO CAROUSEL ESTILIZADO -->
+  <header id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+      <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+      <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+    </div>
     
-    <!-- Slide 1: Comida -->
-    <div class="carousel-item active position-relative text-white p-5 text-center align-content-center" 
-         style="min-height: 400px; background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('../img/ramen-banner.jpg') center/cover no-repeat;">
-      <div class="container py-4 position-relative">
-        <h1 class="display-4 fw-bold text-shadow">Ramen Instántaneo</h1>
-        <p class="lead fw-normal text-light fs-5">Deliciosos fideos instantáneos.</p>
-        <a href="productos.html?cat=Comida" 
-           class="btn btn-lg mt-3 px-4 rounded-pill shadow-sm fw-bold text-white" 
-           style="background-color: #f282a5; border-color: #f282a5;">
-          <i class="bi bi-shop me-1"></i> Explorar Ramen 
-        </a>
+    <div class="carousel-inner">
+      
+      <!-- Slide 1: Comida -->
+      <div class="carousel-item active position-relative text-white p-5 text-center align-content-center" 
+           style="min-height: 400px; background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('../img/ramen-banner.jpg') center/cover no-repeat;">
+        <div class="container py-4 position-relative">
+          <h1 class="display-4 fw-bold text-shadow">Ramen Instántaneo</h1>
+          <p class="lead fw-normal text-light fs-5">Deliciosos fideos instantáneos.</p>
+          <a href="productos.html?cat=Comida" 
+             class="btn btn-lg mt-3 px-4 rounded-pill shadow-sm fw-bold text-white" 
+             style="background-color: #f282a5; border-color: #f282a5;">
+            <i class="bi bi-shop me-1"></i> Explorar Ramen 
+          </a>
+        </div>
       </div>
-    </div>
 
-    <!-- Slide 2: Snacks -->
-    <div class="carousel-item position-relative text-white p-5 text-center align-content-center" 
-         style="min-height: 400px; background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('../img/snacks-banner.png') center/cover no-repeat;">
-      <div class="container py-4 position-relative">
-        <h1 class="display-4 fw-bold text-shadow">Snacks & Dulces Japoneses</h1>
-        <p class="lead fw-normal text-light fs-5">Pockys, mochis, dorayakis y los mejores bocadillos crujientes de Asia.</p>
-        
-        <a href="productos.html?cat=Snacks" 
-           class="btn btn-lg mt-3 px-4 rounded-pill shadow-sm fw-bold text-white" 
-           style="background-color: #f282a5; border-color: #f282a5;">
-          <i class="bi bi-egg-fried me-1"></i> Explorar Snacks
-        </a>
+      <!-- Slide 2: Snacks -->
+      <div class="carousel-item position-relative text-white p-5 text-center align-content-center" 
+           style="min-height: 400px; background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('../img/snacks-banner.png') center/cover no-repeat;">
+        <div class="container py-4 position-relative">
+          <h1 class="display-4 fw-bold text-shadow">Snacks & Dulces Japoneses</h1>
+          <p class="lead fw-normal text-light fs-5">Pockys, mochis, dorayakis y los mejores bocadillos crujientes de Asia.</p>
+          <a href="productos.html?cat=Snacks" 
+             class="btn btn-lg mt-3 px-4 rounded-pill shadow-sm fw-bold text-white" 
+             style="background-color: #f282a5; border-color: #f282a5;">
+            <i class="bi bi-egg-fried me-1"></i> Explorar Snacks
+          </a>
+        </div>
       </div>
-    </div>
 
-    <!-- Slide 3: Bebidas -->
-    <div class="carousel-item position-relative text-white p-5 text-center align-content-center" 
-         style="min-height: 400px; background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('../img/bebidas-banner.jpg') center/cover no-repeat;">
-      <div class="container py-4 position-relative">
-        <h1 class="display-4 fw-bold text-shadow">Bebidas & Bubble Teas</h1>
-        <p class="lead fw-normal text-light fs-5">Refréscate con los Ramunes tradicionales, Boba teas y jugos Mogu Mogu.</p>
-        <a href="productos.html?cat=Bebidas" 
-           class="btn btn-lg mt-3 px-4 rounded-pill shadow-sm fw-bold text-white" 
-           style="background-color: #f282a5; border-color: #f282a5;">
-          <i class="bi bi-cup-straw me-1"></i> Explorar Bebidas
-        </a>
+      <!-- Slide 3: Bebidas -->
+      <div class="carousel-item position-relative text-white p-5 text-center align-content-center" 
+           style="min-height: 400px; background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('../img/bebidas-banner.jpg') center/cover no-repeat;">
+        <div class="container py-4 position-relative">
+          <h1 class="display-4 fw-bold text-shadow">Bebidas & Bubble Teas</h1>
+          <p class="lead fw-normal text-light fs-5">Refréscate con los Ramunes tradicionales, Boba teas y jugos Mogu Mogu.</p>
+          <a href="productos.html?cat=Bebidas" 
+             class="btn btn-lg mt-3 px-4 rounded-pill shadow-sm fw-bold text-white" 
+             style="background-color: #f282a5; border-color: #f282a5;">
+            <i class="bi bi-cup-straw me-1"></i> Explorar Bebidas
+          </a>
+        </div>
       </div>
     </div>
-  </div>
-  
-  <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon"></span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
-    <span class="carousel-control-next-icon"></span>
-  </button>
-</header>
+    
+    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+  </header>
 
   <!-- SECCIÓN DE PRODUCTOS DESTACADOS -->
-  <main class="container my-5">
+  <main class="container my-5 flex-grow-1">
     <div class="text-center mb-5">
       <h2 class="fw-bold text-uppercase text-danger">Productos Destacados</h2>
       <p class="text-muted">Los favoritos de la comunidad otaku y amantes de la comida asiática</p>
@@ -139,12 +148,13 @@
   </main>
 
   <!-- FOOTER -->
-  <footer class="footer-matcha text-white pt-5 pb-4">
+  <footer class="footer-matcha text-white pt-5 pb-4 mt-auto">
     <div class="container">
       <div class="row g-4">
         <div class="col-md-4">
           <h5 class="fw-bold text-white mb-3">
-            <i class="bi bi-shop"></i> Sakura Market</h5>
+            <i class="bi bi-shop me-1"></i> Sakura Market
+          </h5>
           <p class="small text-white-50">Tu tienda especializada en importación de comidas, snacks y bebidas orientales directas a tu mesa.</p>
         </div>
         <div class="col-md-4">
@@ -152,6 +162,7 @@
           <ul class="list-unstyled small">
             <li class="mb-1"><a href="index.html" class="text-white-50 text-decoration-none link-light">Inicio</a></li>
             <li class="mb-1"><a href="productos.html" class="text-white-50 text-decoration-none link-light">Ver Productos</a></li>
+            <li class="mb-1"><a href="blogs.html" class="text-white-50 text-decoration-none link-light">Blogs</a></li>
             <li class="mb-1"><a href="nosotros.html" class="text-white-50 text-decoration-none link-light">Sobre Nosotros</a></li>
             <li class="mb-1"><a href="contacto.html" class="text-white-50 text-decoration-none link-light">Contacto</a></li>
           </ul>
@@ -162,7 +173,6 @@
           <p class="small text-white-50 mb-1"><i class="bi bi-envelope me-2 text-white"></i>contacto@sakuramarket.cl</p>
           <p class="small text-white-50"><i class="bi bi-clock me-2 text-white"></i>Lun - Sáb: 10:00 - 20:00 hrs</p>
         </div>
-
       </div>
 
       <hr class="border-light opacity-25 my-4">
@@ -173,21 +183,21 @@
     </div>
   </footer>
 
-  <!-- JS Bootstrap & Lógica del Proyecto -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="../js/productos.js"></script>
-  <script src="../js/main.js"></script>
-  
   <!-- TOAST NOTIFICACIÓN CARRITO -->
-<div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1100;">
-  <div id="toast-carrito" class="toast align-items-center text-white border-0 shadow" role="alert" aria-live="assertive" aria-atomic="true" style="background-color: #3f5135;">
-    <div class="d-flex">
-      <div class="toast-body fw-bold" id="toast-mensaje">
-        <!-- El mensaje dinámico se inserta aquí con JS -->
+  <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1100;">
+    <div id="toast-carrito" class="toast align-items-center text-white border-0 shadow" role="alert" aria-live="assertive" aria-atomic="true" style="background-color: #3f5135;">
+      <div class="d-flex">
+        <div class="toast-body fw-bold" id="toast-mensaje">
+          <!-- El mensaje dinámico se inserta aquí con JS -->
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
       </div>
-      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
   </div>
-</div>
+
+  <!-- JS Bootstrap & Lógica del Proyecto -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../js/productos.js"></script>
+  <script src="../js/main.js"></script>
 </body>
 </html>
