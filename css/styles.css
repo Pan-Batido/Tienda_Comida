@@ -76,3 +76,11 @@ body {
 .footer-matcha {
   background-color: var(--verde-musgo, #556b2f) !important;
 }
+
+.border-sakura {
+  border-color: #ffb7c5 !important;
+}
+
+.text-sakura {
+  color: #ff69b4 !important;
+}

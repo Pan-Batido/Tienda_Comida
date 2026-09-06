@@ -10,38 +10,61 @@
 </head>
 <body class="d-flex flex-column min-vh-100 bg-light">
 
-  <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-    <div class="container">
-      <a class="navbar-brand fw-bold text-warning" href="index.html">
-        <i class="bi bi-shop me-1"></i>Sakura Market 🌸
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav me-auto">
-          <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
-          <li class="nav-item"><a class="nav-link" href="productos.html">Productos</a></li>
-          <li class="nav-item"><a class="nav-link active fw-bold text-warning" href="blogs.html">Blog</a></li>
-          <li class="nav-item"><a class="nav-link" href="nosotros.html">Nosotros</a></li>
-          <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
-        </ul>
-        <div class="d-flex gap-2">
-          <a href="carrito.html" class="btn btn-outline-light"><i class="bi bi-cart-fill me-1"></i> Carrito</a>
-          <a href="login.html" class="btn btn-warning fw-bold"><i class="bi bi-person-fill me-1"></i> Iniciar Sesión</a>
-        </div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-danger shadow-sm">
+  <div class="container">
+    <!-- Logo y Nombre -->
+    <a class="navbar-brand fw-bold d-flex align-items-center" href="index.html">
+      <img src="../img/logo-sakura.png" alt="Sakura" height="38" class="me-2">
+      <span>Sakura Market</span>
+    </a>
+
+    <!-- Botón responsive para móviles -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Menú de enlaces -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="productos.html">Productos</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="blogs.html">Blogs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="nosotros.html">Nosotros</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="contacto.html">Contacto</a>
+        </li>
+      </ul>
+
+      <!-- Botones de sesión y carrito al extremo derecho -->
+      <div class="d-flex align-items-center gap-2">
+        <a href="login.html" class="btn btn-outline-light btn-sm">Ingresar</a>
+        <a href="registro.html" class="btn btn-outline-danger btn-sm fw-bold">Registrarse</a>
+        
+        <a href="carrito.html" class="btn btn-outline-light position-relative ms-2">
+          <i class="bi bi-cart-fill"></i> Carrito
+          <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark">
+            0
+          </span>
+        </a>
       </div>
     </div>
-  </nav>
+  </div>
+</nav>
 
   <!-- ARTÍCULO -->
   <main class="container my-5 flex-grow-1">
     <div class="row justify-content-center">
       <div class="col-lg-8">
-        <a href="blogs.html" class="btn btn-outline-secondary btn-sm mb-4"><i class="bi bi-arrow-left me-1"></i> Volver al Blog</a>
+        <a href="blogs.html" class="btn btn-outline-danger btn-sm mb-4"><i class="bi bi-arrow-left me-1"></i> Volver al Blog</a>
         
-        <span class="badge bg-warning text-dark mb-2">Curiosidades</span>
         <h1 class="fw-bold mb-3">Curiosidades del Pocky: Origen del Nombre y el Pocky Day</h1>
         <p class="text-muted small"><i class="bi bi-calendar3 me-1"></i> Publicado el 4 de Septiembre, 2026</p>
 
@@ -56,7 +79,7 @@
           <h4 class="fw-bold mt-4 text-warning-dark">2. El "Día del Pocky" (11 de Noviembre)</h4>
           <p>En Japón, el 11 de noviembre (11/11) se celebra oficialmente el <strong>Pocky & Pretz Day</strong>. La fecha fue elegida porque los números unos (1111) se asemejan visualmente a cuatro palitos de Pocky colocados juntos.</p>
 
-          <div class="p-3 bg-white border-start border-4 border-warning shadow-sm my-4">
+          <div class="p-3 bg-white border-start border-4 border-sakura shadow-sm my-4">
             <p class="mb-0 fw-semibold text-dark"><i class="bi bi-heart-fill text-danger me-1"></i> Dato curioso: Durante el Día del Pocky es tradición regalar cajas a tus amigos o jugar al famoso "juego del Pocky" en fiestas.</p>
           </div>
         </div>
