@@ -98,10 +98,18 @@ document.addEventListener("DOMContentLoaded", () => {
   // Revisar si la URL trae el parámetro de categoría (Ej: productos.html?cat=Comida)
   const urlParams = new URLSearchParams(window.location.search);
   const categoriaURL = urlParams.get('cat');
+  const esPaginaInicio = window.location.pathname.endsWith("index.html") || window.location.pathname.endsWith("/") || window.location.pathname === "";
 
   if (categoriaURL && typeof productosAsia !== "undefined") {
     filtrarProductos(categoriaURL);
+  } else if (esPaginaInicio && typeof productosAsia !== "undefined") {
+    // Selección variada de 10 productos destacados mediante sus IDs entre los 29 disponibles
+    const idsDestacadas = [1, 3, 7, 10, 12, 15, 18, 21, 24, 28];
+    const destacados = productosAsia.filter(p => idsDestacadas.includes(p.id));
+    
+    cargarProductos(destacados);
   } else {
+    // En productos.html sin filtro se muestran todos los 29
     cargarProductos();
   }
 });
