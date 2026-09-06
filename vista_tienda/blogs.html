@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Sakura Market</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="d-flex flex-column min-vh-100 bg-light">
+    
+<nav class="navbar navbar-expand-lg navbar-dark bg-danger shadow-sm">
+  <div class="container">
+    <!-- Logo y Nombre -->
+    <a class="navbar-brand fw-bold d-flex align-items-center" href="index.html">
+      <img src="../img/logo-sakura.png" alt="Sakura" height="38" class="me-2">
+      <span>Sakura Market</span>
+    </a>
+
+    <!-- Botón responsive para móviles -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Menú de enlaces -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="productos.html">Productos</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="blogs.html">Blogs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="nosotros.html">Nosotros</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="contacto.html">Contacto</a>
+        </li>
+      </ul>
+
+      <!-- Botones de sesión y carrito al extremo derecho -->
+      <div class="d-flex align-items-center gap-2">
+        <a href="login.html" class="btn btn-outline-light btn-sm">Ingresar</a>
+        <a href="registro.html" class="btn btn-outline-danger btn-sm fw-bold">Registrarse</a>
+        
+        <a href="carrito.html" class="btn btn-outline-light position-relative ms-2">
+          <i class="bi bi-cart-fill"></i> Carrito
+          <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark">
+            0
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main>
+    <main class="container my-5 flex-grow-1">
+    <div class="text-center mb-5">
+      <h1 class="fw-bold text-dark"><i class="bi bi-journal-richtext text-warning me-2"></i>Blog de Comida Oriental</h1>
+      <p class="text-muted">Descubre historias, datos curiosos y guías gastronómicas del continente asiático.</p>
+    </div>
+
+    <div class="row g-4">
+      <!-- ARTÍCULO 1 -->
+      <div class="col-md-6">
+        <div class="card h-100 border-0 shadow-sm overflow-hidden">
+          <img src="../img/RamenPavoPicante.png" class="card-img-top object-fit-cover" alt="Ramen" style="height: 240px;">
+          <div class="card-body d-flex flex-column">
+            <span class="badge bg-danger w-auto mb-2 align-self-start">Gastronomía</span>
+            <h5 class="card-title fw-bold">Guía básica de Ramens Coreanos y Japoneses</h5>
+            <p class="card-text text-muted small">Aprende a diferenciar el clásico Ramyun instantáneo coreano de un auténtico Ramen tradicional japonés.</p>
+            <a href="detalle-blog-1.html" class="btn btn-outline-dark mt-auto fw-bold">Leer Artículo <i class="bi bi-arrow-right ms-1"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ARTÍCULO 2 -->
+      <div class="col-md-6">
+        <div class="card h-100 border-0 shadow-sm overflow-hidden">
+          <img src="../img/pocky2.webp" class="card-img-top object-fit-cover" alt="Pocky" style="height: 240px;">
+          <div class="card-body d-flex flex-column">
+            <span class="badge bg-warning text-dark w-auto mb-2 align-self-start">Curiosidades</span>
+            <h5 class="card-title fw-bold">Curiosidades del Pocky: Origen del Nombre y el Pocky Day</h5>
+            <p class="card-text text-muted small">Descubre por qué este famoso snack japonés se llama así y la particular razón de su día nacional el 11 de noviembre.</p>
+            <a href="detalle-blog-2.html" class="btn btn-outline-dark mt-auto fw-bold">Leer Artículo <i class="bi bi-arrow-right ms-1"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</main>
+
+<footer class="footer-matcha text-white pt-5 pb-4 mt-auto">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-4">
+          <h5 class="fw-bold text-white mb-3"><i class="bi bi-shop me-1"></i> Sakura Market</h5>
+          <p class="small text-white-50">Tu tienda especializada en importación de comidas, snacks y bebidas orientales directas a tu mesa.</p>
+        </div>
+        <div class="col-md-4">
+          <h5 class="fw-bold mb-3">Enlaces Rápidos</h5>
+          <ul class="list-unstyled small">
+            <li class="mb-1"><a href="index.html" class="text-white-50 text-decoration-none link-light">Inicio</a></li>
+            <li class="mb-1"><a href="productos.html" class="text-white-50 text-decoration-none link-light">Ver Productos</a></li>
+            <li class="mb-1"><a href="blogs.html" class="text-white-50 text-decoration-none link-light">Blog</a></li>
+            <li class="mb-1"><a href="nosotros.html" class="text-white-50 text-decoration-none link-light">Sobre Nosotros</a></li>
+            <li class="mb-1"><a href="contacto.html" class="text-white-50 text-decoration-none link-light">Contacto</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h5 class="fw-bold mb-3">Contacto</h5>
+          <p class="small text-white-50 mb-1"><i class="bi bi-geo-alt me-2 text-white"></i>Av. Asia 1234, Santiago, Chile</p>
+          <p class="small text-white-50 mb-1"><i class="bi bi-envelope me-2 text-white"></i>contacto@sakuramarket.cl</p>
+          <p class="small text-white-50"><i class="bi bi-clock me-2 text-white"></i>Lun - Sáb: 10:00 - 20:00 hrs</p>
+        </div>
+      </div>
+      <hr class="border-light opacity-25 my-4">
+      <div class="text-center small text-white-50">
+        &copy; 2026 Sakura Market - Evaluación Proyecto Web.
+      </div>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

@@ -2,7 +2,7 @@ const usuariosBase = [
   {
     rut: "12345678-9",
     nombre: "Sakura De Naruto",
-    correo: "admin@gmail.com",
+    correo: "admin@sakura.cl",
     rol: "Administrador"
   },
   {
@@ -10,5 +10,11 @@ const usuariosBase = [
     nombre: "Juan Pérez",
     correo: "juan.perez@gmail.com",
     rol: "Cliente"
+  },
+  { 
+    rut: "11111111-1", 
+    nombre: "Carlos Vendedor", 
+    correo: "carlos@sakura.cl", 
+    rol: "Vendedor" 
   }
 ];
