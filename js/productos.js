@@ -87,7 +87,7 @@ const productosAsia = [
     nombre: "Pocky Crunch Pistacho Glico 37 g",
     categoria: "Snacks",
     precio: 2990,
-    imagen: "../img/Pocky1.webp",
+    imagen: "../img/pockyP.webp",
     descripcion: "Crujientes palitos de galleta bañados en un rico pistacho"
   },
   {
@@ -103,7 +103,7 @@ const productosAsia = [
     nombre: "Pocky Frutilla Glico 55 g",
     categoria: "Snacks",
     precio: 1900,
-    imagen: "../img/pocky3.webp",
+    imagen: "../img/pockyF.webp",
     descripcion: "Crujientes palitos de galleta bañados en un rico chocolate sabor frutilla"
   },
   {
@@ -111,7 +111,7 @@ const productosAsia = [
     nombre: "Pocky Sabor Avellana Glico 48 g",
     categoria: "Snacks",
     precio: 2990,
-    imagen: "../img/pocky4.webp",
+    imagen: "../img/pockyA.jpg",
     descripcion: "Crujientes palitos de galleta sabor avellana"
   },
   {
@@ -119,7 +119,7 @@ const productosAsia = [
     nombre: "Pocky Crunch Chocolate y Almendras Glico 48 g",
     categoria: "Snacks",
     precio: 2990,
-    imagen: "../img/pocky5.webp",
+    imagen: "../img/pockyAC.webp",
     descripcion: "Crujientes palitos de galleta sabor chocolate con almendras"
   },
   {
