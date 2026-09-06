@@ -4,7 +4,7 @@ function validarEmail(email) {
   return regex.test(email.trim());
 }
 
-// Validar RUN chileno sin puntos ni guion (Ej: 19011022K)
+// Validar rut sin puntos ni guion 
 function validarRun(run) {
   const cleanRun = run.trim().toUpperCase();
   if (cleanRun.length < 7 || cleanRun.length > 9) return false;

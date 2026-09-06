@@ -36,12 +36,13 @@ function cargarProductos(lista = productosAsia) {
           
           <p class="card-text text-muted small flex-grow-1">${prod.descripcion || ''}</p>
         
-        <div class="mt-3">
-          <p class="fw-bold fs-5 text-success mb-2">$${prod.precio.toLocaleString("es-CL")}</p>
-          <button class="btn btn-outline-danger w-100" onclick="agregarAlCarrito(${prod.id})">
-            <i class="bi bi-cart-plus-fill"></i> Añadir al Carrito
-          </button>
-        </div>
+          <div class="mt-3">
+            <p class="fw-bold fs-5 text-success mb-2">$${prod.precio.toLocaleString("es-CL")}</p>
+            <button class="btn btn-outline-danger w-100" onclick="agregarAlCarrito(${prod.id})">
+              <i class="bi bi-cart-plus-fill"></i> Añadir al Carrito
+            </button>
+          </div>
+        </div> <!-- Cierre correcto de card-body -->
 
       </div>
     `;
