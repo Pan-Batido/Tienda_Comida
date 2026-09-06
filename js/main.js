@@ -17,16 +17,25 @@ function cargarProductos(lista = productosAsia) {
     col.className = "col-12 col-md-6 col-lg-3";
 
     col.innerHTML = `
-      <div class="card h-100 shadow-sm border-0">
+      <div class="card h-100 shadow-sm border-0 position-relative cursor-pointer hover-card" 
+           style="cursor: pointer;" 
+           onclick="window.location.href='detalle-producto.html?id=${prod.id}'">
+        
         <img src="${prod.imagen}" class="card-img-top p-2" alt="${prod.nombre}" style="height: 200px; object-fit: contain; background-color: #fff;">
+        
         <div class="card-body d-flex flex-column">
           <span class="badge bg-danger mb-2 w-auto align-self-start">${prod.categoria}</span>
           <h5 class="card-title fw-bold">${prod.nombre}</h5>
           <p class="card-text text-muted small flex-grow-1">${prod.descripcion}</p>
+
           <div class="mt-3">
             <p class="fw-bold fs-5 text-success mb-2">$${prod.precio.toLocaleString("es-CL")}</p>
-            <button class="btn btn-outline-danger w-100" onclick="agregarAlCarrito(${prod.id})">
-              <i class="bi bi-cart-plus-fill"></i> Añadir al Carrito
+            
+            <!-- El event.stopPropagation() evita abrir el detalle al hacer clic solo en Añadir -->
+            <button class="btn btn-sm text-white fw-bold w-100" 
+                    style="background-color: #3f5135;" 
+                    onclick="event.stopPropagation(); agregarAlCarrito(${prod.id});">
+              <i class="bi bi-cart-plus-fill me-1"></i> Añadir al Carrito
             </button>
           </div>
         </div>
@@ -96,7 +105,6 @@ function mostrarToast(mensaje) {
     const toast = new bootstrap.Toast(toastEl, { delay: 2500 });
     toast.show();
   } else {
-    // Si la página no incluye el Toast en el HTML, no bloquea el flujo
     console.log(mensaje);
   }
 }
@@ -125,15 +133,14 @@ document.addEventListener("DOMContentLoaded", () => {
     if (categoriaURL) {
       filtrarProductos(categoriaURL);
     } else if (esPaginaInicio) {
-      // Selección variada de 10 productos destacados mediante sus IDs entre los 29 disponibles
+      // Selección variada de 10 productos destacados mediante sus IDs
       const idsDestacadas = [1, 3, 7, 10, 12, 15, 18, 21, 24, 28];
       const destacados = productosAsia.filter(p => idsDestacadas.includes(p.id));
       
       cargarProductos(destacados);
     } else {
-      // En productos.html sin filtro se muestran todos los 29
+      // En productos.html sin filtro se muestran todos
       cargarProductos(productosAsia);
     }
   }
 });
-
