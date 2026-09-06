@@ -18,7 +18,7 @@ function cargarProductos(lista = productosAsia) {
 
     col.innerHTML = `
       <div class="card h-100 shadow-sm border-0">
-        <img src="${prod.imagen}" class="card-img-top" alt="${prod.nombre}" style="height: 200px; object-fit: cover;">
+        <img src="${prod.imagen}" class="card-img-top p-2" alt="${prod.nombre}" style="height: 200px; object-fit: contain; background-color: #fff;">
         <div class="card-body d-flex flex-column">
           <span class="badge bg-danger mb-2 w-auto align-self-start">${prod.categoria}</span>
           <h5 class="card-title fw-bold">${prod.nombre}</h5>
