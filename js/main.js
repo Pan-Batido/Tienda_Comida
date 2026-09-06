@@ -109,7 +109,6 @@ function mostrarToast(mensaje) {
     const toast = new bootstrap.Toast(toastEl, { delay: 2500 });
     toast.show();
   } else {
-    // Si la página no incluye el Toast en el HTML, no bloquea el flujo
     console.log(mensaje);
   }
 }
@@ -138,15 +137,14 @@ document.addEventListener("DOMContentLoaded", () => {
     if (categoriaURL) {
       filtrarProductos(categoriaURL);
     } else if (esPaginaInicio) {
-      // Selección variada de 10 productos destacados mediante sus IDs entre los 29 disponibles
+      // Selección variada de 10 productos destacados mediante sus IDs
       const idsDestacadas = [1, 3, 7, 10, 12, 15, 18, 21, 24, 28];
       const destacados = productosAsia.filter(p => idsDestacadas.includes(p.id));
       
       cargarProductos(destacados);
     } else {
-      // En productos.html sin filtro se muestran todos los 29
+      // En productos.html sin filtro se muestran todos
       cargarProductos(productosAsia);
     }
   }
 });
-
