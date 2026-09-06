@@ -48,11 +48,13 @@ function filtrarProductos(categoria) {
   });
 
   // Filtrar el arreglo global según la categoría
-  if (categoria === 'Todos') {
-    cargarProductos(productosAsia);
-  } else {
-    const filtrados = productosAsia.filter(p => p.categoria.toLowerCase() === categoria.toLowerCase());
-    cargarProductos(filtrados);
+  if (typeof productosAsia !== "undefined") {
+    if (categoria === 'Todos') {
+      cargarProductos(productosAsia);
+    } else {
+      const filtrados = productosAsia.filter(p => p.categoria.toLowerCase() === categoria.toLowerCase());
+      cargarProductos(filtrados);
+    }
   }
 }
 
@@ -63,6 +65,8 @@ function obtenerCarrito() {
 }
 
 function agregarAlCarrito(idProducto) {
+  if (typeof productosAsia === "undefined") return;
+
   let carrito = obtenerCarrito();
   const producto = productosAsia.find((p) => p.id === idProducto);
 
@@ -77,8 +81,24 @@ function agregarAlCarrito(idProducto) {
   }
 
   localStorage.setItem("carrito", JSON.stringify(carrito));
-  alert(`¡${producto.nombre} añadido al carrito!`);
+  
+  // Muestra el Toast si existe, o cae en un mensaje alternativo si no está cargado el HTML del Toast
+  mostrarToast(`¡${producto.nombre} añadido al carrito! 🌸`);
   actualizarContadorCarrito();
+}
+
+function mostrarToast(mensaje) {
+  const toastEl = document.getElementById("toast-carrito");
+  const toastMsg = document.getElementById("toast-mensaje");
+
+  if (toastEl && toastMsg && typeof bootstrap !== "undefined") {
+    toastMsg.textContent = mensaje;
+    const toast = new bootstrap.Toast(toastEl, { delay: 2500 });
+    toast.show();
+  } else {
+    // Si la página no incluye el Toast en el HTML, no bloquea el flujo
+    console.log(mensaje);
+  }
 }
 
 function actualizarContadorCarrito() {
@@ -98,19 +118,22 @@ document.addEventListener("DOMContentLoaded", () => {
   // Revisar si la URL trae el parámetro de categoría (Ej: productos.html?cat=Comida)
   const urlParams = new URLSearchParams(window.location.search);
   const categoriaURL = urlParams.get('cat');
-  const esPaginaInicio = window.location.pathname.endsWith("index.html") || window.location.pathname.endsWith("/") || window.location.pathname === "";
+  const path = window.location.pathname;
+  const esPaginaInicio = path.endsWith("index.html") || path.endsWith("/") || path.split("/").pop() === "";
 
-  if (categoriaURL && typeof productosAsia !== "undefined") {
-    filtrarProductos(categoriaURL);
-  } else if (esPaginaInicio && typeof productosAsia !== "undefined") {
-    // Selección variada de 10 productos destacados mediante sus IDs entre los 29 disponibles
-    const idsDestacadas = [1, 3, 7, 10, 12, 15, 18, 21, 24, 28];
-    const destacados = productosAsia.filter(p => idsDestacadas.includes(p.id));
-    
-    cargarProductos(destacados);
-  } else {
-    // En productos.html sin filtro se muestran todos los 29
-    cargarProductos();
+  if (typeof productosAsia !== "undefined") {
+    if (categoriaURL) {
+      filtrarProductos(categoriaURL);
+    } else if (esPaginaInicio) {
+      // Selección variada de 10 productos destacados mediante sus IDs entre los 29 disponibles
+      const idsDestacadas = [1, 3, 7, 10, 12, 15, 18, 21, 24, 28];
+      const destacados = productosAsia.filter(p => idsDestacadas.includes(p.id));
+      
+      cargarProductos(destacados);
+    } else {
+      // En productos.html sin filtro se muestran todos los 29
+      cargarProductos(productosAsia);
+    }
   }
 });
 
