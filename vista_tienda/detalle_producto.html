@@ -140,98 +140,117 @@
   </footer>
 
   <!-- SCRIPTS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="../js/productos.js"></script>
-  <script src="../js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../js/productos.js"></script>
+<script src="../js/main.js"></script>
 
-  <script>
-    let productoActual = null;
-    let cantidadSeleccionada = 1;
+<script>
+  let productoActual = null;
+  let cantidadSeleccionada = 1;
 
-    // Obtener los productos desde localStorage o cargar los de productos.js
-    function obtenerListaProductos() {
-      let productosGuardados = localStorage.getItem("productos_db");
-      if (!productosGuardados) {
-        const listaInicial = (typeof productosAsia !== "undefined") ? productosAsia : [];
-        localStorage.setItem("productos_db", JSON.stringify(listaInicial));
-        return listaInicial;
-      }
-      return JSON.parse(productosGuardados);
+  // Obtener los productos desde localStorage o cargar los de productos.js
+  function obtenerListaProductos() {
+    let productosGuardados = localStorage.getItem("productos_db");
+    if (!productosGuardados) {
+      const listaInicial = (typeof productosAsia !== "undefined") ? productosAsia : [];
+      localStorage.setItem("productos_db", JSON.stringify(listaInicial));
+      return listaInicial;
+    }
+    return JSON.parse(productosGuardados);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    // 1. Cargar producto leyendo el ID de la URL
+    const params = new URLSearchParams(window.location.search);
+    const idParam = parseInt(params.get("id"));
+
+    const productos = obtenerListaProductos();
+    productoActual = productos.find(p => p.id === idParam);
+
+    const contenedorProducto = document.getElementById("contenedor-producto");
+    const alertaError = document.getElementById("alerta-error");
+
+    if (!productoActual) {
+      if (alertaError) alertaError.classList.remove("d-none");
+      return;
     }
 
-    // Cargar producto leyendo el ID de la URL
-    document.addEventListener("DOMContentLoaded", () => {
-      const params = new URLSearchParams(window.location.search);
-      const idParam = parseInt(params.get("id"));
+    // 2. Rellenar datos en la vista
+    document.getElementById("producto-imagen").src = productoActual.imagen;
+    document.getElementById("producto-imagen").alt = productoActual.nombre;
+    document.getElementById("producto-nombre").textContent = productoActual.nombre;
+    document.getElementById("producto-categoria").textContent = productoActual.categoria;
+    document.getElementById("producto-precio").textContent = `$${productoActual.precio.toLocaleString("es-CL")}`;
+    document.getElementById("producto-descripcion").textContent = productoActual.descripcion || "Sin descripción disponible.";
 
-      const productos = obtenerListaProductos();
-      productoActual = productos.find(p => p.id === idParam);
+    if (contenedorProducto) contenedorProducto.classList.remove("d-none");
 
-      const contenedorProducto = document.getElementById("contenedor-producto");
-      const alertaError = document.getElementById("alerta-error");
-
-      if (!productoActual) {
-        alertaError.classList.remove("d-none");
-        return;
-      }
-
-      // Rellenar datos en la vista
-      document.getElementById("producto-imagen").src = productoActual.imagen;
-      document.getElementById("producto-imagen").alt = productoActual.nombre;
-      document.getElementById("producto-nombre").textContent = productoActual.nombre;
-      document.getElementById("producto-categoria").textContent = productoActual.categoria;
-      document.getElementById("producto-precio").textContent = `$${productoActual.precio.toLocaleString("es-CL")}`;
-      document.getElementById("producto-descripcion").textContent = productoActual.descripcion || "Sin descripción disponible.";
-
-      contenedorProducto.classList.remove("d-none");
-    });
-
-    // Control de Cantidad (+ / -)
+    // 3. Control de Cantidad (+ / -)
     const cantidadInput = document.getElementById("cantidad-input");
+    const btnIncrementar = document.getElementById("btn-incrementar");
+    const btnDecrementar = document.getElementById("btn-decrementar");
 
-    document.getElementById("btn-incrementar").addEventListener("click", () => {
-      cantidadSeleccionada++;
-      cantidadInput.value = cantidadSeleccionada;
-    });
-
-    document.getElementById("btn-decrementar").addEventListener("click", () => {
-      if (cantidadSeleccionada > 1) {
-        cantidadSeleccionada--;
+    if (btnIncrementar && cantidadInput) {
+      btnIncrementar.addEventListener("click", () => {
+        cantidadSeleccionada++;
         cantidadInput.value = cantidadSeleccionada;
-      }
-    });
+      });
+    }
 
-    // Función para agregar al carrito en localStorage
-    document.getElementById("btn-agregar-carrito").addEventListener("click", () => {
-      if (!productoActual) return;
+    if (btnDecrementar && cantidadInput) {
+      btnDecrementar.addEventListener("click", () => {
+        if (cantidadSeleccionada > 1) {
+          cantidadSeleccionada--;
+          cantidadInput.value = cantidadSeleccionada;
+        }
+      });
+    }
 
-      let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-      const index = carrito.findIndex(item => item.id === productoActual.id);
+    // 4. Agregar al carrito y refrescar contador
+    const btnAgregar = document.getElementById("btn-agregar-carrito");
+    if (btnAgregar) {
+      btnAgregar.addEventListener("click", () => {
+        if (!productoActual) return;
 
-      if (index !== -1) {
-        // Si ya está en el carrito, sumar la cantidad seleccionada
-        carrito[index].cantidad += cantidadSeleccionada;
-      } else {
-        // Agregar nuevo ítem
-        carrito.push({
-          id: productoActual.id,
-          nombre: productoActual.nombre,
-          precio: productoActual.precio,
-          categoria: productoActual.categoria,
-          imagen: productoActual.imagen,
-          cantidad: cantidadSeleccionada
-        });
-      }
+        let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+        const index = carrito.findIndex(item => item.id === productoActual.id);
 
-      localStorage.setItem("carrito", JSON.stringify(carrito));
+        if (index !== -1) {
+          carrito[index].cantidad += cantidadSeleccionada;
+        } else {
+          carrito.push({
+            id: productoActual.id,
+            nombre: productoActual.nombre,
+            precio: productoActual.precio,
+            categoria: productoActual.categoria,
+            imagen: productoActual.imagen,
+            cantidad: cantidadSeleccionada
+          });
+        }
 
-      // Mostrar alerta de éxito
-      const mensajeExito = document.getElementById("mensaje-exito");
-      mensajeExito.classList.remove("d-none");
-      setTimeout(() => {
-        mensajeExito.classList.add("d-none");
-      }, 3000);
-    });
-  </script>
+        // Guardar en localStorage
+        localStorage.setItem("carrito", JSON.stringify(carrito));
+
+        // PASO CLAVE: Refrescar contador del navbar en tiempo real
+        if (typeof actualizarContadorCarrito === "function") {
+          actualizarContadorCarrito();
+        }
+
+        // Notificación Toast dinámica de main.js (o alerta local de respaldo)
+        if (typeof mostrarToast === "function") {
+          mostrarToast(`¡Se agregaron ${cantidadSeleccionada} unidad(es) al carrito! 🌸`);
+        } else {
+          const mensajeExito = document.getElementById("mensaje-exito");
+          if (mensajeExito) {
+            mensajeExito.classList.remove("d-none");
+            setTimeout(() => {
+              mensajeExito.classList.add("d-none");
+            }, 3000);
+          }
+        }
+      });
+    }
+  });
+</script>
 </body>
 </html>
