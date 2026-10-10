@@ -96,22 +96,30 @@ function agregarAlCarrito(idProducto) {
 
   localStorage.setItem("carrito", JSON.stringify(carrito));
   
-  // Muestra el Toast si existe, o cae en un mensaje alternativo si no está cargado el HTML del Toast
-  mostrarToast(`¡${producto.nombre} añadido al carrito! 🌸`);
+  // Muestra la notificación Toast
+  mostrarNotificacion(`¡${producto.nombre} añadido al carrito! 🌸`, "bg-success");
   actualizarContadorCarrito();
 }
 
-function mostrarToast(mensaje) {
-  const toastEl = document.getElementById("toast-carrito");
-  const toastMsg = document.getElementById("toast-mensaje");
+// Función global para mostrar Toasts reemplazando alert() en todo el sitio
+function mostrarNotificacion(mensaje, bgClass = "bg-success") {
+  // Busca primero por id de notificación global, o por id de carrito como fallback
+  const toastEl = document.getElementById("toast-notificacion") || document.getElementById("toast-carrito");
+  const toastMsg = document.getElementById("toast-notificacion-mensaje") || document.getElementById("toast-mensaje");
 
   if (toastEl && toastMsg && typeof bootstrap !== "undefined") {
     toastMsg.textContent = mensaje;
-    const toast = new bootstrap.Toast(toastEl, { delay: 2500 });
+    toastEl.className = `toast align-items-center text-white border-0 shadow ${bgClass}`;
+    const toast = new bootstrap.Toast(toastEl, { delay: 3000 });
     toast.show();
   } else {
     console.log(mensaje);
   }
+}
+
+// Mantenemos alias para retrocompatibilidad con llamadas anteriores
+function mostrarToast(mensaje) {
+  mostrarNotificacion(mensaje, "bg-success");
 }
 
 function actualizarContadorCarrito() {

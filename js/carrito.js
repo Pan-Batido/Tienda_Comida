@@ -91,6 +91,10 @@ function eliminarProducto(idProducto) {
   localStorage.setItem("carrito", JSON.stringify(carrito));
   actualizarContadorCarrito();
   renderizarCarrito();
+  
+  if (typeof mostrarNotificacion === "function") {
+    mostrarNotificacion("Producto eliminado del carrito.", "bg-danger");
+  }
 }
 
 // Actualizar valores de subtotal y total
@@ -119,18 +123,28 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.removeItem("carrito");
         actualizarContadorCarrito();
         renderizarCarrito();
+        if (typeof mostrarNotificacion === "function") {
+          mostrarNotificacion("Se ha vaciado el carrito.", "bg-danger");
+        }
       }
     });
   }
 
-  // Simular Checkout
+  // Simular Checkout (Reemplazando alert por Toast)
   const btnCheckout = document.getElementById("btn-checkout");
   if (btnCheckout) {
     btnCheckout.addEventListener("click", () => {
-      alert("¡Gracias por tu compra en Sakura Market! 🌸 Tu pedido está en proceso.");
+      if (typeof mostrarNotificacion === "function") {
+        mostrarNotificacion("¡Gracias por tu compra en Sakura Market! 🌸 Tu pedido está en proceso.", "bg-success");
+      }
+
       localStorage.removeItem("carrito");
       actualizarContadorCarrito();
-      window.location.href = "index.html";
+
+      // Esperar a que el usuario vea la notificación antes de redirigir
+      setTimeout(() => {
+        window.location.href = "index.html";
+      }, 3500);
     });
   }
 });
