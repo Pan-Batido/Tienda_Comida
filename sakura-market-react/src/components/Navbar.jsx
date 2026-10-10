@@ -1,10 +1,9 @@
 import React from 'react';
 
-export function Navbar({ cantidadCarrito }) {
+export function Navbar({ cantidadCarrito, alAbrirCarrito }) {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark shadow-sm navbar-sakura">
       <div className="container">
-        {/* Logo oficial de Sakura Market */}
         <a className="navbar-brand fw-bold d-flex align-items-center" href="#inicio">
           <img src="/img/logo-sakura.png" alt="Sakura Market" height="42" className="me-2" />
         </a>
@@ -25,16 +24,18 @@ export function Navbar({ cantidadCarrito }) {
               <i className="bi bi-box-arrow-in-right me-1"></i> Ingresar
             </button>
 
-            {/* Botón de Carrito con el verde Matcha */}
-            <a 
-              href="#carrito" 
+            {/* Botón Carrito interactivo */}
+            <button 
               className="btn btn-sm text-white position-relative ms-1 fw-bold btn-carrito-matcha"
+              onClick={alAbrirCarrito}
             >
               <i className="bi bi-cart-fill me-1"></i> Carrito
-              <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                {cantidadCarrito}
-              </span>
-            </a>
+              {cantidadCarrito > 0 && (
+                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                  {cantidadCarrito}
+                </span>
+              )}
+            </button>
           </div>
         </div>
       </div>
