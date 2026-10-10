@@ -85,3 +85,10 @@ body {
   color: #ff69b4 !important;
 }
 
+#producto-imagen {
+  width: 100%;
+  height: 400px;              
+  object-fit: contain;        
+  background-color: #ffffff;  
+  border-radius: 8px;
+}
