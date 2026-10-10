@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Navbar } from './components/Navbar';
 import { Carrusel } from './components/Carrusel';
 import { ProductCard } from './components/ProductCard';
@@ -12,9 +12,19 @@ export function App() {
   const [toast, setToast] = useState({ visible: false, mensaje: '' });
   const [mostrarModalCarrito, setMostrarModalCarrito] = useState(false);
 
+  // Referencia para limpiar el temporizador del Toast
+  const temporizadorToastRef = useRef(null);
+
+  // Mostrar Toast limpiando cualquier temporizador activo previo
   const mostrarToast = (mensaje) => {
+    if (temporizadorToastRef.current) {
+      clearTimeout(temporizadorToastRef.current);
+    }
     setToast({ visible: true, mensaje });
-    setTimeout(() => setToast({ visible: false, mensaje: '' }), 3000);
+
+    temporizadorToastRef.current = setTimeout(() => {
+      setToast({ visible: false, mensaje: '' });
+    }, 3500); // Se mantiene visible 3.5 segundos exactos siempre
   };
 
   const agregarAlCarrito = (producto) => {
@@ -50,10 +60,15 @@ export function App() {
 
   const vaciarCarrito = () => setCarrito([]);
 
+  // Finalizar compra: cierra el modal, muestra el mensaje y espera antes de reiniciar el carro
   const finalizarCompra = () => {
     setMostrarModalCarrito(false);
-    vaciarCarrito();
-    mostrarToast('¡Gracias por tu compra en Sakura Market! 🌸');
+    mostrarToast('¡Gracias por tu compra en Sakura Market! Tu pedido está en camino 🌸');
+    
+    // Vaciamos el carrito tras dar tiempo a ver la notificación
+    setTimeout(() => {
+      vaciarCarrito();
+    }, 1500);
   };
 
   const totalUnidades = carrito.reduce((acc, item) => acc + item.cantidad, 0);
