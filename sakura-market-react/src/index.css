@@ -1,0 +1,36 @@
+/* Color Sakura del sitio estático original */
+.navbar-sakura {
+  background-color: #df7ba1 !important; /* Rojo Sakura suave / Cereza */
+}
+
+/* Verde Matcha exclusivo para el botón de Carrito */
+.btn-carrito-matcha {
+  background-color: #3f5135 !important;
+  border-color: #3f5135 !important;
+  color: #ffffff !important;
+}
+
+.btn-carrito-matcha:hover {
+  background-color: #2e3c27 !important;
+  border-color: #2e3c27 !important;
+}
+
+/* Clases de apoyo con el color original */
+.bg-sakura {
+  background-color: #3f5135 !important;
+  color: #ffffff !important;
+}
+
+.btn-outline-sakura {
+  color: #3f5135 !important;
+  border-color: #3f5135 !important;
+}
+
+.btn-outline-sakura:hover {
+  background-color: #3f5135 !important;
+  color: #ffffff !important;
+}
+
+.text-sakura {
+  color: #3f5135 !important;
+}

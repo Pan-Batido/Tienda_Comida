@@ -14,7 +14,7 @@ function cargarProductos(lista = productosAsia) {
 
   lista.forEach((prod) => {
     const col = document.createElement("div");
-    col.className = "col-12 col-md-6 col-lg-3";
+    col.className = "col-12 col-md-6 cSol-lg-3";
 
     col.innerHTML = `
       <div class="card h-100 shadow-sm border-0 overflow-hidden">
