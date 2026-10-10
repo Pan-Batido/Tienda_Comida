@@ -84,23 +84,103 @@ export function App() {
         alAbrirCarrito={() => setMostrarModalCarrito(true)} 
       />
 
-      <main className="container my-4">
-        <Carrusel alSeleccionarCategoria={setCategoriaSeleccionada} />
+      {/* Sección Inicio para el Navbar */}
+      <section id="inicio">
+        <main className="container my-4">
+          <Carrusel alSeleccionarCategoria={setCategoriaSeleccionada} />
 
-        <h2 className="fw-bold text-sakura mb-4 text-center">
-          🌸 Catálogo de Productos
-        </h2>
+          {/* Sección Productos para el Navbar */}
+          <div id="productos">
+            <h2 className="fw-bold text-sakura mb-4 text-center">
+              Catálogo de Productos
+            </h2>
 
-        <div className="row">
-          {productosFiltrados.map((prod) => (
-            <ProductCard 
-              key={prod.id} 
-              producto={prod} 
-              alAgregar={agregarAlCarrito} 
-            />
-          ))}
+            <div className="row">
+              {productosFiltrados.map((prod) => (
+                <ProductCard 
+                  key={prod.id} 
+                  producto={prod} 
+                  alAgregar={agregarAlCarrito} 
+                />
+              ))}
+            </div>
+          </div>
+        </main>
+      </section>
+
+{/* Sección Contacto Completa en Rosado Sakura */}
+      <footer id="contacto" className="bg-white pt-5 pb-4 border-top mt-5 shadow-sm">
+        <div className="container">
+          <div className="row g-4 mb-4 text-start">
+            
+            {/* Columna 1: Información de la Tienda */}
+            <div className="col-12 col-md-4">
+              <h5 className="fw-bold mb-3" style={{ color: '#e287a3' }}> Sakura Market</h5>
+              <p className="text-muted small mb-2">
+                Tu tienda favorita de snacks, bebidas y productos asiáticos importados directo a tu mesa.
+              </p>
+              <div className="d-flex flex-column gap-2 small text-muted">
+                <div><i className="bi bi-geo-alt-fill me-2" style={{ color: '#e287a3' }}></i>Av. Providencia 1234, Santiago, Chile</div>
+                <div><i className="bi bi-envelope-fill me-2" style={{ color: '#e287a3' }}></i>contacto@sakuramarket.cl</div>
+                <div><i className="bi bi-telephone-fill me-2" style={{ color: '#e287a3' }}></i>+56 9 1234 5678</div>
+              </div>
+            </div>
+
+            {/* Columna 2: Horarios de Atención */}
+            <div className="col-12 col-md-3">
+              <h5 className="fw-bold text-dark mb-3"> Horario</h5>
+              <ul className="list-unstyled small text-muted d-flex flex-column gap-1">
+                <li><strong>Lunes a Viernes:</strong> 10:00 - 20:00 hrs</li>
+                <li><strong>Sábados:</strong> 11:00 - 19:00 hrs</li>
+                <li><strong>Domingos y Festivos:</strong> Cerrado</li>
+              </ul>
+              <h6 className="fw-bold text-dark mt-3 mb-2">Síguenos</h6>
+              <div className="d-flex gap-3 fs-5">
+                <a href="#contacto" style={{ color: '#e287a3' }}><i className="bi bi-instagram"></i></a>
+                <a href="#contacto" style={{ color: '#e287a3' }}><i className="bi bi-facebook"></i></a>
+                <a href="#contacto" style={{ color: '#e287a3' }}><i className="bi bi-tiktok"></i></a>
+              </div>
+            </div>
+
+            {/* Columna 3: Formulario Rápido de Mensajes */}
+            <div className="col-12 col-md-5">
+              <h5 className="fw-bold text-dark mb-3"> Envíanos un mensaje</h5>
+              <form onSubmit={(e) => {
+                e.preventDefault();
+                mostrarToast('¡Mensaje enviado con éxito! Te responderemos pronto 🌸');
+                e.target.reset();
+              }}>
+                <div className="row g-2 mb-2">
+                  <div className="col-6">
+                    <input type="text" className="form-control form-control-sm" placeholder="Tu Nombre" required />
+                  </div>
+                  <div className="col-6">
+                    <input type="email" className="form-control form-control-sm" placeholder="Tu Email" required />
+                  </div>
+                </div>
+                <div className="mb-2">
+                  <textarea className="form-control form-control-sm" rows="3" placeholder="¿En qué te podemos ayudar?" required></textarea>
+                </div>
+                <button 
+                  type="submit" 
+                  className="btn btn-sm text-white fw-bold px-4 border-0"
+                  style={{ backgroundColor: '#e287a3' }}
+                >
+                  Enviar Mensaje
+                </button>
+              </form>
+            </div>
+
+          </div>
+
+          <hr className="my-3 text-muted opacity-25" />
+
+          {/* Copyright final */}
+          <div className="text-center text-muted small">
+            © 2026 Sakura Market - Todos los derechos reservados.
+          </div>
         </div>
-      </main>
+      </footer>
 
       <NotificacionToast mensaje={toast.mensaje} visible={toast.visible} />
 

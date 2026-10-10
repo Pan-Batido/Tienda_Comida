@@ -1,10 +1,23 @@
 import React from 'react';
 
 export function Navbar({ cantidadCarrito, alAbrirCarrito }) {
+  // Manejador de desplazamiento suave sin romper la navegación SPA
+  const scrollToSection = (e, id) => {
+    e.preventDefault();
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark shadow-sm navbar-sakura">
       <div className="container">
-        <a className="navbar-brand fw-bold d-flex align-items-center" href="#inicio">
+        <a 
+          className="navbar-brand fw-bold d-flex align-items-center" 
+          href="#inicio"
+          onClick={(e) => scrollToSection(e, 'inicio')}
+        >
           <img src="/img/logo-sakura.png" alt="Sakura Market" height="42" className="me-2" />
         </a>
 
@@ -14,9 +27,33 @@ export function Navbar({ cantidadCarrito, alAbrirCarrito }) {
 
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav me-auto">
-            <li className="nav-item"><a className="nav-link active" href="#inicio">Inicio</a></li>
-            <li className="nav-item"><a className="nav-link" href="#productos">Productos</a></li>
-            <li className="nav-item"><a className="nav-link" href="#contacto">Contacto</a></li>
+            <li className="nav-item">
+              <a 
+                className="nav-link active" 
+                href="#inicio"
+                onClick={(e) => scrollToSection(e, 'inicio')}
+              >
+                Inicio
+              </a>
+            </li>
+            <li className="nav-item">
+              <a 
+                className="nav-link" 
+                href="#productos"
+                onClick={(e) => scrollToSection(e, 'productos')}
+              >
+                Productos
+              </a>
+            </li>
+            <li className="nav-item">
+              <a 
+                className="nav-link" 
+                href="#contacto"
+                onClick={(e) => scrollToSection(e, 'contacto')}
+              >
+                Contacto
+              </a>
+            </li>
           </ul>
 
           <div className="d-flex align-items-center gap-2">
