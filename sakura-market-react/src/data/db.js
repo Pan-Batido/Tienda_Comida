@@ -1,14 +1,14 @@
-// Importación de imágenes locales desde src/assets/img/
-import ramenJapones from '../assets/img/ramen-banner.jpg';
-import pockyMatcha from '../assets/img/snacks-banner.png';
-import ramuneSaborOriginal from '../assets/img/bebidas-banner.jpg';
-
 // Claves para el almacenamiento local (localStorage)
 const DB_PRODUCTOS_KEY = 'sakura_productos';
 const DB_CARRITO_KEY = 'sakura_carrito';
 const DB_USUARIOS_KEY = 'sakura_usuarios';
 
-// 1. CATÁLOGO INICIAL DE PRODUCTOS (Semilla de datos)
+// Definición de rutas de imágenes
+const ramenJapones = '/src/assets/img/ramen-banner.jpg';
+const pockyMatcha = '/src/assets/img/Pocky1.webp';
+const ramuneSaborOriginal = '/src/assets/img/bebida1.jpg';
+
+// Catálogo inicial
 const productosIniciales = [
   {
     id: 1,
@@ -45,7 +45,7 @@ const usuariosIniciales = [
     id: 1,
     nombre: 'Administrador Sakura',
     email: 'admin@sakuramarket.cl',
-    password: 'admin123', // En producción se aplicaría hash
+    password: 'admin123',
     rol: 'ADMIN'
   },
   {
@@ -158,7 +158,6 @@ export const autenticarUsuario = (email, password) => {
   );
   
   if (usuarioEncontrado) {
-    // Retornar información del usuario excluyendo credenciales sensibles si fuera necesario
     const { password, ...datosUsuario } = usuarioEncontrado;
     return datosUsuario;
   }
