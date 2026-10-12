@@ -1,69 +1,93 @@
 import React from 'react';
+import { Link, NavLink } from 'react-router-dom';
 import logoSakura from '../assets/img/logo-sakura.png';
 
 export function Navbar({ cantidadCarrito, alAbrirCarrito }) {
-  const scrollToSection = (e, id) => {
-    e.preventDefault();
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark shadow-sm navbar-sakura">
+    <nav className="navbar navbar-expand-lg navbar-dark shadow-sm navbar-sakura sticky-top">
       <div className="container">
-        <a 
-          className="navbar-brand fw-bold d-flex align-items-center" 
-          href="#inicio"
-          onClick={(e) => scrollToSection(e, 'inicio')}
-        >
+        {/* Brand/Logo navegable a la página de inicio */}
+        <Link className="navbar-brand fw-bold d-flex align-items-center" to="/">
           <img src={logoSakura} alt="Sakura Market" height="42" className="me-2" />
-        </a>
+        </Link>
 
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        {/* Botón Toggler para dispositivos móviles */}
+        <button 
+          className="navbar-toggler" 
+          type="button" 
+          data-bs-toggle="collapse" 
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
           <span className="navbar-toggler-icon"></span>
         </button>
 
+        {/* Enlaces de navegación con react-router-dom */}
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav me-auto">
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a 
-                className="nav-link active" 
-                href="#inicio"
-                onClick={(e) => scrollToSection(e, 'inicio')}
+              <NavLink 
+                className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'} 
+                to="/"
               >
                 Inicio
-              </a>
+              </NavLink>
             </li>
             <li className="nav-item">
-              <a 
-                className="nav-link" 
-                href="#productos"
-                onClick={(e) => scrollToSection(e, 'productos')}
+              <NavLink 
+                className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'} 
+                to="/productos"
               >
                 Productos
-              </a>
+              </NavLink>
             </li>
             <li className="nav-item">
-              <a 
-                className="nav-link" 
-                href="#contacto"
-                onClick={(e) => scrollToSection(e, 'contacto')}
+              <NavLink 
+                className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'} 
+                to="/categorias"
+              >
+                Categorías
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink 
+                className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'} 
+                to="/ofertas"
+              >
+                Ofertas
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink 
+                className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'} 
+                to="/blog"
+              >
+                Blog
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink 
+                className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'} 
+                to="/contacto"
               >
                 Contacto
-              </a>
+              </NavLink>
             </li>
           </ul>
 
+          {/* Acciones del usuario y Carrito */}
           <div className="d-flex align-items-center gap-2">
-            <button className="btn btn-outline-light btn-sm fw-bold">
+            <Link to="/login" className="btn btn-outline-light btn-sm fw-bold">
               <i className="bi bi-box-arrow-in-right me-1"></i> Ingresar
-            </button>
+            </Link>
 
             <button 
+              type="button"
               className="btn btn-sm text-white position-relative ms-1 fw-bold btn-carrito-matcha"
               onClick={alAbrirCarrito}
+              aria-label="Ver Carrito"
             >
               <i className="bi bi-cart-fill me-1"></i> Carrito
               {cantidadCarrito > 0 && (
@@ -78,3 +102,5 @@ export function Navbar({ cantidadCarrito, alAbrirCarrito }) {
     </nav>
   );
 }
+
+export default Navbar;
