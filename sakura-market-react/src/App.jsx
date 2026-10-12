@@ -18,7 +18,22 @@ import { CarritoModal } from './components/CarritoModal';
 import { NotificacionToast } from './components/NotificacionToast';
 
 // Importación de Páginas
+import { Home } from './pages/Home';
+import { Productos } from './pages/Productos';
+import { Categorias } from './pages/Categorias';
+import { Ofertas } from './pages/Ofertas';
+import { DetalleProducto } from './pages/DetalleProducto';
+import { Contacto } from './pages/Contacto';
+import { Blog } from './pages/Blog';
+import { Login } from './pages/Login';
+import { Registro } from './pages/Registro';
 import { AdminProductos } from './pages/AdminProductos';
+
+// Importación de Páginas de Checkout
+import { Carrito } from './pages/checkout/Carrito';
+import { Checkout } from './pages/checkout/Checkout';
+import { PagoExitoso } from './pages/checkout/PagoExitoso';
+import { PagoError } from './pages/checkout/PagoError';
 
 export function App() {
   const [productos, setProductos] = useState([]);
@@ -91,10 +106,6 @@ export function App() {
     mostrarNotificacion('🎉 ¡Gracias por tu compra en Sakura Market!');
   };
 
-  const productosFiltrados = categoriaSeleccionada === 'Todos'
-    ? productos
-    : productos.filter((p) => p.categoria.toLowerCase() === categoriaSeleccionada.toLowerCase());
-
   const totalCantidadCarrito = carrito.reduce((acc, item) => acc + item.cantidad, 0);
 
   return (
@@ -105,44 +116,64 @@ export function App() {
           alAbrirCarrito={() => setMostrarModalCarrito(true)} 
         />
 
-        <Routes>
-          {/* Ruta Principal: Tienda Pública */}
-          <Route 
-            path="/" 
-            element={
-              <>
-                <Carrusel alSeleccionarCategoria={(cat) => setCategoriaSeleccionada(cat)} />
-                <main className="container my-4 flex-grow-1" id="productos">
-                  <h2 className="text-center fw-bold mb-3 text-dark">🌸 Catálogo de Comida Asiática</h2>
-                  <FiltroCategorias 
-                    categoriaActiva={categoriaSeleccionada}
-                    alSeleccionarCategoria={(cat) => setCategoriaSeleccionada(cat)}
-                  />
-                  <div className="row">
-                    {productosFiltrados.map((prod) => (
-                      <ProductCard key={prod.id} producto={prod} alAgregar={handleAgregarAlCarrito} />
-                    ))}
-                  </div>
-                </main>
-              </>
-            } 
-          />
+        <div className="flex-grow-1">
+          <Routes>
+            {/* Rutas Públicas Principales */}
+            <Route path="/" element={<Home alAgregarAlCarrito={handleAgregarAlCarrito} />} />
+            <Route path="/productos" element={<Productos alAgregarAlCarrito={handleAgregarAlCarrito} />} />
+            <Route path="/producto/:id" element={<DetalleProducto alAgregarAlCarrito={handleAgregarAlCarrito} />} />
+            <Route path="/categorias" element={<Categorias alAgregarAlCarrito={handleAgregarAlCarrito} />} />
+            <Route path="/ofertas" element={<Ofertas alAgregarAlCarrito={handleAgregarAlCarrito} />} />
+            <Route path="/contacto" element={<Contacto />} />
+            <Route path="/blog" element={<Blog />} />
 
-          {/* Ruta Panel de Administración ABM */}
-          <Route path="/admin" element={<AdminProductos />} />
-        </Routes>
+            {/* Rutas de Autenticación */}
+            <Route path="/login" element={<Login />} />
+            <Route path="/registro" element={<Registro />} />
+
+            {/* Rutas del Flujo de Compra */}
+            <Route 
+              path="/carrito" 
+              element={
+                <Carrito 
+                  carrito={carrito} 
+                  alActualizarCantidad={handleModificarCantidad}
+                  alEliminarItem={handleEliminarDelCarrito}
+                  alVaciarCarrito={handleVaciarCarrito}
+                />
+              } 
+            />
+            <Route 
+              path="/checkout" 
+              element={
+                <Checkout 
+                  carrito={carrito} 
+                  alVaciarCarrito={handleVaciarCarrito} 
+                />
+              } 
+            />
+            <Route path="/pago-exitoso" element={<PagoExitoso />} />
+            <Route path="/pago-error" element={<PagoError />} />
+
+            {/* Ruta Panel de Administración ABM */}
+            <Route path="/admin" element={<AdminProductos />} />
+          </Routes>
+        </div>
 
         <CarritoModal 
-          mostrando={mostrarModalCarrito}
+          mostrar={mostrarModalCarrito}
           alCerrar={() => setMostrarModalCarrito(false)}
-          items={carrito}
-          alModificarCantidad={handleModificarCantidad}
+          carrito={carrito}
+          alActualizarCantidad={handleModificarCantidad}
           alEliminarItem={handleEliminarDelCarrito}
           alVaciarCarrito={handleVaciarCarrito}
-          alFinalizarCompra={handleFinalizarCompra}
         />
 
-        <NotificacionToast mensaje={notificacion.mensaje} visible={notificacion.visible} />
+        <NotificacionToast 
+          mensaje={notificacion.mensaje} 
+          mostrar={notificacion.visible} 
+          alCerrar={() => setNotificacion({ visible: false, mensaje: '' })}
+        />
 
         <footer className="bg-dark text-white text-center py-3 mt-auto">
           <div className="container d-flex justify-content-between align-items-center">
