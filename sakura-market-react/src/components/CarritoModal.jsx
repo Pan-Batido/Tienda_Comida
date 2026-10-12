@@ -1,131 +1,158 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-export function CarritoModal({ 
-  mostrando, 
-  alCerrar, 
-  items, 
-  alModificarCantidad, 
-  alEliminarItem, 
-  alVaciarCarrito,
-  alFinalizarCompra 
+export function CarritoModal({
+  mostrar,
+  alCerrar,
+  carrito,
+  alActualizarCantidad,
+  alEliminarItem,
+  alVaciarCarrito
 }) {
-  if (!mostrando) return null;
+  if (!mostrar) return null;
 
-  const total = items.reduce((suma, item) => suma + item.precio * item.cantidad, 0);
+  // Formateador a pesos chilenos (CLP)
+  const formatearCLP = (monto) => {
+    return new Intl.NumberFormat('es-CL', {
+      style: 'currency',
+      currency: 'CLP',
+    }).format(monto);
+  };
+
+  // Calcular el total
+  const total = carrito.reduce(
+    (acc, item) => acc + item.precio * item.cantidad,
+    0
+  );
 
   return (
-    <div className="modal show d-block" tabIndex="-1" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
+    <div
+      className="modal fade show d-block"
+      tabIndex="-1"
+      style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}
+    >
       <div className="modal-dialog modal-dialog-centered modal-lg">
         <div className="modal-content border-0 shadow">
-          <div className="modal-header bg-sakura text-white">
+          {/* Encabezado del Modal */}
+          <div className="modal-header bg-danger text-white">
             <h5 className="modal-title fw-bold">
-              <i className="bi bi-cart-fill me-2"></i>Tu Carrito de Compras
+              <i className="bi bi-cart3 me-2"></i>Carrito de Compras
             </h5>
-            <button 
-              type="button" 
-              className="btn-close btn-close-white" 
+            <button
+              type="button"
+              className="btn-close btn-close-white"
               onClick={alCerrar}
+              aria-label="Cerrar"
             ></button>
           </div>
 
-          <div className="modal-body p-4">
-            {items.length === 0 ? (
-              <div className="text-center py-5">
-                <i className="bi bi-cart-x text-muted display-1"></i>
-                <p className="mt-3 fs-5 text-muted">Tu carrito está vacío 🌸</p>
+          {/* Cuerpo del Modal */}
+          <div className="modal-body p-4" style={{ maxHeight: '60vh', overflowY: 'auto' }}>
+            {carrito.length === 0 ? (
+              <div className="text-center py-5 text-muted">
+                <i className="bi bi-cart-x fs-1 d-block mb-3 text-secondary"></i>
+                <h5>Tu carrito está vacío</h5>
+                <p className="small">¡Explora nuestro catálogo y agrega tus snacks o ramen favoritos!</p>
               </div>
             ) : (
-              <>
-                <div className="table-responsive">
-                  <table className="table align-middle">
-                    <thead>
-                      <tr>
-                        <th>Producto</th>
-                        <th>Precio</th>
-                        <th className="text-center">Cantidad</th>
-                        <th>Subtotal</th>
-                        <th></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {items.map((item) => (
-                        <tr key={item.id}>
-                          <td>
-                            <div className="d-flex align-items-center gap-3">
-                              <img 
-                                src={item.imagen} 
-                                alt={item.nombre} 
-                                style={{ width: '48px', height: '48px', objectFit: 'contain' }} 
-                              />
-                              <span className="fw-semibold text-dark">{item.nombre}</span>
-                            </div>
-                          </td>
-                          <td>${item.precio.toLocaleString('es-CL')}</td>
-                          <td>
-                            <div className="d-flex justify-content-center align-items-center gap-2">
-                              <button 
-                                className="btn btn-sm btn-outline-secondary"
-                                onClick={() => alModificarCantidad(item.id, -1)}
-                              >
-                                -
-                              </button>
-                              <span className="fw-bold px-2">{item.cantidad}</span>
-                              <button 
-                                className="btn btn-sm btn-outline-secondary"
-                                onClick={() => alModificarCantidad(item.id, 1)}
-                              >
-                                +
-                              </button>
-                            </div>
-                          </td>
-                          <td className="fw-bold text-success">
-                            ${(item.precio * item.cantidad).toLocaleString('es-CL')}
-                          </td>
-                          <td>
-                            <button 
-                              className="btn btn-sm btn-outline-danger"
-                              onClick={() => alEliminarItem(item.id)}
+              <div className="table-responsive">
+                <table className="table align-middle">
+                  <thead className="table-light">
+                    <tr>
+                      <th scope="col">Producto</th>
+                      <th scope="col" className="text-center">Precio</th>
+                      <th scope="col" className="text-center">Cantidad</th>
+                      <th scope="col" className="text-end">Subtotal</th>
+                      <th scope="col" className="text-center">Acción</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {carrito.map((item) => (
+                      <tr key={item.id}>
+                        <td>
+                          <div className="d-flex align-items-center gap-3">
+                            <img
+                              src={item.imagen}
+                              alt={item.nombre}
+                              className="rounded object-fit-cover"
+                              style={{ width: '50px', height: '50px' }}
+                            />
+                            <span className="fw-semibold text-dark">{item.nombre}</span>
+                          </div>
+                        </td>
+                        <td className="text-center">{formatearCLP(item.precio)}</td>
+                        <td className="text-center">
+                          <div className="btn-group btn-group-sm" role="group">
+                            <button
+                              type="button"
+                              className="btn btn-outline-secondary"
+                              onClick={() => alActualizarCantidad(item.id, item.cantidad - 1)}
                             >
-                              <i className="bi bi-trash-fill"></i>
+                              -
                             </button>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-
-                <div className="d-flex justify-content-between align-items-center mt-4 pt-3 border-top">
-                  <button 
-                    className="btn btn-outline-danger btn-sm"
-                    onClick={alVaciarCarrito}
-                  >
-                    <i className="bi bi-trash me-1"></i> Vaciar Carrito
-                  </button>
-                  <div className="text-end">
-                    <span className="fs-5 fw-bold me-2">Total:</span>
-                    <span className="fs-4 fw-bold text-success">${total.toLocaleString('es-CL')}</span>
-                  </div>
-                </div>
-              </>
+                            <span className="btn btn-light disabled px-3 fw-bold">
+                              {item.cantidad}
+                            </span>
+                            <button
+                              type="button"
+                              className="btn btn-outline-secondary"
+                              onClick={() => alActualizarCantidad(item.id, item.cantidad + 1)}
+                            >
+                              +
+                            </button>
+                          </div>
+                        </td>
+                        <td className="text-end fw-bold text-danger">
+                          {formatearCLP(item.precio * item.cantidad)}
+                        </td>
+                        <td className="text-center">
+                          <button
+                            type="button"
+                            className="btn btn-outline-danger btn-sm border-0"
+                            onClick={() => alEliminarItem(item.id)}
+                            title="Eliminar producto"
+                          >
+                            <i className="bi bi-trash-fill"></i>
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             )}
           </div>
 
-          <div className="modal-footer bg-light">
-            <button className="btn btn-secondary" onClick={alCerrar}>
-              Seguir Comprando
-            </button>
-            {items.length > 0 && (
-              <button 
-                className="btn btn-carrito-matcha fw-bold"
-                onClick={alFinalizarCompra}
+          {/* Pie del Modal */}
+          {carrito.length > 0 && (
+            <div className="modal-footer bg-light d-flex justify-content-between align-items-center p-3">
+              <button
+                type="button"
+                className="btn btn-outline-secondary btn-sm"
+                onClick={alVaciarCarrito}
               >
-                Finalizar Compra
+                <i className="bi bi-trash me-1"></i> Vaciar Carrito
               </button>
-            )}
-          </div>
+
+              <div className="d-flex align-items-center gap-3">
+                <span className="fs-5 fw-bold text-dark">
+                  Total: <span className="text-danger">{formatearCLP(total)}</span>
+                </span>
+
+                <Link
+                  to="/checkout"
+                  className="btn btn-danger fw-bold"
+                  onClick={alCerrar}
+                >
+                  Ir al Checkout <i className="bi bi-arrow-right ms-1"></i>
+                </Link>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
   );
 }
+
+export default CarritoModal;
