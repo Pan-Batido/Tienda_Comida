@@ -1,7 +1,7 @@
 // Importación de imágenes locales desde src/assets/img/
-import ramenJapones from '../assets/img/ramen.jpg';
-import pockyMatcha from '../assets/img/pocky.jpg';
-import ramuneSaborOriginal from '../assets/img/ramune.jpg';
+import ramenJapones from '../assets/img/ramen-banner.jpg';
+import pockyMatcha from '../assets/img/snacks-banner.png';
+import ramuneSaborOriginal from '../assets/img/bebidas-banner.jpg';
 
 // Claves para el almacenamiento local (localStorage)
 const DB_PRODUCTOS_KEY = 'sakura_productos';
