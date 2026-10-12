@@ -1,7 +1,7 @@
 import React from 'react';
+import logoSakura from '../assets/img/logo-sakura.png';
 
 export function Navbar({ cantidadCarrito, alAbrirCarrito }) {
-  // Manejador de desplazamiento suave sin romper la navegación SPA
   const scrollToSection = (e, id) => {
     e.preventDefault();
     const element = document.getElementById(id);
@@ -18,7 +18,7 @@ export function Navbar({ cantidadCarrito, alAbrirCarrito }) {
           href="#inicio"
           onClick={(e) => scrollToSection(e, 'inicio')}
         >
-          <img src="/img/logo-sakura.png" alt="Sakura Market" height="42" className="me-2" />
+          <img src={logoSakura} alt="Sakura Market" height="42" className="me-2" />
         </a>
 
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -61,7 +61,6 @@ export function Navbar({ cantidadCarrito, alAbrirCarrito }) {
               <i className="bi bi-box-arrow-in-right me-1"></i> Ingresar
             </button>
 
-            {/* Botón Carrito interactivo */}
             <button 
               className="btn btn-sm text-white position-relative ms-1 fw-bold btn-carrito-matcha"
               onClick={alAbrirCarrito}

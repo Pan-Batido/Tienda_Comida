@@ -1,4 +1,7 @@
 import React from 'react';
+import ramenBanner from '../assets/img/ramen-banner.jpg';
+import snacksBanner from '../assets/img/snacks-banner.png';
+import bebidasBanner from '../assets/img/bebidas-banner.jpg';
 
 export function Carrusel({ alSeleccionarCategoria }) {
   return (
@@ -15,7 +18,7 @@ export function Carrusel({ alSeleccionarCategoria }) {
           className="carousel-item active position-relative text-white p-5 text-center align-content-center" 
           style={{
             minHeight: '400px',
-            background: "linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('/img/ramen-banner.jpg') center/cover no-repeat"
+            background: `linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url(${ramenBanner}) center/cover no-repeat`
           }}
         >
           <div className="container py-4 position-relative">
@@ -36,7 +39,7 @@ export function Carrusel({ alSeleccionarCategoria }) {
           className="carousel-item position-relative text-white p-5 text-center align-content-center" 
           style={{
             minHeight: '400px',
-            background: "linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('/img/snacks-banner.png') center/cover no-repeat"
+            background: `linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url(${snacksBanner}) center/cover no-repeat`
           }}
         >
           <div className="container py-4 position-relative">
@@ -57,7 +60,7 @@ export function Carrusel({ alSeleccionarCategoria }) {
           className="carousel-item position-relative text-white p-5 text-center align-content-center" 
           style={{
             minHeight: '400px',
-            background: "linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('/img/bebidas-banner.jpg') center/cover no-repeat"
+            background: `linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url(${bebidasBanner}) center/cover no-repeat`
           }}
         >
           <div className="container py-4 position-relative">
