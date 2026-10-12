@@ -1,88 +1,123 @@
 import React from 'react';
-import ramenBanner from '../assets/img/ramen-banner.jpg';
-import snacksBanner from '../assets/img/snacks-banner.png';
-import bebidasBanner from '../assets/img/bebidas-banner.jpg';
+import { Link } from 'react-router-dom';
+import bannerRamen from '../assets/img/ramen-banner.jpg';
+import bannerPocky from '../assets/img/Pocky1.webp';
+import bannerBebida from '../assets/img/bebida1.jpg';
 
-export function Carrusel({ alSeleccionarCategoria }) {
+export function Carrusel() {
   return (
-    <header id="heroCarousel" className="carousel slide mb-5 shadow rounded overflow-hidden" data-bs-ride="carousel">
+    <div id="carruselSakura" className="carousel slide shadow-sm mb-4" data-bs-ride="carousel">
+      {/* Indicadores */}
       <div className="carousel-indicators">
-        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" className="active"></button>
-        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
-        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+        <button
+          type="button"
+          data-bs-target="#carruselSakura"
+          data-bs-slide-to="0"
+          className="active"
+          aria-current="true"
+          aria-label="Slide 1"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#carruselSakura"
+          data-bs-slide-to="1"
+          aria-label="Slide 2"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#carruselSakura"
+          data-bs-slide-to="2"
+          aria-label="Slide 3"
+        ></button>
       </div>
-      
-      <div className="carousel-inner">
-        {/* Slide 1: Comida / Ramen */}
-        <div 
-          className="carousel-item active position-relative text-white p-5 text-center align-content-center" 
-          style={{
-            minHeight: '400px',
-            background: `linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url(${ramenBanner}) center/cover no-repeat`
-          }}
-        >
-          <div className="container py-4 position-relative">
-            <h1 className="display-4 fw-bold text-shadow">Ramen</h1>
-            <p className="lead fw-normal text-light fs-5">Deliciosos fideos instantáneos.</p>
-            <button 
-              onClick={() => alSeleccionarCategoria('Comida')}
-              className="btn btn-lg mt-3 px-4 rounded-pill shadow-sm fw-bold text-white" 
-              style={{ backgroundColor: '#f282a5', borderColor: '#f282a5' }}
-            >
-              <i className="bi bi-shop me-1"></i> Explorar Ramen
-            </button>
+
+      {/* Diapositivas */}
+      <div className="carousel-inner rounded-3 overflow-hidden">
+        {/* Slide 1 - Ramen */}
+        <div className="carousel-item active" data-bs-interval="4000">
+          <img
+            src={bannerRamen}
+            className="d-block w-100 object-fit-cover"
+            alt="Promoción Ramen Tradicional"
+            style={{ height: '380px', filter: 'brightness(0.75)' }}
+          />
+          <div className="carousel-caption d-md-block text-start bg-dark bg-opacity-50 p-4 rounded-3">
+            <h2 className="fw-bold text-white mb-2">
+              🍜 Sabor Auténtico Japonés
+            </h2>
+            <p className="lead text-light mb-3">
+              Prueba nuestras variedades de Ramen artesanal y fideos instantáneos importados.
+            </p>
+            <Link to="/productos" className="btn btn-danger fw-bold">
+              Ver Ramen <i className="bi bi-arrow-right ms-1"></i>
+            </Link>
           </div>
         </div>
 
-        {/* Slide 2: Snacks */}
-        <div 
-          className="carousel-item position-relative text-white p-5 text-center align-content-center" 
-          style={{
-            minHeight: '400px',
-            background: `linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url(${snacksBanner}) center/cover no-repeat`
-          }}
-        >
-          <div className="container py-4 position-relative">
-            <h1 className="display-4 fw-bold text-shadow">Snacks & Dulces Japoneses</h1>
-            <p className="lead fw-normal text-light fs-5">Pockys, mochis, dorayakis y los mejores bocadillos crujientes de Asia.</p>
-            <button 
-              onClick={() => alSeleccionarCategoria('Snacks')}
-              className="btn btn-lg mt-3 px-4 rounded-pill shadow-sm fw-bold text-white" 
-              style={{ backgroundColor: '#f282a5', borderColor: '#f282a5' }}
-            >
-              <i className="bi bi-egg-fried me-1"></i> Explorar Snacks
-            </button>
+        {/* Slide 2 - Snacks / Pocky */}
+        <div className="carousel-item" data-bs-interval="4000">
+          <img
+            src={bannerPocky}
+            className="d-block w-100 object-fit-cover"
+            alt="Promoción Snacks y Pocky"
+            style={{ height: '380px', filter: 'brightness(0.75)' }}
+          />
+          <div className="carousel-caption d-md-block text-start bg-dark bg-opacity-50 p-4 rounded-3">
+            <h2 className="fw-bold text-white mb-2">
+              🍡 Snacks y Dulces Exclusivos
+            </h2>
+            <p className="lead text-light mb-3">
+              Pocky de Matcha, Mochis y los aperitivos más virales de Asia directos a tu mesa.
+            </p>
+            <Link to="/categorias" className="btn btn-warning text-dark fw-bold">
+              Explorar Snacks <i className="bi bi-arrow-right ms-1"></i>
+            </Link>
           </div>
         </div>
 
-        {/* Slide 3: Bebidas */}
-        <div 
-          className="carousel-item position-relative text-white p-5 text-center align-content-center" 
-          style={{
-            minHeight: '400px',
-            background: `linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url(${bebidasBanner}) center/cover no-repeat`
-          }}
-        >
-          <div className="container py-4 position-relative">
-            <h1 className="display-4 fw-bold text-shadow">Bebidas, Milk & Tea</h1>
-            <p className="lead fw-normal text-light fs-5">Refréscate con las mejores bebidas de Asia</p>
-            <button 
-              onClick={() => alSeleccionarCategoria('Bebidas')}
-              className="btn btn-lg mt-3 px-4 rounded-pill shadow-sm fw-bold text-white" 
-              style={{ backgroundColor: '#f282a5', borderColor: '#f282a5' }}
-            >
-              <i className="bi bi-cup-straw me-1"></i> Explorar Bebidas
-            </button>
+        {/* Slide 3 - Bebidas / Ramune */}
+        <div className="carousel-item" data-bs-interval="4000">
+          <img
+            src={bannerBebida}
+            className="d-block w-100 object-fit-cover"
+            alt="Promoción Bebidas Asiáticas"
+            style={{ height: '380px', filter: 'brightness(0.75)' }}
+          />
+          <div className="carousel-caption d-md-block text-start bg-dark bg-opacity-50 p-4 rounded-3">
+            <h2 className="fw-bold text-white mb-2">
+              🥤 Ramune y Bebidas Refrescantes
+            </h2>
+            <p className="lead text-light mb-3">
+              Descubre los sabores clásicos y de edición limitada de Ramune y tés asiáticos.
+            </p>
+            <Link to="/ofertas" className="btn btn-success fw-bold">
+              Ver Ofertas <i className="bi bi-arrow-right ms-1"></i>
+            </Link>
           </div>
         </div>
       </div>
-      
-      <button className="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
-        <span className="carousel-control-prev-icon"></span>
+
+      {/* Controles de Navegación */}
+      <button
+        className="carousel-control-prev"
+        type="button"
+        data-bs-target="#carruselSakura"
+        data-bs-slide="prev"
+      >
+        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span className="visually-hidden">Anterior</span>
       </button>
-      <button className="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
-        <span className="carousel-control-next-icon"></span>
+      <button
+        className="carousel-control-next"
+        type="button"
+        data-bs-target="#carruselSakura"
+        data-bs-slide="next"
+      >
+        <span className="carousel-control-next-icon" aria-hidden="true"></span>
+        <span className="visually-hidden">Siguiente</span>
       </button>
-    </header>
+    </div>
   );
 }
+
+export default Carrusel;
