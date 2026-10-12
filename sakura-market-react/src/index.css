@@ -1,36 +1,87 @@
-/* Color Sakura del sitio estático original */
-.navbar-sakura {
-  background-color: #df7ba1 !important; /* Rojo Sakura suave / Cereza */
+/* ==========================================
+   PALETA SAKURA MARKET (NAVBAR ROSADO + VERDE MATCHA)
+   ========================================== */
+
+:root {
+  --sakura-pink: #df7ba1;         /* Rosa Sakura del Navbar */
+  --matcha-primary: #3f5135;      /* Verde Matcha / Musgo Principal */
+  --matcha-dark: #2e3c27;         /* Verde Oscuro para hover */
 }
 
-/* Verde Matcha exclusivo para el botón de Carrito */
+/* 1. Navbar con su color rosa sakura original */
+.navbar-sakura {
+  background-color: var(--sakura-pink) !important;
+}
+
+/* Botón de Carrito en el Navbar */
 .btn-carrito-matcha {
-  background-color: #3f5135 !important;
-  border-color: #3f5135 !important;
+  background-color: var(--matcha-primary) !important;
+  border-color: var(--matcha-primary) !important;
   color: #ffffff !important;
 }
 
 .btn-carrito-matcha:hover {
-  background-color: #2e3c27 !important;
-  border-color: #2e3c27 !important;
+  background-color: var(--matcha-dark) !important;
+  border-color: var(--matcha-dark) !important;
 }
 
-/* Clases de apoyo con el color original */
+/* Clases de apoyo */
 .bg-sakura {
-  background-color: #3f5135 !important;
+  background-color: var(--matcha-primary) !important;
   color: #ffffff !important;
 }
 
 .btn-outline-sakura {
-  color: #3f5135 !important;
-  border-color: #3f5135 !important;
+  color: var(--matcha-primary) !important;
+  border-color: var(--matcha-primary) !important;
 }
 
 .btn-outline-sakura:hover {
-  background-color: #3f5135 !important;
+  background-color: var(--matcha-primary) !important;
   color: #ffffff !important;
 }
 
 .text-sakura {
-  color: #3f5135 !important;
+  color: var(--matcha-primary) !important;
+}
+
+/* ==========================================
+   2. REEMPLAZO DEL ROJO EN EL RESTO DE LA PÁGINA POR VERDE MATCHA
+   ========================================== */
+
+/* Textos, títulos y precios que usaban text-danger */
+.text-danger {
+  color: var(--matcha-primary) !important;
+}
+
+/* Botones principales que usaban btn-danger */
+.btn-danger {
+  background-color: var(--matcha-primary) !important;
+  border-color: var(--matcha-primary) !important;
+  color: #ffffff !important;
+}
+
+.btn-danger:hover,
+.btn-danger:focus,
+.btn-danger:active {
+  background-color: var(--matcha-dark) !important;
+  border-color: var(--matcha-dark) !important;
+  color: #ffffff !important;
+}
+
+/* Botones de contorno que usaban btn-outline-danger */
+.btn-outline-danger {
+  color: var(--matcha-primary) !important;
+  border-color: var(--matcha-primary) !important;
+}
+
+.btn-outline-danger:hover,
+.btn-outline-danger:active {
+  background-color: var(--matcha-primary) !important;
+  color: #ffffff !important;
+}
+
+/* Badges y etiquetas que usaban bg-danger */
+.bg-danger {
+  background-color: var(--matcha-primary) !important;
 }

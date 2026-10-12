@@ -10,34 +10,33 @@ import {
 } from './data/db';
 
 // Importación de Componentes
-import { Navbar } from './components/Navbar';
-import { Carrusel } from './components/Carrusel';
-import { FiltroCategorias } from './components/FiltroCategorias';
-import { ProductCard } from './components/ProductCard';
-import { CarritoModal } from './components/CarritoModal';
-import { NotificacionToast } from './components/NotificacionToast';
+import Navbar from './components/Navbar';
+import Carrusel from './components/Carrusel';
+import FiltroCategorias from './components/FiltroCategorias';
+import ProductCard from './components/ProductCard';
+import CarritoModal from './components/CarritoModal';
+import NotificacionToast from './components/NotificacionToast';
 
 // Importación de Páginas
-import { Home } from './pages/Home';
-import { Productos } from './pages/Productos';
-import { Categorias } from './pages/Categorias';
-import { Ofertas } from './pages/Ofertas';
-import { DetalleProducto } from './pages/DetalleProducto';
-import { Contacto } from './pages/Contacto';
-import { Blog } from './pages/Blog';
-import { Login } from './pages/Login';
-import { Registro } from './pages/Registro';
+import Home from './pages/Home';
+import Productos from './pages/Productos';
+import Categorias from './pages/Categorias';
+import Ofertas from './pages/Ofertas';
+import DetalleProducto from './pages/DetalleProducto';
+import Contacto from './pages/Contacto';
+import Blog from './pages/Blog';
+import Login from './pages/Login';
+import Registro from './pages/Registro';
 import { AdminProductos } from './pages/AdminProductos';
 
 // Importación de Páginas de Checkout
-import { Carrito } from './pages/checkout/Carrito';
-import { Checkout } from './pages/checkout/Checkout';
-import { PagoExitoso } from './pages/checkout/PagoExitoso';
-import { PagoError } from './pages/checkout/PagoError';
+import Carrito from './pages/checkout/Carrito';
+import Checkout from './pages/checkout/Checkout';
+import PagoExitoso from './pages/checkout/PagoExitoso';
+import PagoError from './pages/checkout/PagoError';
 
 export function App() {
   const [productos, setProductos] = useState([]);
-  const [categoriaSeleccionada, setCategoriaSeleccionada] = useState('Todos');
   const [carrito, setCarrito] = useState([]);
   const [mostrarModalCarrito, setMostrarModalCarrito] = useState(false);
   const [notificacion, setNotificacion] = useState({ visible: false, mensaje: '' });
@@ -71,16 +70,15 @@ export function App() {
     mostrarNotificacion(`🌸 ¡"${producto.nombre}" añadido al carrito!`);
   };
 
-  const handleModificarCantidad = (id, cambio) => {
-    const nuevoCarrito = carrito
-      .map((item) => {
-        if (item.id === id) {
-          const nuevaCantidad = item.cantidad + cambio;
-          return nuevaCantidad > 0 ? { ...item, cantidad: nuevaCantidad } : null;
-        }
-        return item;
-      })
-      .filter(Boolean);
+  const handleModificarCantidad = (id, nuevaCantidad) => {
+    let nuevoCarrito = [];
+    if (nuevaCantidad <= 0) {
+      nuevoCarrito = carrito.filter((item) => item.id !== id);
+    } else {
+      nuevoCarrito = carrito.map((item) =>
+        item.id === id ? { ...item, cantidad: nuevaCantidad } : item
+      );
+    }
 
     setCarrito(nuevoCarrito);
     guardarCarrito(nuevoCarrito);
@@ -97,13 +95,6 @@ export function App() {
     setCarrito([]);
     vaciarCarritoBD();
     mostrarNotificacion('🧹 Carrito vaciado');
-  };
-
-  const handleFinalizarCompra = () => {
-    setCarrito([]);
-    vaciarCarritoBD();
-    setMostrarModalCarrito(false);
-    mostrarNotificacion('🎉 ¡Gracias por tu compra en Sakura Market!');
   };
 
   const totalCantidadCarrito = carrito.reduce((acc, item) => acc + item.cantidad, 0);

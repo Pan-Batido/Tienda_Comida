@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { obtenerUsuarios, guardarUsuario } from '../data/db';
+import * as dbModule from '../data/db';
 
 export function Registro() {
   const navigate = useNavigate();
@@ -20,7 +20,10 @@ export function Registro() {
       return;
     }
 
+    // Obtener usuarios usando la función exportada de db.js
+    const obtenerUsuarios = dbModule.obtenerUsuarios || dbModule.getUsuarios || (() => []);
     const usuariosExistentes = obtenerUsuarios();
+    
     const yaExiste = usuariosExistentes.some((u) => u.email.toLowerCase() === email.toLowerCase());
 
     if (yaExiste) {
@@ -36,7 +39,19 @@ export function Registro() {
       rol: 'cliente'
     };
 
-    guardarUsuario(nuevoUsuario);
+    // Intentar guardar usuario según el nombre exacto de la función en db.js
+    if (typeof dbModule.guardarUsuario === 'function') {
+      dbModule.guardarUsuario(nuevoUsuario);
+    } else if (typeof dbModule.agregarUsuario === 'function') {
+      dbModule.agregarUsuario(nuevoUsuario);
+    } else if (typeof dbModule.crearUsuario === 'function') {
+      dbModule.crearUsuario(nuevoUsuario);
+    } else {
+      // Si no existe la función en db.js, guardamos directamente en localStorage
+      const listaActualizada = [...usuariosExistentes, nuevoUsuario];
+      localStorage.setItem('sakura_usuarios', JSON.stringify(listaActualizada));
+    }
+
     setExito(true);
 
     setTimeout(() => {
