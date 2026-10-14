@@ -25,6 +25,8 @@ import Ofertas from './pages/Ofertas';
 import DetalleProducto from './pages/DetalleProducto';
 import Contacto from './pages/Contacto';
 import Blog from './pages/Blog';
+import DetalleBlog1 from './pages/DetalleBlog1';
+import DetalleBlog2 from './pages/DetalleBlog2';
 import Login from './pages/Login';
 import Registro from './pages/Registro';
 import { AdminProductos } from './pages/AdminProductos';
@@ -117,6 +119,8 @@ export function App() {
             <Route path="/ofertas" element={<Ofertas alAgregarAlCarrito={handleAgregarAlCarrito} />} />
             <Route path="/contacto" element={<Contacto />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/1" element={<DetalleBlog1 />} />
+            <Route path="/blog/2" element={<DetalleBlog2 />} />
 
             {/* Rutas de Autenticación */}
             <Route path="/login" element={<Login />} />

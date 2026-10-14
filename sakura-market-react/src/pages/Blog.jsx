@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export function Blog() {
   const articulos = [
@@ -36,9 +37,12 @@ export function Blog() {
               </div>
               <div className="card-footer bg-transparent border-0 d-flex justify-content-between align-items-center">
                 <small className="text-muted">{art.fecha}</small>
-                <button className="btn btn-link text-danger p-0 fw-bold text-decoration-none">
+                <Link 
+                  to={`/blog/${art.id}`} 
+                  className="btn btn-link text-danger p-0 fw-bold text-decoration-none"
+                >
                   Leer más <i className="bi bi-arrow-right"></i>
-                </button>
+                </Link>
               </div>
             </div>
           </div>
