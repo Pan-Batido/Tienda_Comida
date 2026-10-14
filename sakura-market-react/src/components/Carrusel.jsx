@@ -24,13 +24,6 @@ export function Carrusel({ alSeleccionarCategoria }) {
           <div className="container py-4 position-relative">
             <h1 className="display-4 fw-bold text-shadow">Ramen</h1>
             <p className="lead fw-normal text-light fs-5">Deliciosos fideos instantáneos.</p>
-            <button 
-              onClick={() => alSeleccionarCategoria('Comida')}
-              className="btn btn-lg mt-3 px-4 rounded-pill shadow-sm fw-bold text-white" 
-              style={{ backgroundColor: '#f282a5', borderColor: '#f282a5' }}
-            >
-              <i className="bi bi-shop me-1"></i> Explorar Ramen
-            </button>
           </div>
         </div>
 
@@ -45,13 +38,6 @@ export function Carrusel({ alSeleccionarCategoria }) {
           <div className="container py-4 position-relative">
             <h1 className="display-4 fw-bold text-shadow">Snacks & Dulces Japoneses</h1>
             <p className="lead fw-normal text-light fs-5">Pockys, mochis, dorayakis y los mejores bocadillos crujientes de Asia.</p>
-            <button 
-              onClick={() => alSeleccionarCategoria('Snacks')}
-              className="btn btn-lg mt-3 px-4 rounded-pill shadow-sm fw-bold text-white" 
-              style={{ backgroundColor: '#f282a5', borderColor: '#f282a5' }}
-            >
-              <i className="bi bi-egg-fried me-1"></i> Explorar Snacks
-            </button>
           </div>
         </div>
 
@@ -66,13 +52,6 @@ export function Carrusel({ alSeleccionarCategoria }) {
           <div className="container py-4 position-relative">
             <h1 className="display-4 fw-bold text-shadow">Bebidas, Milk & Tea</h1>
             <p className="lead fw-normal text-light fs-5">Refréscate con las mejores bebidas de Asia</p>
-            <button 
-              onClick={() => alSeleccionarCategoria('Bebidas')}
-              className="btn btn-lg mt-3 px-4 rounded-pill shadow-sm fw-bold text-white" 
-              style={{ backgroundColor: '#f282a5', borderColor: '#f282a5' }}
-            >
-              <i className="bi bi-cup-straw me-1"></i> Explorar Bebidas
-            </button>
           </div>
         </div>
       </div>

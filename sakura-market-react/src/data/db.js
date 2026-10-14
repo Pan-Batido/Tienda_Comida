@@ -4,9 +4,16 @@ const DB_CARRITO_KEY = 'sakura_carrito';
 const DB_USUARIOS_KEY = 'sakura_usuarios';
 
 // Definición de rutas de imágenes
-const ramenJapones = '/src/assets/img/ramen-banner.jpg';
-const pockyMatcha = '/src/assets/img/Pocky1.webp';
-const ramuneSaborOriginal = '/src/assets/img/bebida1.jpg';
+const ramen1 = '/src/assets/img/RamenOrientalPicante.png';
+const ramen2 = '/src/assets/img/RamenCarne.jpg';
+const ramen3 = '/src/assets/img/RamenPollo.png';
+const snack1 = '/src/assets/img/Pocky1.webp';
+const snack2 = '/src/assets/img/Pocky2.webp';
+const snack3 = '/src/assets/img/Pocky3.webp';
+const snack4 = '/src/assets/img/Pocky4.webp';
+const bebida1 = '/src/assets/img/bebida1.jpg';
+const bebida3 = '/src/assets/img/bebida3.png';
+const bebida6 ='/src/assets/img/bebida6.png';
 
 // Catálogo inicial
 const productosIniciales = [
@@ -17,7 +24,7 @@ const productosIniciales = [
     precio: 7990,
     categoria: 'Comida',
     stock: 15,
-    imagen: ramenJapones
+    imagen: ramen1
   },
   {
     id: 2,
@@ -26,7 +33,7 @@ const productosIniciales = [
     precio: 2490,
     categoria: 'Snacks',
     stock: 30,
-    imagen: pockyMatcha
+    imagen: snack1
   },
   {
     id: 3,
@@ -35,7 +42,70 @@ const productosIniciales = [
     precio: 1990,
     categoria: 'Bebidas',
     stock: 25,
-    imagen: ramuneSaborOriginal
+    imagen: bebida1
+  },
+  {
+    id: 4,
+    nombre: 'Leche con Té y Taro 390ml',
+    descripcion: 'Sabroso e irresistible té con leche y taro de cremosa textura.',
+    precio: 2300,
+    categoria: 'Bebidas',
+    stock: 20,
+    imagen: bebida3
+  },
+  {
+    id: 5,
+    nombre: 'Mochi de Fresa Tradicional',
+    descripcion: 'Pastelitos de arroz suave rellenos de dulce pasta de fresa natural.',
+    precio: 3200,
+    categoria: 'Snacks',
+    stock: 18,
+    imagen: snack2
+  },
+  {
+    id: 6,
+    nombre: 'Ramen Neoguri Picante',
+    descripcion: 'Delicioso ramen picante sabor a mariscos con fideos gruesos.',
+    precio: 2100,
+    categoria: 'Comida',
+    stock: 12,
+    imagen: ramen2
+  },
+  {
+    id: 7,
+    nombre: 'Dorayaki Relleno de Anko',
+    descripcion: 'Bizcocho esponjoso japonés relleno de pasta de judía roja dulce.',
+    precio: 1800,
+    categoria: 'Snacks',
+    stock: 22,
+    imagen: snack3
+  },
+  {
+    id: 8,
+    nombre: 'Jugo de Uva Verde Coco Palm',
+    descripcion: 'Bebida de uva verde con trocitos reales de coco en su interior.',
+    precio: 1650,
+    categoria: 'Bebidas',
+    stock: 40,
+    imagen: bebida6
+  },
+  {
+    id: 9,
+    nombre: 'Pepero Almond Crunch',
+    descripcion: 'Galletas de palito cubiertas de chocolate con leche y almendras crocantes.',
+    precio: 2200,
+    categoria: 'Snacks',
+    stock: 25,
+    imagen: snack4
+  },
+  {
+    id: 10,
+    nombre: 'Ramen Shin Ramyun Gourmet',
+    descripcion: 'El clásico ramen coreano muy picante con caldo intenso de verduras y champiñones.',
+    precio: 1950,
+    categoria: 'Comida',
+    stock: 15,
+    imagen: ramen3
   }
 ];
 

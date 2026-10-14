@@ -6,15 +6,15 @@ export function Ofertas({ alAgregarAlCarrito }) {
   const [ofertas, setOfertas] = useState([]);
 
   useEffect(() => {
-    // Simular productos en oferta
+    // Cargar únicamente los primeros 5 productos seleccionados para la sección de ofertas
     const prods = obtenerProductos();
-    setOfertas(prods);
+    setOfertas(prods.slice(0, 5));
   }, []);
 
   return (
     <div className="container py-4">
       <div className="bg-danger text-white rounded-3 p-4 mb-4 shadow-sm text-center">
-        <h1 className="fw-bold mb-2">🔥 Ofertas & Descuentos Especiales</h1>
+        <h1 className="fw-bold mb-2"> Ofertas & Descuentos Especiales</h1>
         <p className="lead mb-0">¡Aprovecha precios rebajados en tus snacks y bebidas favoritas por tiempo limitado!</p>
       </div>
 
