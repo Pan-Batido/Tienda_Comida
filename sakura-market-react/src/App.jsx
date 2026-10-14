@@ -41,7 +41,6 @@ export function App() {
   const [mostrarModalCarrito, setMostrarModalCarrito] = useState(false);
   const [notificacion, setNotificacion] = useState({ visible: false, mensaje: '' });
 
-  // Cargar usuario activo y datos al iniciar
   useEffect(() => {
     try {
       setProductos(obtenerProductos() || []);
@@ -56,7 +55,6 @@ export function App() {
     }
   }, []);
 
-  // Función para sincronizar la sesión en toda la app
   const actualizarUsuarioActivo = (usuario) => {
     if (usuario) {
       localStorage.setItem('sakura_usuario_activo', JSON.stringify(usuario));
@@ -77,10 +75,12 @@ export function App() {
   const handleAgregarAlCarrito = (producto) => {
     const existe = carrito.find((item) => item.id === producto.id);
     let nuevoCarrito = [];
+    let nuevaCantidad = 1;
 
     if (existe) {
+      nuevaCantidad = existe.cantidad + 1;
       nuevoCarrito = carrito.map((item) =>
-        item.id === producto.id ? { ...item, cantidad: item.cantidad + 1 } : item
+        item.id === producto.id ? { ...item, cantidad: nuevaCantidad } : item
       );
     } else {
       nuevoCarrito = [...carrito, { ...producto, cantidad: 1 }];
@@ -88,7 +88,7 @@ export function App() {
 
     setCarrito(nuevoCarrito);
     guardarCarrito(nuevoCarrito);
-    mostrarNotificacion(`🌸 ¡"${producto.nombre}" añadido al carrito!`);
+    mostrarNotificacion(`🌸 Agregaste "${producto.nombre}" (${nuevaCantidad} en carrito)`);
   };
 
   const handleModificarCantidad = (id, nuevaCantidad) => {
@@ -123,7 +123,6 @@ export function App() {
   return (
     <Router>
       <div className="bg-light min-vh-100 d-flex flex-column">
-        {/* Le pasamos el usuario y la función de cerrar sesión al Navbar */}
         <Navbar 
           cantidadCarrito={totalCantidadCarrito} 
           alAbrirCarrito={() => setMostrarModalCarrito(true)}
@@ -133,18 +132,17 @@ export function App() {
 
         <div className="flex-grow-1">
           <Routes>
-            <Route path="/" element={<Home alAgregarAlCarrito={handleAgregarAlCarrito} />} />
-            <Route path="/productos" element={<Productos alAgregarAlCarrito={handleAgregarAlCarrito} />} />
+            <Route path="/" element={<Home alAgregarAlCarrito={handleAgregarAlCarrito} carrito={carrito} />} />
+            <Route path="/productos" element={<Productos alAgregarAlCarrito={handleAgregarAlCarrito} carrito={carrito} />} />
             <Route path="/producto/:id" element={<DetalleProducto alAgregarAlCarrito={handleAgregarAlCarrito} />} />
-            <Route path="/categorias" element={<Categorias alAgregarAlCarrito={handleAgregarAlCarrito} />} />
-            <Route path="/ofertas" element={<Ofertas alAgregarAlCarrito={handleAgregarAlCarrito} />} />
+            <Route path="/categorias" element={<Categorias alAgregarAlCarrito={handleAgregarAlCarrito} carrito={carrito} />} />
+            <Route path="/ofertas" element={<Ofertas alAgregarAlCarrito={handleAgregarAlCarrito} carrito={carrito} />} />
             <Route path="/contacto" element={<Contacto />} />
             
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/1" element={<DetalleBlog1 />} />
             <Route path="/blog/2" element={<DetalleBlog2 />} />
 
-            {/* Le pasamos la función de actualización a Login */}
             <Route path="/login" element={<Login alIniciarSesion={actualizarUsuarioActivo} />} />
             <Route path="/registro" element={<Registro />} />
 

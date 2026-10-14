@@ -1,8 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export function ProductCard({ producto, alAgregarAlCarrito }) {
+export function ProductCard({ producto, alAgregarAlCarrito, carrito = [] }) {
   const { id, nombre, descripcion, precio, categoria, stock, imagen } = producto;
+
+  // Buscar cuántas unidades de este producto ya están en el carrito
+  const itemEnCarrito = carrito.find((item) => item.id === id);
+  const cantidadEnCarrito = itemEnCarrito ? itemEnCarrito.cantidad : 0;
 
   // Formatear precio en pesos chilenos (CLP)
   const precioFormateado = new Intl.NumberFormat('es-CL', {
@@ -55,7 +59,8 @@ export function ProductCard({ producto, alAgregarAlCarrito }) {
             onClick={() => alAgregarAlCarrito(producto)}
             disabled={stock <= 0}
           >
-            <i className="bi bi-cart-plus me-1"></i> Agregar
+            <i className="bi bi-cart-plus me-1"></i> 
+            Agregar {cantidadEnCarrito > 0 && `(${cantidadEnCarrito})`}
           </button>
         </div>
       </div>
