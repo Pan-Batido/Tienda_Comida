@@ -11,9 +11,6 @@ import {
 
 // Importación de Componentes
 import Navbar from './components/Navbar';
-import Carrusel from './components/Carrusel';
-import FiltroCategorias from './components/FiltroCategorias';
-import ProductCard from './components/ProductCard';
 import CarritoModal from './components/CarritoModal';
 import NotificacionToast from './components/NotificacionToast';
 
@@ -29,7 +26,7 @@ import DetalleBlog1 from './pages/DetalleBlog1';
 import DetalleBlog2 from './pages/DetalleBlog2';
 import Login from './pages/Login';
 import Registro from './pages/Registro';
-import { AdminProductos } from './pages/AdminProductos';
+import AdminProductos from './pages/AdminProductos';
 
 // Importación de Páginas de Checkout
 import Carrito from './pages/checkout/Carrito';
@@ -44,8 +41,12 @@ export function App() {
   const [notificacion, setNotificacion] = useState({ visible: false, mensaje: '' });
 
   useEffect(() => {
-    setProductos(obtenerProductos());
-    setCarrito(obtenerCarrito());
+    try {
+      setProductos(obtenerProductos() || []);
+      setCarrito(obtenerCarrito() || []);
+    } catch (e) {
+      console.error("Error al cargar datos iniciales:", e);
+    }
   }, []);
 
   const mostrarNotificacion = (mensaje) => {
@@ -118,15 +119,17 @@ export function App() {
             <Route path="/categorias" element={<Categorias alAgregarAlCarrito={handleAgregarAlCarrito} />} />
             <Route path="/ofertas" element={<Ofertas alAgregarAlCarrito={handleAgregarAlCarrito} />} />
             <Route path="/contacto" element={<Contacto />} />
+            
+            {/* Rutas Módulo Blog */}
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/1" element={<DetalleBlog1 />} />
             <Route path="/blog/2" element={<DetalleBlog2 />} />
 
-            {/* Rutas de Autenticación */}
+            {/* Rutas Autenticación */}
             <Route path="/login" element={<Login />} />
             <Route path="/registro" element={<Registro />} />
 
-            {/* Rutas del Flujo de Compra */}
+            {/* Rutas Flujo Checkout */}
             <Route 
               path="/carrito" 
               element={
@@ -150,7 +153,7 @@ export function App() {
             <Route path="/pago-exitoso" element={<PagoExitoso />} />
             <Route path="/pago-error" element={<PagoError />} />
 
-            {/* Ruta Panel de Administración ABM */}
+            {/* Ruta Panel de Administración */}
             <Route path="/admin" element={<AdminProductos />} />
           </Routes>
         </div>
