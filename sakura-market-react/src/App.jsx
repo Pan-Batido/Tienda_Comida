@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
-// Importación de base de datos local
+// Base de datos local
 import { 
   obtenerProductos, 
   obtenerCarrito, 
@@ -9,12 +9,12 @@ import {
   vaciarCarritoBD 
 } from './data/db';
 
-// Importación de Componentes
+// Componentes
 import Navbar from './components/Navbar';
 import CarritoModal from './components/CarritoModal';
 import NotificacionToast from './components/NotificacionToast';
 
-// Importación de Páginas
+// Páginas
 import Home from './pages/Home';
 import Productos from './pages/Productos';
 import Categorias from './pages/Categorias';
@@ -28,7 +28,7 @@ import Login from './pages/Login';
 import Registro from './pages/Registro';
 import AdminProductos from './pages/AdminProductos';
 
-// Importación de Páginas de Checkout
+// Checkout
 import Carrito from './pages/checkout/Carrito';
 import Checkout from './pages/checkout/Checkout';
 import PagoExitoso from './pages/checkout/PagoExitoso';
@@ -37,17 +37,35 @@ import PagoError from './pages/checkout/PagoError';
 export function App() {
   const [productos, setProductos] = useState([]);
   const [carrito, setCarrito] = useState([]);
+  const [usuarioActivo, setUsuarioActivo] = useState(null);
   const [mostrarModalCarrito, setMostrarModalCarrito] = useState(false);
   const [notificacion, setNotificacion] = useState({ visible: false, mensaje: '' });
 
+  // Cargar usuario activo y datos al iniciar
   useEffect(() => {
     try {
       setProductos(obtenerProductos() || []);
       setCarrito(obtenerCarrito() || []);
+      
+      const usrStr = localStorage.getItem('sakura_usuario_activo');
+      if (usrStr) {
+        setUsuarioActivo(JSON.parse(usrStr));
+      }
     } catch (e) {
       console.error("Error al cargar datos iniciales:", e);
     }
   }, []);
+
+  // Función para sincronizar la sesión en toda la app
+  const actualizarUsuarioActivo = (usuario) => {
+    if (usuario) {
+      localStorage.setItem('sakura_usuario_activo', JSON.stringify(usuario));
+      setUsuarioActivo(usuario);
+    } else {
+      localStorage.removeItem('sakura_usuario_activo');
+      setUsuarioActivo(null);
+    }
+  };
 
   const mostrarNotificacion = (mensaje) => {
     setNotificacion({ visible: true, mensaje });
@@ -105,14 +123,16 @@ export function App() {
   return (
     <Router>
       <div className="bg-light min-vh-100 d-flex flex-column">
+        {/* Le pasamos el usuario y la función de cerrar sesión al Navbar */}
         <Navbar 
           cantidadCarrito={totalCantidadCarrito} 
-          alAbrirCarrito={() => setMostrarModalCarrito(true)} 
+          alAbrirCarrito={() => setMostrarModalCarrito(true)}
+          usuarioActivo={usuarioActivo}
+          alCerrarSesion={() => actualizarUsuarioActivo(null)}
         />
 
         <div className="flex-grow-1">
           <Routes>
-            {/* Rutas Públicas Principales */}
             <Route path="/" element={<Home alAgregarAlCarrito={handleAgregarAlCarrito} />} />
             <Route path="/productos" element={<Productos alAgregarAlCarrito={handleAgregarAlCarrito} />} />
             <Route path="/producto/:id" element={<DetalleProducto alAgregarAlCarrito={handleAgregarAlCarrito} />} />
@@ -120,16 +140,14 @@ export function App() {
             <Route path="/ofertas" element={<Ofertas alAgregarAlCarrito={handleAgregarAlCarrito} />} />
             <Route path="/contacto" element={<Contacto />} />
             
-            {/* Rutas Módulo Blog */}
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/1" element={<DetalleBlog1 />} />
             <Route path="/blog/2" element={<DetalleBlog2 />} />
 
-            {/* Rutas Autenticación */}
-            <Route path="/login" element={<Login />} />
+            {/* Le pasamos la función de actualización a Login */}
+            <Route path="/login" element={<Login alIniciarSesion={actualizarUsuarioActivo} />} />
             <Route path="/registro" element={<Registro />} />
 
-            {/* Rutas Flujo Checkout */}
             <Route 
               path="/carrito" 
               element={
@@ -153,7 +171,6 @@ export function App() {
             <Route path="/pago-exitoso" element={<PagoExitoso />} />
             <Route path="/pago-error" element={<PagoError />} />
 
-            {/* Ruta Panel de Administración */}
             <Route path="/admin" element={<AdminProductos />} />
           </Routes>
         </div>

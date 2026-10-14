@@ -18,12 +18,17 @@ export function Login() {
     );
 
     if (usuarioEncontrado) {
+      // 1. Guardar el usuario activo en localStorage
       localStorage.setItem('sakura_usuario_activo', JSON.stringify(usuarioEncontrado));
 
+      // 2. Disparar el evento de autenticación para que el Navbar reaccione de inmediato
+      window.dispatchEvent(new Event('sakura_auth_change'));
+
+      // 3. Redirigir según el rol
       if (usuarioEncontrado.rol === 'ADMIN' || usuarioEncontrado.rol === 'admin') {
         navigate('/admin');
       } else {
-        navigate('/checkout');
+        navigate('/');
       }
     } else {
       setError('Correo electrónico o contraseña incorrectos.');
