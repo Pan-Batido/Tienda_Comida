@@ -1,37 +1,32 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { obtenerUsuarios } from '../data/db';
+import { api, saveSession } from '../services/api';
 
 export function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [cargando, setCargando] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setCargando(true);
 
-    const usuarios = obtenerUsuarios();
-    const usuarioEncontrado = usuarios.find(
-      (u) => u.email.toLowerCase() === email.toLowerCase() && u.password === password
-    );
+    try {
+      const { token, usuario } = await api.login(email, password);
+      saveSession(token, usuario);
 
-    if (usuarioEncontrado) {
-      // 1. Guardar el usuario activo en localStorage
-      localStorage.setItem('sakura_usuario_activo', JSON.stringify(usuarioEncontrado));
-
-      // 2. Disparar el evento de autenticación para que el Navbar reaccione de inmediato
-      window.dispatchEvent(new Event('sakura_auth_change'));
-
-      // 3. Redirigir según el rol
-      if (usuarioEncontrado.rol === 'ADMIN' || usuarioEncontrado.rol === 'admin') {
+      if (usuario.rol === 'ADMINISTRADOR' || usuario.rol === 'VENDEDOR') {
         navigate('/admin');
       } else {
         navigate('/');
       }
-    } else {
-      setError('Correo electrónico o contraseña incorrectos.');
+    } catch (err) {
+      setError(err.message || 'Correo electrónico o contraseña incorrectos.');
+    } finally {
+      setCargando(false);
     }
   };
 
@@ -79,8 +74,8 @@ export function Login() {
                 />
               </div>
 
-              <button type="submit" className="btn btn-danger w-100 fw-bold py-2 mb-3">
-                Ingresar <i className="bi bi-arrow-right-short ms-1"></i>
+              <button type="submit" disabled={cargando} className="btn btn-danger w-100 fw-bold py-2 mb-3">
+                {cargando ? 'Ingresando...' : 'Ingresar'} <i className="bi bi-arrow-right-short ms-1"></i>
               </button>
             </form>
 

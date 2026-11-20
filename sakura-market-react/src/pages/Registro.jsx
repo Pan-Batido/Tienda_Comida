@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { obtenerUsuarios } from '../data/db';
+import { api } from '../services/api';
 
 export function Registro() {
   const navigate = useNavigate();
-  
+
   const [nombre, setNombre] = useState('');
   const [apellidos, setApellidos] = useState('');
   const [email, setEmail] = useState('');
@@ -20,7 +20,7 @@ export function Registro() {
   const [error, setError] = useState('');
   const [exito, setExito] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
 
@@ -29,39 +29,22 @@ export function Registro() {
       return;
     }
 
-    const usuariosExistentes = obtenerUsuarios();
-    const yaExiste = usuariosExistentes.some(
-      (u) => u.email.toLowerCase() === email.toLowerCase()
-    );
+    try {
+      await api.registro({
+        nombre,
+        apellidos,
+        email,
+        password,
+        direccion: { calle, departamento, region, comuna, indicaciones },
+      });
 
-    if (yaExiste) {
-      setError('El correo electrónico ya se encuentra registrado.');
-      return;
+      setExito(true);
+      setTimeout(() => {
+        navigate('/login');
+      }, 1500);
+    } catch (err) {
+      setError(err.message || 'No se pudo completar el registro.');
     }
-
-    const nuevoUsuario = {
-      id: Date.now(),
-      nombre,
-      apellidos,
-      email,
-      password,
-      direccion: {
-        calle,
-        departamento,
-        region,
-        comuna,
-        indicaciones
-      },
-      rol: 'USER'
-    };
-
-    const listaActualizada = [...usuariosExistentes, nuevoUsuario];
-    localStorage.setItem('sakura_usuarios', JSON.stringify(listaActualizada));
-
-    setExito(true);
-    setTimeout(() => {
-      navigate('/login');
-    }, 1500);
   };
 
   return (
@@ -92,103 +75,51 @@ export function Registro() {
 
             <form onSubmit={handleSubmit}>
               <h5 className="fw-bold text-danger mb-3 border-bottom pb-2">Información Personal</h5>
-              
+
               <div className="row g-3 mb-3">
                 <div className="col-12 col-md-6">
                   <label className="form-label fw-bold small text-muted">Nombre*</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    required
-                    placeholder="Tu nombre"
-                    value={nombre}
-                    onChange={(e) => setNombre(e.target.value)}
-                  />
+                  <input type="text" className="form-control" required placeholder="Tu nombre" value={nombre} onChange={(e) => setNombre(e.target.value)} />
                 </div>
                 <div className="col-12 col-md-6">
                   <label className="form-label fw-bold small text-muted">Apellidos*</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    required
-                    placeholder="Tus apellidos"
-                    value={apellidos}
-                    onChange={(e) => setApellidos(e.target.value)}
-                  />
+                  <input type="text" className="form-control" required placeholder="Tus apellidos" value={apellidos} onChange={(e) => setApellidos(e.target.value)} />
                 </div>
               </div>
 
               <div className="mb-3">
                 <label className="form-label fw-bold small text-muted">Correo Electrónico*</label>
-                <input
-                  type="email"
-                  className="form-control"
-                  required
-                  placeholder="nombre@ejemplo.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
+                <input type="email" className="form-control" required placeholder="nombre@ejemplo.com" value={email} onChange={(e) => setEmail(e.target.value)} />
               </div>
 
               <div className="row g-3 mb-4">
                 <div className="col-12 col-md-6">
                   <label className="form-label fw-bold small text-muted">Contraseña*</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    required
-                    placeholder="••••••••"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
+                  <input type="password" className="form-control" required placeholder="••••••••" value={password} onChange={(e) => setPassword(e.target.value)} />
                 </div>
                 <div className="col-12 col-md-6">
                   <label className="form-label fw-bold small text-muted">Confirmar Contraseña*</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    required
-                    placeholder="••••••••"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                  />
+                  <input type="password" className="form-control" required placeholder="••••••••" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
                 </div>
               </div>
 
               <h5 className="fw-bold text-danger mb-3 border-bottom pb-2">Dirección de entrega de los productos</h5>
-              
+
               <div className="row g-3 mb-3">
                 <div className="col-12 col-md-8">
                   <label className="form-label fw-bold small text-muted">Calle*</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    required
-                    placeholder="Ej. Av. Pedro de Valdivia 1234"
-                    value={calle}
-                    onChange={(e) => setCalle(e.target.value)}
-                  />
+                  <input type="text" className="form-control" required placeholder="Ej. Av. Pedro de Valdivia 1234" value={calle} onChange={(e) => setCalle(e.target.value)} />
                 </div>
                 <div className="col-12 col-md-4">
                   <label className="form-label fw-bold small text-muted">Departamento (opcional)</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Ej. 603"
-                    value={departamento}
-                    onChange={(e) => setDepartamento(e.target.value)}
-                  />
+                  <input type="text" className="form-control" placeholder="Ej. 603" value={departamento} onChange={(e) => setDepartamento(e.target.value)} />
                 </div>
               </div>
 
               <div className="row g-3 mb-3">
                 <div className="col-12 col-md-6">
                   <label className="form-label fw-bold small text-muted">Región*</label>
-                  <select
-                    className="form-select"
-                    value={region}
-                    onChange={(e) => setRegion(e.target.value)}
-                  >
+                  <select className="form-select" value={region} onChange={(e) => setRegion(e.target.value)}>
                     <option value="Región Metropolitana de Santiago">Región Metropolitana de Santiago</option>
                     <option value="Valparaíso">Valparaíso</option>
                     <option value="Bío-Bío">Bío-Bío</option>
@@ -196,11 +127,7 @@ export function Registro() {
                 </div>
                 <div className="col-12 col-md-6">
                   <label className="form-label fw-bold small text-muted">Comuna*</label>
-                  <select
-                    className="form-select"
-                    value={comuna}
-                    onChange={(e) => setComuna(e.target.value)}
-                  >
+                  <select className="form-select" value={comuna} onChange={(e) => setComuna(e.target.value)}>
                     <option value="Cerrillos">Cerrillos</option>
                     <option value="Santiago">Santiago</option>
                     <option value="Providencia">Providencia</option>
@@ -212,13 +139,7 @@ export function Registro() {
 
               <div className="mb-4">
                 <label className="form-label fw-bold small text-muted">Indicaciones para la entrega (opcional)</label>
-                <textarea
-                  className="form-control"
-                  rows="2"
-                  placeholder="Ej. Entre calles, color del edificio, dejar con el conserje"
-                  value={indicaciones}
-                  onChange={(e) => setIndicaciones(e.target.value)}
-                ></textarea>
+                <textarea className="form-control" rows="2" placeholder="Ej. Entre calles, color del edificio, dejar con el conserje" value={indicaciones} onChange={(e) => setIndicaciones(e.target.value)}></textarea>
               </div>
 
               <button type="submit" className="btn btn-danger w-100 fw-bold py-2 mb-3">
