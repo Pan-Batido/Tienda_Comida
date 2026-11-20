@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+api.obtenerProductoPorId(id).then(setProducto).catch(() => setProducto(null));
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { obtenerProductoPorId } from '../data/db';
+import { api } from '../services/api';
 
 export function DetalleProducto({ alAgregarAlCarrito }) {
   const { id } = useParams();

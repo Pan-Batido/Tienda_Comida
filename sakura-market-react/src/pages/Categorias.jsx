@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { obtenerProductos } from '../data/db';
+api.obtenerProductos().then(setProductos).catch(console.error);
+import { api } from '../services/api';
 import ProductCard from '../components/ProductCard';
 
 export function Categorias({ alAgregarAlCarrito }) {

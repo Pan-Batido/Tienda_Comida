@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { obtenerProductos } from '../data/db';
+import { api } from '../services/api';
 import Carrusel from '../components/Carrusel';
 import FiltroCategorias from '../components/FiltroCategorias';
 import ProductCard from '../components/ProductCard';
@@ -10,7 +10,9 @@ export function Home({ alAgregarAlCarrito }) {
   const [busqueda, setBusqueda] = useState('');
 
   useEffect(() => {
-    setProductos(obtenerProductos());
+    api.obtenerProductos()
+      .then(setProductos)
+      .catch((err) => console.error('Error cargando productos:', err));
   }, []);
 
   const productosFiltrados = productos.filter((prod) => {

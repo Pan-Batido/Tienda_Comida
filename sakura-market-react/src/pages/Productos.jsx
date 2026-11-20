@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { obtenerProductos } from '../data/db';
+import { api } from '../services/api';
 import FiltroCategorias from '../components/FiltroCategorias';
 import ProductCard from '../components/ProductCard';
 
@@ -9,12 +9,11 @@ export function Productos({ alAgregarAlCarrito }) {
   const [busqueda, setBusqueda] = useState('');
 
   useEffect(() => {
-    // Cargar inventario completo desde la capa de datos db.js
-    const datos = obtenerProductos();
-    setProductos(datos);
+    api.obtenerProductos()
+      .then(setProductos)
+      .catch((err) => console.error('Error cargando catálogo:', err));
   }, []);
 
-  // Lógica de filtrado combinado (categoría + texto de búsqueda)
   const productosFiltrados = productos.filter((prod) => {
     const coincideCategoria =
       categoriaSeleccionada === 'Todas' || prod.categoria === categoriaSeleccionada;
@@ -26,7 +25,6 @@ export function Productos({ alAgregarAlCarrito }) {
 
   return (
     <div className="container py-4">
-      {/* Encabezado de la Sección */}
       <div className="border-bottom pb-3 mb-4 d-flex justify-content-between align-items-center flex-wrap gap-2">
         <div>
           <h1 className="fw-bold text-danger mb-1">
@@ -41,7 +39,6 @@ export function Productos({ alAgregarAlCarrito }) {
         </span>
       </div>
 
-      {/* Control de Búsqueda y Filtros */}
       <FiltroCategorias
         categoriaSeleccionada={categoriaSeleccionada}
         alSeleccionarCategoria={setCategoriaSeleccionada}
@@ -49,7 +46,6 @@ export function Productos({ alAgregarAlCarrito }) {
         alCambiarBusqueda={setBusqueda}
       />
 
-      {/* Cuadrícula / Grilla de Productos */}
       {productosFiltrados.length === 0 ? (
         <div className="text-center py-5 bg-light rounded-3 shadow-sm my-4">
           <i className="bi bi-cart-x fs-1 text-muted d-block mb-3"></i>
