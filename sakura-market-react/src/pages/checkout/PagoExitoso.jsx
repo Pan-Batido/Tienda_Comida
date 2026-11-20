@@ -2,6 +2,17 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 export function PagoExitoso() {
+  let numeroOrden = '#SAK-000000';
+  try {
+    const ordenStr = localStorage.getItem('sakura_ultima_orden');
+    if (ordenStr) {
+      const orden = JSON.parse(ordenStr);
+      if (orden.numeroOrden) numeroOrden = `#${orden.numeroOrden}`;
+    }
+  } catch {
+    // Fallback silencioso
+  }
+
   return (
     <div className="container py-5 text-center">
       <div className="row justify-content-center">
@@ -16,7 +27,7 @@ export function PagoExitoso() {
             </p>
             <div className="bg-light p-3 rounded mb-4">
               <small className="text-muted d-block">Número de Orden:</small>
-              <span className="fw-bold text-danger fs-5">#SAK-{Math.floor(100000 + Math.random() * 900000)}</span>
+              <span className="fw-bold text-danger fs-5">{numeroOrden}</span>
             </div>
             <Link to="/productos" className="btn btn-danger fw-bold py-2">
               Volver a la Tienda <i className="bi bi-house-door-fill ms-1"></i>
