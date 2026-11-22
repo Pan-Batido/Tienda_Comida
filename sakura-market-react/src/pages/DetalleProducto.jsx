@@ -1,4 +1,4 @@
-api.obtenerProductoPorId(id).then(setProducto).catch(() => setProducto(null));
+import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { api } from '../services/api';
 
@@ -10,11 +10,9 @@ export function DetalleProducto({ alAgregarAlCarrito }) {
   const [cantidad, setCantidad] = useState(1);
 
   useEffect(() => {
-    // Buscar el producto en la base de datos simulada por su ID
-    const prodEncontrado = obtenerProductoPorId(id);
-    if (prodEncontrado) {
-      setProducto(prodEncontrado);
-    }
+    api.obtenerProductoPorId(id)
+      .then(setProducto)
+      .catch(() => setProducto(null));
   }, [id]);
 
   if (!producto) {
@@ -39,7 +37,6 @@ export function DetalleProducto({ alAgregarAlCarrito }) {
   }).format(producto.precio);
 
   const handleAgregar = () => {
-    // Agregar 'cantidad' veces el producto seleccionado
     for (let i = 0; i < cantidad; i++) {
       alAgregarAlCarrito(producto);
     }

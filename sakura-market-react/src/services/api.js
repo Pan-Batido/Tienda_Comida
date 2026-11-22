@@ -50,8 +50,6 @@ async function request(path, { method = 'GET', body } = {}) {
   return data;
 }
 
-// Normaliza el objeto Producto que viene de Spring Boot (donde categoria es un objeto {id, nombre})
-// para mantener compatibilidad total con los componentes actuales del frontend
 function normalizarProducto(p) {
   return {
     ...p,
@@ -68,6 +66,9 @@ export const api = {
 
   registro: (datosRegistro) =>
     request('/auth/registro', { method: 'POST', body: datosRegistro }),
+
+  loginGoogle: (credential) =>
+    request('/auth/google', { method: 'POST', body: { credential } }),
 
   // Productos
   obtenerProductos: async () => {

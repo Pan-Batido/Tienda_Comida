@@ -1,14 +1,14 @@
-api.obtenerProductos().then((prods) => setOfertas(prods.slice(0, 5))).catch(console.error);
-import { api } from '../services/api'
+import React, { useState, useEffect } from 'react';
+import { api } from '../services/api';
 import ProductCard from '../components/ProductCard';
 
 export function Ofertas({ alAgregarAlCarrito }) {
   const [ofertas, setOfertas] = useState([]);
 
   useEffect(() => {
-    // Cargar únicamente los primeros 5 productos seleccionados para la sección de ofertas
-    const prods = obtenerProductos();
-    setOfertas(prods.slice(0, 5));
+    api.obtenerProductos()
+      .then((prods) => setOfertas(prods.slice(0, 5)))
+      .catch(console.error);
   }, []);
 
   return (

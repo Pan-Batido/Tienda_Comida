@@ -1,4 +1,4 @@
-api.obtenerProductos().then(setProductos).catch(console.error);
+import React, { useState, useEffect } from 'react';
 import { api } from '../services/api';
 import ProductCard from '../components/ProductCard';
 
@@ -7,7 +7,7 @@ export function Categorias({ alAgregarAlCarrito }) {
   const [categoriaActiva, setCategoriaActiva] = useState('Comida');
 
   useEffect(() => {
-    setProductos(obtenerProductos());
+    api.obtenerProductos().then(setProductos).catch(console.error);
   }, []);
 
   const categorias = [

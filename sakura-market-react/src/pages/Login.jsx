@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { GoogleLogin } from '@react-oauth/google';
 import { api, saveSession } from '../services/api';
 
 export function Login() {
@@ -25,6 +26,26 @@ export function Login() {
       }
     } catch (err) {
       setError(err.message || 'Correo electrónico o contraseña incorrectos.');
+    } finally {
+      setCargando(false);
+    }
+  };
+
+  const handleGoogleSuccess = async (credentialResponse) => {
+    setError('');
+    setCargando(true);
+
+    try {
+      const { token, usuario } = await api.loginGoogle(credentialResponse.credential);
+      saveSession(token, usuario);
+
+      if (usuario.rol === 'ADMINISTRADOR' || usuario.rol === 'VENDEDOR') {
+        navigate('/admin');
+      } else {
+        navigate('/');
+      }
+    } catch (err) {
+      setError(err.message || 'No se pudo iniciar sesión con Google.');
     } finally {
       setCargando(false);
     }
@@ -78,6 +99,19 @@ export function Login() {
                 {cargando ? 'Ingresando...' : 'Ingresar'} <i className="bi bi-arrow-right-short ms-1"></i>
               </button>
             </form>
+
+            <div className="d-flex align-items-center my-3">
+              <hr className="flex-grow-1" />
+              <span className="px-2 text-muted small">o continúa con</span>
+              <hr className="flex-grow-1" />
+            </div>
+
+            <div className="d-flex justify-content-center mb-3">
+              <GoogleLogin
+                onSuccess={handleGoogleSuccess}
+                onError={() => setError('Error al conectar con Google.')}
+              />
+            </div>
 
             <div className="text-center border-top pt-3 mt-2">
               <span className="text-muted small me-2">¿No tienes cuenta?</span>
