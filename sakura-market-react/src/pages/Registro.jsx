@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { GoogleLogin } from '@react-oauth/google';
 import { api } from '../services/api';
 
 export function Registro() {
@@ -45,6 +46,25 @@ export function Registro() {
     } catch (err) {
       setError(err.message || 'No se pudo completar el registro.');
     }
+  };
+
+  const handleGoogleSuccess = async (credentialResponse) => {
+    setError('');
+    try {
+      const data = await api.loginGoogle(credentialResponse.credential);
+      const rol = data?.usuario?.rol;
+      if (rol === 'ADMINISTRADOR' || rol === 'VENDEDOR') {
+        navigate('/admin');
+      } else {
+        navigate('/');
+      }
+    } catch (err) {
+      setError(err.message || 'No se pudo completar el registro con Google.');
+    }
+  };
+
+  const handleGoogleError = () => {
+    setError('Error al conectar con Google. Intenta nuevamente.');
   };
 
   return (
@@ -147,6 +167,22 @@ export function Registro() {
               </button>
             </form>
 
+            <div className="my-3 d-flex align-items-center">
+              <hr className="flex-grow-1 text-muted" />
+              <span className="px-2 text-muted small">o regístrate rápido con</span>
+              <hr className="flex-grow-1 text-muted" />
+            </div>
+
+            <div className="d-flex justify-content-center mb-3">
+              <GoogleLogin
+                onSuccess={handleGoogleSuccess}
+                onError={handleGoogleError}
+                text="signup_with"
+                shape="rectangular"
+                theme="outline"
+              />
+            </div>
+
             <div className="text-center border-top pt-3 mt-2">
               <span className="text-muted small me-2">¿Ya tienes cuenta?</span>
               <Link to="/login" className="fw-bold text-danger text-decoration-none small">
@@ -160,4 +196,4 @@ export function Registro() {
   );
 }
 
-export default Registro;
+export default Registro;Ñ
